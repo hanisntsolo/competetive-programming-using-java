@@ -12,8 +12,6 @@ import java.util.HashMap;
 import java.util.AbstractMap;
 import java.util.Date;
 
-
-
 public class Templating {
     //Peigonehole-Principle: Given an integer n, find a number consisting only of digits 0 and 1.
 
@@ -21,7 +19,6 @@ public class Templating {
     double number = Math.pow(2,10);
 
     //Partial sums of an array.
-
     //Fast modular exponentiation recursive
     public static int fastExpo(int a, long n, int MOD) {
         if(n==0) return 1;
