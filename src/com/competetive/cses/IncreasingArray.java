@@ -1,4 +1,4 @@
-//package com.competetive.cses;
+package com.competetive.cses;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -15,45 +15,25 @@ import java.util.Random;
 import java.util.HashMap;
 import java.util.AbstractMap;
 import java.util.Date;
-//This is a maximum-length substring containing only one type of character.
-//ATTCGGGA
-public class Repetetions {
+
+public class IncreasingArray {
 
     public static void main(String[] args) throws IOException {
-//        Reader sc = new Reader();
-        Scanner sc = new Scanner(System.in);
-
-        StringBuilder string = new StringBuilder();
-        string.append(sc.nextLine());
-        int left = 0;
-        int right = 0;
-        int count = 0;
-        HashMap<Character,Integer> map = new HashMap<>();
-        //ATTCGGGA
-        int maxCount = 0;
-        for (right = 0; right < string.length(); right++) {
-            if(string.charAt(right)==string.charAt(left)) {
-                count++;
-            } else {
-                left = right;
-                maxCount = max(maxCount,count);
-                count = 0;
-                right = right - 1;
+        Reader sc = new Reader();
+        long  len = sc.nextInt();
+        long count = 0;
+        long prev = sc.nextInt();
+        //    3 2 5 1 7
+        //    7 1 5 2 3
+        for (long i = 1; i < len; i++) {
+            long curr = sc.nextInt();
+            if(curr<prev) {
+                count += prev - curr;
+                curr = prev;
             }
+            prev = curr;
         }
-//        while(right<string.length()) {
-//            char curr = string.charAt(right);
-//            if(map.containsKey(curr)) {
-//                count = Math.max(count, right-left);
-//                left = right;
-//                map.clear();
-//            } else {
-//                map.put(curr,1);
-//            }
-//            right++;
-//        }
-        maxCount = max(maxCount,count);
-        out.println(maxCount);
+        out.println(count);
     }
     static class Reader {
             final private int BUFFER_SIZE = 1 << 16;
