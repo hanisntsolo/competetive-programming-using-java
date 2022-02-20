@@ -1,4 +1,4 @@
-//package com.competetive.cses;
+package com.competetive.cses;
 
 import java.io.DataInputStream;
 import java.io.FileInputStream;
