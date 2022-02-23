@@ -1,56 +1,45 @@
-package com.competetive.cses;
-
+//package com.competetive.codeforcespractice;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.HashMap;
+//Static imports for less code
+import static java.lang.System.*;
+import static java.math.BigInteger.valueOf;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+import static java.lang.Math.abs;
+//Utilities
+import java.util.*;
 
-public class SumOfTwoValues {
-
-    public static void positionOfTarget(int[] array, int target) {
-
-        boolean found = false;
-        for(int i=0;i<array.length;i++) {
-            int numToFind = target - array[i];
-            for(int j=i+1;j<array.length;j++) {
-
-                if(array[j] == numToFind) {
-                    System.out.println(i+1+" "+(j+1));
-                    found = true;
-                    break;
-                }
-
-            }
-            if(found) break;
-        }
-
-        if(!found)
-        System.out.println("IMPOSSIBLE");
-    }
-    public static void main(String[] args) throws Exception {
-        Reader sc = new Reader();
-        int length = sc.nextInt();
-        int target = sc.nextInt();
-        int[] array = new int[length];
-        HashMap<Integer, Integer> map = new HashMap<>();
-        boolean found = false;
+public class Team {
+    public static int implementSolutionOrNot(ArrayList<String> problems) {
         int count = 0;
-        for(int i=0;i<array.length;i++) {
-            count++;
-            array[i] = sc.nextInt();
-            int numberToFind = target - array[i];
-            if(map.containsKey(array[i])) {
-                System.out.println(i+1 + " " + map.get(array[i]));
-                found = true;
-                break;
-            } else {
-                map.put(numberToFind,i+1);
-            }
+        for (String problem : problems) {
+            if(problem.charAt(0) =='1' && problem.charAt(1)=='1' ||
+                    problem.charAt(0) =='1' && problem.charAt(2)=='1' ||
+                        problem.charAt(1) =='1' && problem.charAt(2)=='1')
+                count++;
         }
-//        System.out.println(count);
-        if(!found)
-        System.out.println("IMPOSSIBLE");
-//        positionOfTarget(array, target);
+//        for (int i = 0; i < problems.length; i++) {
+//            if(problems[i].charAt(0) =='1' && problems[i].charAt(1)=='1' ||
+//                    problems[i].charAt(0) =='1' && problems[i].charAt(2)=='1' ||
+//                        problems[i].charAt(1) =='1' && problems[i].charAt(2)=='1') count++;
+//        }
+        return count;
+    }
+    public static void main(String[] args) throws IOException{
+        Reader sc = new Reader();
+        int tests = sc.nextInt();
+        String[] lines = new String[tests];
+        ArrayList<String> newList = new ArrayList<>();
+        for (int i = 0; i < tests; i++) {
+            String problem = "";
+            for (int j = 0; j < 3; j++) {
+                problem+=sc.nextInt();
+            }
+            newList.add(problem);
+        }
+        out.println(implementSolutionOrNot(newList));
     }
     static class Reader {
             final private int BUFFER_SIZE = 1 << 16;

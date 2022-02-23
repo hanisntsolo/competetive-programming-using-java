@@ -17,14 +17,11 @@ import java.util.AbstractMap;
 import java.util.Date;
 
 public class IncreasingArray {
-
     public static void main(String[] args) throws IOException {
         Reader sc = new Reader();
         long  len = sc.nextInt();
         long count = 0;
         long prev = sc.nextInt();
-        //    3 2 5 1 7
-        //    7 1 5 2 3
         for (long i = 1; i < len; i++) {
             long curr = sc.nextInt();
             if(curr<prev) {

@@ -1,57 +1,80 @@
-package com.competetive.cses;
-
+package com.competetive.educationalround;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+//Static imports for less code
+import static java.math.BigInteger.valueOf;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+import static java.lang.Math.abs;
+import static java.lang.System.out;
+//Utilities
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.HashMap;
+import java.util.AbstractMap;
+import java.util.Date;
 
-public class SumOfTwoValues {
-
-    public static void positionOfTarget(int[] array, int target) {
-
-        boolean found = false;
-        for(int i=0;i<array.length;i++) {
-            int numToFind = target - array[i];
-            for(int j=i+1;j<array.length;j++) {
-
-                if(array[j] == numToFind) {
-                    System.out.println(i+1+" "+(j+1));
-                    found = true;
-                    break;
+/**
+ * 4
+ * rgbBRG
+ * RgbrBG
+ * bBrRgG
+ * rgRGBb
+ */
+//'r' -> true
+//'g' -> true
+//'b' -> true
+public class DoorsAndKeys {
+    public static void main(String[] args) throws IOException {
+        Scanner sc = new Scanner(System.in);
+        int testCases = sc.nextInt();
+        String[] doorWay = new String[testCases];
+        for (int i = 0; i < testCases; i++) {;
+            doorWay[i] = sc.next();
+        }
+        solve(doorWay);
+    }
+    public static void solve(String[] ways) {
+        boolean flag = false;
+        for(int j=0;j<ways.length;j++) {
+            String doorWay = ways[j];
+            HashMap<Character, Boolean> doorMap = new HashMap<>();
+            doorMap.put('r',false);
+            doorMap.put('g',false);
+            doorMap.put('b',false);
+            for (int i = 0; i < doorWay.length(); i++) {
+                if (doorWay.charAt(i) == 'r' || doorWay.charAt(i) == 'b' || doorWay.charAt(i) == 'g') {
+                    doorMap.put(doorWay.charAt(i), true);
+                } else {
+                    if (doorWay.charAt(i) == 'R') {
+                        if (!doorMap.get('r')) {
+                            out.println("NO");
+                            flag = true;
+                            break;
+                        }
+                    } else if (doorWay.charAt(i) == 'B') {
+                        if (!doorMap.get('b')) {
+                            out.println("NO");
+                            flag = true;
+                            break;
+                        }
+                    } else if (doorWay.charAt(i) == 'G') {
+                        if (!doorMap.get('g')) {
+                            out.println("NO");
+                            flag = true;
+                            break;
+                        }
+                    }
                 }
-
             }
-            if(found) break;
+            if (doorMap.get('r') && doorMap.get('g') && doorMap.get('b'))
+                out.println("YES");
         }
+    }
 
-        if(!found)
-        System.out.println("IMPOSSIBLE");
-    }
-    public static void main(String[] args) throws Exception {
-        Reader sc = new Reader();
-        int length = sc.nextInt();
-        int target = sc.nextInt();
-        int[] array = new int[length];
-        HashMap<Integer, Integer> map = new HashMap<>();
-        boolean found = false;
-        int count = 0;
-        for(int i=0;i<array.length;i++) {
-            count++;
-            array[i] = sc.nextInt();
-            int numberToFind = target - array[i];
-            if(map.containsKey(array[i])) {
-                System.out.println(i+1 + " " + map.get(array[i]));
-                found = true;
-                break;
-            } else {
-                map.put(numberToFind,i+1);
-            }
-        }
-//        System.out.println(count);
-        if(!found)
-        System.out.println("IMPOSSIBLE");
-//        positionOfTarget(array, target);
-    }
     static class Reader {
             final private int BUFFER_SIZE = 1 << 16;
             private DataInputStream din;

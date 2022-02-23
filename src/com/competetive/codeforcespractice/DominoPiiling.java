@@ -1,56 +1,27 @@
-package com.competetive.cses;
-
+package com.competetive.codeforcespractice;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+//Static imports for less code
+import static java.math.BigInteger.valueOf;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+import static java.lang.Math.abs;
+import static java.lang.System.out;
+//Utilities
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.HashMap;
-
-public class SumOfTwoValues {
-
-    public static void positionOfTarget(int[] array, int target) {
-
-        boolean found = false;
-        for(int i=0;i<array.length;i++) {
-            int numToFind = target - array[i];
-            for(int j=i+1;j<array.length;j++) {
-
-                if(array[j] == numToFind) {
-                    System.out.println(i+1+" "+(j+1));
-                    found = true;
-                    break;
-                }
-
-            }
-            if(found) break;
-        }
-
-        if(!found)
-        System.out.println("IMPOSSIBLE");
-    }
-    public static void main(String[] args) throws Exception {
+import java.util.AbstractMap;
+import java.util.Date;
+public class DominoPiiling {
+    public static void main(String[] args) throws IOException {
         Reader sc = new Reader();
-        int length = sc.nextInt();
-        int target = sc.nextInt();
-        int[] array = new int[length];
-        HashMap<Integer, Integer> map = new HashMap<>();
-        boolean found = false;
-        int count = 0;
-        for(int i=0;i<array.length;i++) {
-            count++;
-            array[i] = sc.nextInt();
-            int numberToFind = target - array[i];
-            if(map.containsKey(array[i])) {
-                System.out.println(i+1 + " " + map.get(array[i]));
-                found = true;
-                break;
-            } else {
-                map.put(numberToFind,i+1);
-            }
-        }
-//        System.out.println(count);
-        if(!found)
-        System.out.println("IMPOSSIBLE");
-//        positionOfTarget(array, target);
+        int first = sc.nextInt();
+        int second = sc.nextInt();
+        out.println((int)Math.floor(first*second*0.5));
     }
     static class Reader {
             final private int BUFFER_SIZE = 1 << 16;
