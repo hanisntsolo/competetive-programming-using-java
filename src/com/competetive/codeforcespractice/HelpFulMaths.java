@@ -1,19 +1,22 @@
-package com.competetive.cses;
-
-import jdk.swing.interop.SwingInterOpUtils;
-
+package com.competetive.codeforcespractice;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 //Static imports for less code
-import static java.lang.Math.*;
 import static java.math.BigInteger.valueOf;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+import static java.lang.Math.abs;
 import static java.lang.System.out;
 //Utilities
-import java.math.BigInteger;
-import java.util.*;
-
-public class NumberSpiral {
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.HashMap;
+import java.util.AbstractMap;
+import java.util.Date;
+public class HelpFulMaths {
     static class Reader {
             final private int BUFFER_SIZE = 1 << 16;
             private DataInputStream din;
@@ -136,43 +139,22 @@ public class NumberSpiral {
                 din.close();
             }
         }
-
-    public static void main(String[] args) throws IOException {
-        Reader sc = new Reader();
-//        Scanner sc = new Scanner(System.in);
-        int tests = sc.nextInt();
-        int[][] coordinates = new int[tests][2];
-        for (int i = 0; i < tests; i++) {
-//            coordinates[i][0] = sc.nextInt();
-//            coordinates[i][1] = sc.nextInt();
-            int y = sc.nextInt();
-            int x = sc.nextInt();
-            find(y,x);
-        }
-//        for (int i = 0; i < tests; i++) {
-//            find(coordinates[i][0],coordinates[i][1]);
-//        }
-    }
-//    public static void find(int y, int x) {
-//        int number = 0;
-//        if(y>x) {
-//            if(y%2==1) number = ((y - 1) * (y - 1)) + x;
-//            else number = (y * y) - x + 1;
-//        } else {
-//            if(x%2==0) number = ((x - 1) * (x - 1)) + y;
-//            else number = (x * x) - y + 1;
-//        }
-//        out.println(number);
-//    }
-    public static void find(long y, long x) {
-            long number = 0;
-            if(y>x) {
-                if(y%2==1) number = (long)((y - 1) * (y - 1)) + x;
-                else number = (long)(y * y) - x + 1;
-            } else {
-                if(x%2==0) number = (long)((x - 1) * (x - 1)) + y;
-                else number = (long)(x * x) - y + 1;
+        public static void main(String[] args) throws IOException {
+//            Reader sc = new Reader();
+            Scanner sc = new Scanner(System.in);
+            String problem = sc.nextLine();
+            ArrayList<Integer> array = new ArrayList<>();
+            for (int i = 0; i < problem.length(); i+=2) {
+                array.add(Integer.parseInt(String.valueOf(problem.charAt(i))));
             }
-            out.println(number);
-    }
+            Collections.sort(array);
+//            out.println(array);
+            if(array.size()==1) out.println(array.get(0));
+            else {
+                for (int i = 0; i < array.size()-1; i++) {
+                    out.print(array.get(i)+"+");
+                }
+                out.println(array.get(array.size()-1));
+            }
+        }
 }
