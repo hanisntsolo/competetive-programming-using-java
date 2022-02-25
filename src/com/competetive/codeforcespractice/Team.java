@@ -1,4 +1,5 @@
-//package com.competetive.codeforcespractice;
+package com.competetive.codeforcespractice;
+
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;

@@ -1,5 +1,4 @@
-package com.competetive.div;
-
+package com.competetive.cses;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -12,43 +11,7 @@ import static java.lang.System.out;
 //Utilities
 import java.util.*;
 
-public class AvoidLocalMaximums {
-
-    public static void printAns(int[] nums) {
-
-        int count = 0;
-        int  left = 1,right = nums.length-1;
-        for (int i = left,j=right; i < j-3; i++,j--) {
-//            out.println(nums[i - 1] + " " + nums[i] + " " + nums[i + 1]);
-            if (nums[i] > nums[i - 1] && nums[i] > nums[i + 1]) {
-                nums[i + 1] = nums[i];
-                count++;
-                out.println(Arrays.toString(nums));
-            }
-            if (nums[j] > nums[j - 1] && nums[j] > nums[j + 1]) {
-                nums[j - 1] = nums[j];
-                count++;
-                out.println(Arrays.toString(nums));
-            }
-        }
-        out.println(count);
-    }
-    public static void main(String[] args) throws IOException {
-//        Reader sc = new Reader();
-        Scanner sc = new Scanner(System.in);
-
-        long len = sc.nextInt();
-        while(len!=0) {
-            int arrLen = sc.nextInt();
-            int[] nums = new int[arrLen];
-            for (int i = 0; i < arrLen; i++) {
-                nums[i] = sc.nextInt();
-            }
-            printAns(nums);
-            len--;
-        }
-    }
-
+public class Permutations {
     static class Reader {
             final private int BUFFER_SIZE = 1 << 16;
             private DataInputStream din;
@@ -171,4 +134,48 @@ public class AvoidLocalMaximums {
                 din.close();
             }
         }
+
+    public static void main(String[] args) throws IOException {
+        Reader sc = new Reader();
+        int number = sc.nextInt();
+        if(number == 1) {
+            out.println(1);
+        }
+        else if(number<=3 && number>1) {
+            out.println("NO SOLUTION");
+        } else {
+            StringBuilder oddBuff = new StringBuilder();
+            StringBuilder eveBuff = new StringBuilder();
+            ArrayList<Integer> odd = new ArrayList<>();
+            ArrayList<Integer> eve = new ArrayList<>();
+            ArrayList<Integer> list = new ArrayList<>();
+            for (int i = number; i > 0; i--) {
+                if((i&1) == 0) {
+//                    eve +=" "+i;
+//                    eve.append(eve+" "+i);
+                    eve.add(i);
+                    eveBuff.append(i).append(" ");
+                } else {
+//                    odd = odd+" "+i;
+//                    odd.append(odd+" "+i);
+                    odd.add(i);
+                    oddBuff.append(i).append(" ");
+                }
+                list.add(i);
+            }
+//            out.println(oddBuff.toString()+eveBuff.toString());
+//            out.println(eve.toString().concat(odd.toString()));
+            out.println(list.toString());
+        }
+    }
 }
+//                                        7
+//1 -> NO SOLUTION
+//2 -> NO SOLUTION
+//3 -> NO SOLUTION
+//4  ->  NO SOLUTION
+//5  -> 1 3 5 2 4 -> 1 3 5 2 4
+//6 -> 1 2 3 4 5 6 -> 1 3 2 4 5 6 -> 1 3 5 4 2 6 -> 1 3 5 2 4 6
+//7 -> 1 2 3 4 5 6 7 -> 1 3 2 4 5 6 7 -> 1 3 5 4 2 6 7 -> 1 3 5 2 4 6 7
+//                           2 6 3 7 5 4 1
+//                   5 1 4 8 6 2 3 7
