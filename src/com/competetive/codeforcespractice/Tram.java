@@ -1,16 +1,13 @@
 package com.competetive.codeforcespractice;
-
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-
 //Static imports for less code
 import static java.math.BigInteger.valueOf;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.lang.Math.abs;
 import static java.lang.System.out;
-
 //Utilities
 import java.util.Scanner;
 import java.util.Collections;
@@ -19,8 +16,7 @@ import java.util.Random;
 import java.util.HashMap;
 import java.util.AbstractMap;
 import java.util.Date;
-
-public class Word {
+public class Tram {
     static class Reader {
             final private int BUFFER_SIZE = 1 << 16;
             private DataInputStream din;
@@ -44,7 +40,7 @@ public class Word {
 
             public String readLine() throws IOException
             {
-                byte[] buf = new byte[101]; // line length
+                byte[] buf = new byte[64]; // line length
                 int cnt = 0, c;
                 while ((c = read()) != -1) {
                     if (c == '\n') {
@@ -143,21 +139,20 @@ public class Word {
                 din.close();
             }
         }
-    public static void main(String[] args) throws IOException {
-
-        Reader sc = new Reader();
-        String words = sc.readLine(), lowerWords = words.toLowerCase(), upperWords = words.toUpperCase();
-        int lowerCaseCount = 0, upperCaseCount = 0;
-        for (int i = 0; i < words.length(); i++) {
-            if(words.charAt(i) == upperWords.charAt(i)) {
-                lowerCaseCount+=1;
-            } else {
-                upperCaseCount+=1;
+        public static void main(String[] args) throws IOException {
+            Reader sc = new Reader();
+            int stations = sc.nextInt();
+            int maxSufficientCap = 0;
+            int peopleInTram = 0;
+            int leave, enter;
+            while(stations-- > 0) {
+                leave = sc.nextInt(); enter = sc.nextInt();
+                peopleInTram -= leave;
+                peopleInTram += enter;
+                maxSufficientCap = Math.max(maxSufficientCap, peopleInTram);
             }
+            out.println(maxSufficientCap);
         }
-
-        if(upperCaseCount<=lowerCaseCount) out.println(lowerWords);
-        else out.println(upperWords);
-
-    }
 }
+
+
