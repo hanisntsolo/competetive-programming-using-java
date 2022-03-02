@@ -16,23 +16,23 @@ import java.util.Random;
 import java.util.HashMap;
 import java.util.AbstractMap;
 import java.util.Date;
-
-public class YoungPhysicist {
-
+public class QueueAtTheSchool {
     public static void main(String[] args) throws IOException {
         Reader sc = new Reader();
-        int vectors = sc.nextInt();
-        int x=0, y=0 ,z=0;
-        while(vectors-->0) {
-            x+=sc.nextInt();y+=sc.nextInt();z+=sc.nextInt();
+        int len = sc.nextInt(), time = sc.nextInt();
+        StringBuilder queue = new StringBuilder(sc.readLine());
+        for(int t = 0; t < time; t++) {
+            for(int i = 0; i < len - 1; i++) {
+                if(queue.charAt(i) == 'B' && queue.charAt(i+1) == 'G') {
+                    char temp = queue.charAt(i);
+                    queue.setCharAt(i, queue.charAt(i + 1));
+                    queue.setCharAt(i+1, temp);
+                    i+=1;
+                }
+            }
         }
-        if ((x == 0 && y == 0 && z == 0)) {
-            out.println("YES");
-        } else {
-            out.println("NO");
-        }
+        out.println(queue);
     }
-
     static class Reader {
             final private int BUFFER_SIZE = 1 << 16;
             private DataInputStream din;
@@ -156,3 +156,9 @@ public class YoungPhysicist {
             }
         }
 }
+
+//BGGBG
+//GBGBG
+//
+//Ans
+//GBGGB
