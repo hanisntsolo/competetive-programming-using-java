@@ -1,0 +1,12 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Package Control",
+		"Sublimerge 3",
+		"Terminus",
+	],
+}
