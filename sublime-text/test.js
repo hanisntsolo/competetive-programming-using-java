@@ -1,3 +1,4 @@
+console.log("This is test.js written as part of coding as competetive programmer.")
 var test = () => {
 	console.log("hello, world!");
 }
