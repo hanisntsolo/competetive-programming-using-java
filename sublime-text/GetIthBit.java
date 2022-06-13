@@ -28,11 +28,6 @@ public class GetIthBit {
 		System.out.println(getBit.convertToBinary(14));
 		System.out.println(getBit.convertToBinary(24));
 		System.out.println(getBit.convertToBinary(9));
-
-
-
-
-
 	}
 
 	public int getIthBit(int num, int bit) {
