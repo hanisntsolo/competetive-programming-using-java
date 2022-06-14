@@ -10,7 +10,7 @@ public class Subsets {
 	public String[] generateSubsets(String query) {
 		int length = query.length();
 		String[] result = new String[1 << length];
-		for(int i = 0; i < 1 << length; i++) {
+		for(int i = 0; i < (1 << length); i++) {
 			result[i] = getSubset(i, query);
 		}
 		return result;
