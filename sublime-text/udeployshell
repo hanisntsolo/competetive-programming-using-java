@@ -1,0 +1,10 @@
+touch /home/hanisntsolo/Documents/_code-hanisntsolo/competetive-programming-using-java/sublime-text/test.sh
+chmod 755 /home/hanisntsolo/Documents/_code-hanisntsolo/competetive-programming-using-java/sublime-text/test.sh
+cat <<EOF >/home/hanisntsolo/Documents/_code-hanisntsolo/competetive-programming-using-java/sublime-text/test.sh
+#!/bin/bash                                                                               
+echo File Transfer started
+sftp pk175202@eersqa.nam.nsroot.net:/home/feeders/pk175202 << EOF                                                   
+put /home/hanisntsolo/Documents/_code-hanisntsolo/competetive-programming-using-java/sublime-text/test.sh                                                                             
+bye
+EOF
+EOF     
