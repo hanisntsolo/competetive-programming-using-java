@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.File;
 
 public class ProcessBuilderPing {
 
@@ -9,7 +10,7 @@ public class ProcessBuilderPing {
         ProcessBuilder processBuilder = new ProcessBuilder();
         // linux
         // processBuilder.command("bash", "-c", "ls -lart");
-        String path = "/home/hanisntsolo/Documents/_code-hanisntsolo/competetive-programming-using-java/sublime-text/script.sh";
+        String path = "/home/hanisntsolo/Documents/_code-hanisntsolo/competetive-programming-using-java/sublime-text/test3.sh";
         processBuilder.command(path);
 
         System.out.println("Command Processed!");
@@ -33,6 +34,13 @@ public class ProcessBuilderPing {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+        File sourceFile = new File("/home/hanisntsolo/Documents/_code-hanisntsolo/competetive-programming-using-java/sublime-text/EERS175202.txt");
+        File destFile = new File("/home/hanisntsolo/Documents/_code-hanisntsolo/competetive-programming-using-java/sublime-text/archieve/EERS175202.txt.old");
+        if (sourceFile.renameTo(destFile)) {
+        System.out.println("File moved successfully");
+        } else {
+        System.out.println("Failed to move file");
         }
 
     }
