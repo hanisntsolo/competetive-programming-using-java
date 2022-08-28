@@ -1,6 +1,6 @@
 //Git push to master using token in the repo
-git push https://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@github.com/hanisntsolo/competetive-programming-using-java.git
+git push https://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@github.com/hanisntsolo/competetive-programming-using-java.git
 
 
-New token
-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
+
+pwd : /home/hanisntsolo/Documents/_code-hanisntsolo/competetive-programming-using-java/sublime-text
