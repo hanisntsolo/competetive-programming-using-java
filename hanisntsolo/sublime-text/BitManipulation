@@ -1,0 +1,49 @@
+1 or 0's - | 
+
+Bitwise AND    &
+ ""		OR	   |
+ ""		NOT | COMPLEMENT 	~
+ "" 	LEFT SHIFT		    <<
+ ""		RIGHT SHIFT			>>
+
+ 1 or 0's Koi idea? 
+
+ A B   A&B  A|B  
+ 0 0    0 	 0
+ 0 1	0    1
+ 1 0    0    1
+ 1 1    1	 1
+
+ ~A 
+ 0 -> 1
+ 1 -> 0
+
+#16 8 4 2 1 code -> 
+    1 0 1 1
+ 0 0 1 0 1 <- 5
+ 0 0 1 1 1 <- 7
+ 1 0 0 0 1 < 17
+
+1010 -> find the decimal value? -> 10
+1011 -> ? -> 11
+1 1 1 1 -> ? 15
+8 4 2 1 
+
+32 -> binary ? 100000 very good!
+1   0 1 0 1 0 -> decimal Value
+32 16 8 4 2 1 -> 42 decimal Value.
+
+ 			Binary
+ 	5 -> 	101
+ 	7 ->    111
+
+LEFT SHIFT << 
+
+      001011 -> 11 << 2
+      101100
+
+RIGHT SHIFT >>
+
+		1111 -> 15 >> 2
+		  XX
+		0011
