@@ -44,9 +44,9 @@ public class GetIthBit {
 		return num | mask;
 	}
 	public int updateIthBit(int num, int bit, int value) {
-		clearIthBit(num, bit);
-		int mask = value << bit;
-		num = num | mask;
+		clearIthBit(num, bit); //clear the bit 
+		int mask = value << bit; // create mask
+		num = num | mask; // apply mask
 		return num;
 	}
 
