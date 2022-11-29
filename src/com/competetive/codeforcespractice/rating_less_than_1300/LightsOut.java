@@ -10,21 +10,30 @@ public class LightsOut {
 	private	static int[][] initialGrid = {{1,1,1},{1,1,1},{1,1,1}};
 	public static void main(String[] args) throws IOException {
 		int[][] grid = getGrid();
-		System.out.println(Arrays.deepToString(grid));
+		// System.out.println(Arrays.deepToString(grid));
 		//Change the state of the grid according to belwo logic
 		//if the state is even adjacent flips dont happen at all.
 		//if the state is odd then the adjacent and the number flips.
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j < 3; j++) {
-				if((grid[i][j] & 1) == 0) {
-					continue;
-				} else {
-					//perform state change there and all adjacent values.
-					performStateChange(initialGrid, i, j);
+				if(grid[i][j] != 0) {
+					int switches = grid[i][j];
+					while(switches > 0) {
+						performStateChange(initialGrid, i, j);
+						switches--;
+					}
 				}
 			}
 		}
-		System.out.println(Arrays.deepToString(initialGrid));
+		printGrid(initialGrid);
+	}
+	public static void printGrid(int[][] grid) {
+		for(int[] row : grid) {
+			for(int num : row) {
+				System.out.print(num);
+			}
+			System.out.println();
+		}
 	}
 	public static void performStateChange(int[][] initialGrid, int i, int j) {
 		int nextState = initialGrid[i][j] == 1 ? 0 : 1;
@@ -32,16 +41,11 @@ public class LightsOut {
 		for(int direction = 0; direction < directions.length; direction++) {
 			int nextRow = i + directions[direction][0];
 			int nextCol = j + directions[direction][1];
-			System.out.println("NextDirection :: row" + nextRow+ " col" + nextCol);
 			if(nextRow < 0 || nextCol < 0 || nextRow > 2 || nextCol > 2)
 				continue;
-			//changeState(initialGrid, nextRow, nextCol, nextState);
-			initialGrid[nextRow][nextCol] = nextState;
-			System.out.println("Changed :: row" + nextRow+ " col" + nextCol);
+			int nextNeighbourState = initialGrid[nextRow][nextCol] == 0 ? 1 : 0;
+			initialGrid[nextRow][nextCol] = nextNeighbourState;
 		}
-		System.out.println("State Changed :: ");
-		System.out.println("row ::" + i + " col ::" + j);
-		System.out.println(Arrays.deepToString(initialGrid));
 	}
 	public static void changeState(int[][] initialGrid, int nextRow, int nextCol, int state) {
 		initialGrid[nextRow][nextCol] = state;
