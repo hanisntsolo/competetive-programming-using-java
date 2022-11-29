@@ -17,46 +17,20 @@ import java.util.Random;
 import java.util.HashMap;
 import java.util.AbstractMap;
 import java.util.Date;
-import java.util.Arrays;
-import java.util.ArrayList;
 
-public class NextPrime {
+public class UltraFastMathmatician {
 
 	public static void main(String[] args) throws IOException {
 		Reader rd = new Reader();
-		System.out.println(checkNextPrime(rd.nextInt(), rd.nextInt()));
-	}
-	public static String checkNextPrime(int first, int second) {
-		ArrayList<Integer> primeList = generatePrimeNumbers();
-		int firstIndex = primeList.indexOf(first);
-		if(firstIndex == primeList.size() - 1) return "NO"; // edge - case.
-		return second == primeList.get(firstIndex+1) ? "YES" : "NO";
-	}
-
-	public static ArrayList<Integer> generatePrimeNumbers() {
-		ArrayList<Integer> list = new ArrayList<>();
-		for(int i=2; i<= 50; i++) {
-			if(isPrime(i)) {
-				list.add(i);
-			}
-		}
-		return list;
-	}
-	public static int[] convertToInt(ArrayList<Integer> list) {
-		int[] numList = new int[list.size()];
+		String firstNumber = rd.readLine();
+		String secondNumber = rd.readLine();
+		StringBuilder sb = new StringBuilder();
 		int index = 0;
-		for(int num : list) {
-			numList[index++] = num;
+		while(index < firstNumber.length() - 1) {
+			sb.append(firstNumber.charAt(index) == secondNumber.charAt(index) ? 0 : 1);
+			index++;
 		}
-		return numList;
-	}
-	public static boolean isPrime(int num) {
-		for(int i=2; i<=num/2; i++) {
-			if(num%i==0) {
-				return false;
-			}
-		}
-		return true;
+		System.out.println(sb);
 	}
 	    static class Reader {
 	        final private int BUFFER_SIZE = 1 << 16;
@@ -81,7 +55,7 @@ public class NextPrime {
 	
 	        public String readLine() throws IOException
 	        {
-	            byte[] buf = new byte[64]; // line length
+	            byte[] buf = new byte[101]; // line length
 	            int cnt = 0, c;
 	            while ((c = read()) != -1) {
 	                if (c == '\n') {
@@ -180,4 +154,5 @@ public class NextPrime {
 	            din.close();
 	        }
 	    }
+
 }
