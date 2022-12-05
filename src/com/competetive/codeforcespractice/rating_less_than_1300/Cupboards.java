@@ -39,7 +39,8 @@ public class Cupboards {
 			}
 			test--;
 		}
-		int min = zeroR + oneL > zeroL + oneR ? zeroL + oneR : zeroR + oneL;
+		// int min = zeroR + oneL > zeroL + oneR ? zeroL + oneR : zeroR + oneL;
+        int min = Math.min(zeroR, oneR) + Math.min(zeroL, oneL);
 		System.out.println(min);
 	}
 
