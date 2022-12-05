@@ -17,32 +17,75 @@ import java.util.Random;
 import java.util.HashMap;
 import java.util.AbstractMap;
 import java.util.Date;
-public class Cupboards {
-
+public class SuperCentral {
+	static class Point {
+		private int x;
+		private int y;
+		public Point(int x, int y) {
+			this.x = x;
+			this.y = y;
+		}
+		public int getX() {
+			return this.x;
+		}
+		public int getY() {
+			return this.y;
+		}
+	}
+	public static boolean isRightNeighbor(Point a, Point b) {
+		if(a.getX() < b.getX() && a.getY() == b.getY())
+			return true;
+		return false;
+	}
+	public static boolean isLeftNeighbor(Point a ,Point b) {
+		if(a.getX() > b.getX() && a.getY() == b.getY())
+			return true;
+		return false;
+	}
+	public static boolean isLowerNeighbor(Point a, Point b) {
+		if(a.getY() > b.getY() && a.getX() == b.getX())
+			return true;
+		return false;
+	}
+	public static boolean isUpperNeighbor(Point a , Point b) {
+		if(a.getY() < b.getY() && a.getX() == b.getX())
+			return true;
+		return false;
+	}
+	public static boolean isSuperCentral(Point a , Point b) {
+		if(isRightNeighbor(a,b) || isLeftNeighbor(a,b)
+		 || isUpperNeighbor(a,b) || isLowerNeighbor(a,b))
+			return true;
+		return false;
+	}
+	public static int totalSuperCentralPoints(ArrayList<Point> list) {
+		int totalSuperCentralPoint = 0;
+		for(int i = 0; i < list.size(); i++) {
+			int localCount = 0;
+			for(int j = 0; j < list.size(); j++) {
+				if(i==j) continue;
+				//Calculate superCentralPoints
+				if(isSuperCentral(list.get(i), list.get(j))) {
+					localCount+=1;
+				}
+			}
+			if(localCount >3) {
+				totalSuperCentralPoint+=1;
+			}
+		}
+		return totalSuperCentralPoint;
+	}
 	public static void main(String[] args) throws IOException {
 		Reader rd = new Reader();
-		int zeroR = 0, zeroL = 0;
-		int oneR = 0, oneL = 0;
-		int test = rd.nextInt();
-		while(test > 0) {
-			int left = rd.nextInt();
-			int right = rd.nextInt();
-			if(left == 0) {
-				zeroL+=1;
-			} else {
-				oneL+=1;
-			}
-			if(right == 0) {
-				zeroR+=1;
-			} else {
-				oneR+=1;
-			}
-			test--;
+		ArrayList<Point> pointsList = new ArrayList<>();
+		int points = rd.nextInt();
+		while(points > 0) {
+			Point p = new Point(rd.nextInt(), rd.nextInt());
+			pointsList.add(p);
+			points--;
 		}
-        int min = Math.min(zeroR, oneR) + Math.min(zeroL, oneL);
-		System.out.println(min);
+		System.out.println(totalSuperCentralPoints(pointsList));
 	}
-
     static class Reader {
         final private int BUFFER_SIZE = 1 << 16;
         private DataInputStream din;

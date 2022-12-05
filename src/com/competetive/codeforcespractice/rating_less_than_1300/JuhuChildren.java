@@ -11,38 +11,45 @@ import static java.lang.System.out;
 
 //Utilities
 import java.util.Scanner;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.HashMap;
 import java.util.AbstractMap;
 import java.util.Date;
-public class Cupboards {
+import java.util.Queue;
+import java.util.LinkedList;
+
+public class JuhuChildren {
 
 	public static void main(String[] args) throws IOException {
 		Reader rd = new Reader();
-		int zeroR = 0, zeroL = 0;
-		int oneR = 0, oneL = 0;
-		int test = rd.nextInt();
-		while(test > 0) {
-			int left = rd.nextInt();
-			int right = rd.nextInt();
-			if(left == 0) {
-				zeroL+=1;
-			} else {
-				oneL+=1;
-			}
-			if(right == 0) {
-				zeroR+=1;
-			} else {
-				oneR+=1;
-			}
-			test--;
+		int len = rd.nextInt();
+		int toffee = rd.nextInt();
+		Queue<int[]> qChild = new LinkedList();
+		Queue<Integer> toffeeChild = new LinkedList();
+        int index = 1;
+		while(len > 0) {
+			int nextChild = rd.nextInt();
+			qChild.add(new int[]{nextChild, index});
+			toffeeChild.add(nextChild);
+			len-=1;
+            index+=1;
 		}
-        int min = Math.min(zeroR, oneR) + Math.min(zeroL, oneL);
-		System.out.println(min);
+		while(qChild.size() > 1) {
+			int[] firstInLine = qChild.poll();
+			int firstToffee = toffeeChild.poll();
+			if(firstToffee > toffee) {
+				int remainingToffee = firstToffee - toffee;
+				qChild.offer(firstInLine);
+				toffeeChild.offer(remainingToffee);
+			} else {
+				continue;
+			}
+		}
+        System.out.println(qChild.peek()[1]);
 	}
-
     static class Reader {
         final private int BUFFER_SIZE = 1 << 16;
         private DataInputStream din;

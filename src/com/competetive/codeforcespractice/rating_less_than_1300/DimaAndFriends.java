@@ -17,32 +17,25 @@ import java.util.Random;
 import java.util.HashMap;
 import java.util.AbstractMap;
 import java.util.Date;
-public class Cupboards {
+public class DimaAndFriends {
 
 	public static void main(String[] args) throws IOException {
 		Reader rd = new Reader();
-		int zeroR = 0, zeroL = 0;
-		int oneR = 0, oneL = 0;
-		int test = rd.nextInt();
-		while(test > 0) {
-			int left = rd.nextInt();
-			int right = rd.nextInt();
-			if(left == 0) {
-				zeroL+=1;
-			} else {
-				oneL+=1;
-			}
-			if(right == 0) {
-				zeroR+=1;
-			} else {
-				oneR+=1;
-			}
-			test--;
+		int friends = rd.nextInt();
+		int totalPeople = friends + 1;
+		int fingers = 0;
+		while(friends>0) {
+			fingers+=rd.nextInt();
+			friends--;
 		}
-        int min = Math.min(zeroR, oneR) + Math.min(zeroL, oneL);
-		System.out.println(min);
+		int answer = 0;
+		for( int i = 1; i <= 5; i++) {
+			if((fingers + i) % (totalPeople) != 1) {
+				answer+=1;
+			}
+		}
+		System.out.println(answer);
 	}
-
     static class Reader {
         final private int BUFFER_SIZE = 1 << 16;
         private DataInputStream din;

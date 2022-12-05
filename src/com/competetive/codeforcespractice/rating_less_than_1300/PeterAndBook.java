@@ -17,32 +17,58 @@ import java.util.Random;
 import java.util.HashMap;
 import java.util.AbstractMap;
 import java.util.Date;
-public class Cupboards {
+public class PeterAndBook {
 
 	public static void main(String[] args) throws IOException {
 		Reader rd = new Reader();
-		int zeroR = 0, zeroL = 0;
-		int oneR = 0, oneL = 0;
-		int test = rd.nextInt();
-		while(test > 0) {
-			int left = rd.nextInt();
-			int right = rd.nextInt();
-			if(left == 0) {
-				zeroL+=1;
-			} else {
-				oneL+=1;
+		int pages = rd.nextInt();
+		int d1 = rd.nextInt(),
+		  d2 = rd.nextInt(),
+		  d3 = rd.nextInt(),
+		  d4 = rd.nextInt(),
+		  d5 = rd.nextInt(),
+		  d6 = rd.nextInt(),
+		  d7 = rd.nextInt();
+		  int day = 0;
+		while(pages>0) {
+			pages-=d1;
+			if(pages <= 0) {
+				day = 1;
+				break;
 			}
-			if(right == 0) {
-				zeroR+=1;
-			} else {
-				oneR+=1;
+			pages-=d2;
+			if(pages <= 0) {
+				day = 2;
+				break;
 			}
-			test--;
+			pages-=d3;
+			if(pages <= 0) {
+				day = 3;
+				break;
+			}
+			pages-=d4;
+			if(pages <= 0) {
+				day = 4;
+				break;
+			}
+			pages-=d5;
+			if(pages <= 0) {
+				day = 5;
+				break;
+			}
+			pages-=d6;
+			if(pages <= 0) {
+				day = 6;
+				break;
+			}
+			pages-=d7;
+			if(pages <= 0) {
+				day = 7;
+				break;
+			}
 		}
-        int min = Math.min(zeroR, oneR) + Math.min(zeroL, oneL);
-		System.out.println(min);
+		System.out.println(day);
 	}
-
     static class Reader {
         final private int BUFFER_SIZE = 1 << 16;
         private DataInputStream din;
