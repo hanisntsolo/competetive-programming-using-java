@@ -52,24 +52,33 @@ public class SuperCentral {
 			return true;
 		return false;
 	}
-	public static boolean isSuperCentral(Point a , Point b) {
-		if(isRightNeighbor(a,b) || isLeftNeighbor(a,b)
-		 || isUpperNeighbor(a,b) || isLowerNeighbor(a,b))
-			return true;
-		return false;
-	}
 	public static int totalSuperCentralPoints(ArrayList<Point> list) {
 		int totalSuperCentralPoint = 0;
 		for(int i = 0; i < list.size(); i++) {
 			int localCount = 0;
+            boolean upperN = false;
+            boolean rightN = false;
+            boolean lowerN = false;
+            boolean leftN  = false;
+            Point p1 = list.get(i); 
 			for(int j = 0; j < list.size(); j++) {
 				if(i==j) continue;
 				//Calculate superCentralPoints
-				if(isSuperCentral(list.get(i), list.get(j))) {
-					localCount+=1;
-				}
+                Point p2 = list.get(j);
+				if(isUpperNeighbor(p1, p2)) {
+                    upperN = true;
+                }
+                if(isRightNeighbor(p1, p2)) {
+                    rightN = true;
+                }
+                if(isLowerNeighbor(p1, p2)) {
+                    lowerN = true;
+                }
+                if(isLeftNeighbor(p1, p2)) {
+                    leftN = true;
+                }
 			}
-			if(localCount >3) {
+			if(upperN && rightN && lowerN && leftN) {
 				totalSuperCentralPoint+=1;
 			}
 		}
