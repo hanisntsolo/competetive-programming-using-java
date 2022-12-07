@@ -3,46 +3,47 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 //Static imports for less code
+import static java.math.BigInteger.valueOf;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.lang.Math.abs;
 import static java.lang.System.out;
 
 //Utilities
-import java.util.Arrays;
+import java.util.Scanner;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.HashMap;
 import java.util.AbstractMap;
 import java.util.Date;
-public class EvenOdds {
+public class MagicNumbers {
 
 	public static void main(String[] args) throws IOException {
-
 		Reader rd = new Reader();
-		long n = rd.nextLong();
-		long k = rd.nextLong();
-		long center = n/2;
-		if(n % 2 == 0) {
-			if(k - 1 < center) {
-				System.out.println(2 * (k - 1) + 1);
+		long number = rd.nextLong();
+		boolean flag = false;
+		while(number > 0) {
+			int droppingFactor = 1;
+			if(number % 10 == 1) {
+				droppingFactor = 10;
+			} else if(number % 100 == 14) {
+				droppingFactor = 100;
+			} else if(number % 1000 == 144) {
+				droppingFactor = 1000;
 			} else {
-				long num = k - center;
-				System.out.println(2 * num);
+				System.out.println("NO");
+				flag = true;
+				break;
 			}
-		} else {
-			if(k - 1 <= center) {
-				System.out.println(2 * (k - 1) + 1);
-			} else {
-				long num = k - 1 - center;
-				System.out.println(2 * num);
-			}
+			number/=droppingFactor;
+			// System.out.println(number);
 		}
-
+		if(!flag) {
+			System.out.println("YES");
+		}
 	}
     static class Reader {
-
         final private int BUFFER_SIZE = 1 << 16;
         private DataInputStream din;
         private byte[] buffer;

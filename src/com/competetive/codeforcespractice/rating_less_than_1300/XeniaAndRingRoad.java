@@ -3,46 +3,42 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 //Static imports for less code
+import static java.math.BigInteger.valueOf;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.lang.Math.abs;
 import static java.lang.System.out;
 
 //Utilities
-import java.util.Arrays;
+import java.util.Scanner;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.HashMap;
 import java.util.AbstractMap;
 import java.util.Date;
-public class EvenOdds {
+public class XeniaAndRingRoad {
 
-	public static void main(String[] args) throws IOException {
-
+	public static void main(String[] args) throws IOException{
 		Reader rd = new Reader();
-		long n = rd.nextLong();
-		long k = rd.nextLong();
-		long center = n/2;
-		if(n % 2 == 0) {
-			if(k - 1 < center) {
-				System.out.println(2 * (k - 1) + 1);
+		int totalHouses = rd.nextInt();
+		int totalThingsToDo = rd.nextInt();
+		long timetaken = 0;
+		int currPosition = 1;	
+		while(totalThingsToDo > 0) {
+			//logic to count amount of timeUnit used.
+			int houseNumber = rd.nextInt();
+			if(houseNumber >= currPosition) {
+				timetaken += houseNumber - currPosition;
 			} else {
-				long num = k - center;
-				System.out.println(2 * num);
+				timetaken += totalHouses - (currPosition - houseNumber);
 			}
-		} else {
-			if(k - 1 <= center) {
-				System.out.println(2 * (k - 1) + 1);
-			} else {
-				long num = k - 1 - center;
-				System.out.println(2 * num);
-			}
+			currPosition = houseNumber;
+			totalThingsToDo-=1;
 		}
-
+		System.out.println(timetaken);
 	}
     static class Reader {
-
         final private int BUFFER_SIZE = 1 << 16;
         private DataInputStream din;
         private byte[] buffer;

@@ -3,46 +3,48 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 //Static imports for less code
+import static java.math.BigInteger.valueOf;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.lang.Math.abs;
 import static java.lang.System.out;
 
 //Utilities
-import java.util.Arrays;
+import java.util.Scanner;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.HashMap;
 import java.util.AbstractMap;
 import java.util.Date;
-public class EvenOdds {
+public class JeffAndDigits {
 
 	public static void main(String[] args) throws IOException {
-
 		Reader rd = new Reader();
-		long n = rd.nextLong();
-		long k = rd.nextLong();
-		long center = n/2;
-		if(n % 2 == 0) {
-			if(k - 1 < center) {
-				System.out.println(2 * (k - 1) + 1);
-			} else {
-				long num = k - center;
-				System.out.println(2 * num);
-			}
-		} else {
-			if(k - 1 <= center) {
-				System.out.println(2 * (k - 1) + 1);
-			} else {
-				long num = k - 1 - center;
-				System.out.println(2 * num);
-			}
+		long totalNumbers = rd.nextLong();
+		long countOf5 = 0;
+		long countOf0 = 0;
+		while(totalNumbers > 0) {
+			long num = rd.nextLong();
+			if(num == 5) countOf5++;
+			else if(num == 0) countOf0++;
+			totalNumbers--;
 		}
-
+		if(countOf5>=9 && countOf0 > 0) {
+			//Yes possible
+			StringBuilder sb = new StringBuilder();
+			long totalNine = countOf5 - (countOf5 % 9);
+			// System.out.println(totalNine);
+			sb.append(new String(new char[(int)totalNine]).replace("\0", "5"));
+			sb.append(new String(new char[(int)countOf0]).replace("\0", "0"));
+			System.out.println(sb);
+		} else if(countOf0 > 0) {
+			System.out.println(0);
+		} else {
+			System.out.println(-1);
+		}
 	}
     static class Reader {
-
         final private int BUFFER_SIZE = 1 << 16;
         private DataInputStream din;
         private byte[] buffer;

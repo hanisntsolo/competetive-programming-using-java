@@ -3,46 +3,49 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 //Static imports for less code
+import static java.math.BigInteger.valueOf;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.lang.Math.abs;
 import static java.lang.System.out;
 
 //Utilities
-import java.util.Arrays;
+import java.util.Scanner;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.HashMap;
 import java.util.AbstractMap;
 import java.util.Date;
-public class EvenOdds {
+public class FootBall {
 
 	public static void main(String[] args) throws IOException {
-
 		Reader rd = new Reader();
-		long n = rd.nextLong();
-		long k = rd.nextLong();
-		long center = n/2;
-		if(n % 2 == 0) {
-			if(k - 1 < center) {
-				System.out.println(2 * (k - 1) + 1);
+		int totalTeams = rd.nextInt();
+		HashMap<String, Integer> teams = new HashMap<>();
+		String winningTeam = "";
+		int maxGoals = Integer.MIN_VALUE;
+		while(totalTeams > 0) {
+			String teamName = rd.readLine();
+			if(!teams.containsKey(teamName)) {
+				teams.put(teamName, 1);
+				if(teams.get(teamName) > maxGoals) {
+					winningTeam = teamName;
+					maxGoals = teams.get(teamName);
+				}
 			} else {
-				long num = k - center;
-				System.out.println(2 * num);
+				int currGoals = teams.get(teamName) + 1;
+				if(currGoals > maxGoals) {
+					winningTeam = teamName;
+					maxGoals = currGoals;
+				}
+				teams.put(teamName, currGoals);
 			}
-		} else {
-			if(k - 1 <= center) {
-				System.out.println(2 * (k - 1) + 1);
-			} else {
-				long num = k - 1 - center;
-				System.out.println(2 * num);
-			}
+			totalTeams--;
 		}
-
+		System.out.println(winningTeam);
 	}
     static class Reader {
-
         final private int BUFFER_SIZE = 1 << 16;
         private DataInputStream din;
         private byte[] buffer;

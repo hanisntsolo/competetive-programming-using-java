@@ -74,7 +74,7 @@ public class SuperCentral {
                 if(isLowerNeighbor(p1, p2)) {
                     lowerN = true;
                 }
-                if(isLeftNeighbor(p1, p2)) {
+                if(up(p1, p2)) {
                     leftN = true;
                 }
 			}

@@ -3,46 +3,40 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 //Static imports for less code
+import static java.math.BigInteger.valueOf;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.lang.Math.abs;
 import static java.lang.System.out;
 
 //Utilities
-import java.util.Arrays;
+import java.util.Scanner;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.HashMap;
 import java.util.AbstractMap;
 import java.util.Date;
-public class EvenOdds {
+public class Translation {
 
-	public static void main(String[] args) throws IOException {
-
-		Reader rd = new Reader();
-		long n = rd.nextLong();
-		long k = rd.nextLong();
-		long center = n/2;
-		if(n % 2 == 0) {
-			if(k - 1 < center) {
-				System.out.println(2 * (k - 1) + 1);
-			} else {
-				long num = k - center;
-				System.out.println(2 * num);
-			}
-		} else {
-			if(k - 1 <= center) {
-				System.out.println(2 * (k - 1) + 1);
-			} else {
-				long num = k - 1 - center;
-				System.out.println(2 * num);
+	public static void main(String[] args) throws IOException{
+		Scanner rd = new Scanner(System.in);
+		boolean flag = false;
+		StringBuilder w1 = new StringBuilder(rd.nextLine());
+		StringBuilder w2 = new StringBuilder(rd.nextLine());
+		for(int i = 0; i<w1.length(); i++) {
+			// System.out.println(w1.charAt(i)+"::"+w2.charAt(w2.length()-1-i));
+			if(w1.charAt(i)!=w2.charAt(w2.length()-1-i)) {
+				System.out.println("NO");
+				flag = true;
+				break;
 			}
 		}
-
+		if(!flag) {
+			System.out.println("YES");
+		}
 	}
     static class Reader {
-
         final private int BUFFER_SIZE = 1 << 16;
         private DataInputStream din;
         private byte[] buffer;
@@ -65,7 +59,7 @@ public class EvenOdds {
 
         public String readLine() throws IOException
         {
-            byte[] buf = new byte[64]; // line length
+            byte[] buf = new byte[101]; // line length
             int cnt = 0, c;
             while ((c = read()) != -1) {
                 if (c == '\n') {
