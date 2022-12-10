@@ -1,4 +1,3 @@
-//Very good question to consider ;;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,22 +17,45 @@ import java.util.Random;
 import java.util.HashMap;
 import java.util.AbstractMap;
 import java.util.Date;
-public class NumberOfPositions {
+import java.util.Collections;
+import java.util.*;
 
+
+public class Puzzles {
+
+//Valid Implementation in a seperate class
+	static class IntegerComparator implements Comparator<Integer> {
+		public int compare(Integer a, Integer b) {
+			return a < b ? -1 : a > b ? 1 : 0;
+		}
+	}// 
+	
 	public static void main(String[] args) throws IOException {
 		Reader rd = new Reader();
-		int totalPeople = rd.nextInt();
-		int before = rd.nextInt();
-        int after = rd.nextInt();
-		if (totalPeople - before > after) {
-            System.out.println(after+1);
-        } else if(totalPeople - before == after) {
-            System.out.println(totalPeople - before);
-        } else if(totalPeople - before < after) {
-            System.out.println(totalPeople - before);
-        }
-
+		int totalChildren = rd.nextInt();
+		int totalPuzzle = rd.nextInt();
+		//writing inline comparator there and there itsel
+		Queue<Integer> q = new PriorityQueue<Integer>(new Comparator<Integer>() {
+			@Override
+			public int compare(Integer a, Integer b) {
+				return a <= b ? -1 :  1 ;
+			}
+		});
+		while(totalPuzzle > 0) {
+			q.offer(rd.nextInt());
+			System.out.println(q);
+			totalPuzzle-=1;
+		}
+		// System.out.println(q);
+		int first = q.poll();
+		int second = 0;
+		while(totalChildren > 1) {
+			second = q.poll();
+			totalChildren--;
+		}
+		System.out.println(second - first);
 	}
+
     static class Reader {
         final private int BUFFER_SIZE = 1 << 16;
         private DataInputStream din;
@@ -156,4 +178,5 @@ public class NumberOfPositions {
             din.close();
         }
     }
+
 }
