@@ -1,3 +1,4 @@
+//Very good question to see Priority Queue Implementation.
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -17,50 +18,66 @@ import java.util.Random;
 import java.util.HashMap;
 import java.util.AbstractMap;
 import java.util.Date;
+import java.util.Comparator;
 import java.util.Collections;
-import java.util.*;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
+public class Airport {
 
-public class Puzzles {
-
-//Valid Implementation in a seperate class
-	static class IntegerComparator implements Comparator<Integer> {
-		public int compare(Integer a, Integer b) {
-			return a < b ? -1 : a > b ? 1 : 0;
-		}
-	}// 
-	
 	public static void main(String[] args) throws IOException {
 		Reader rd = new Reader();
-		int totalChildren = rd.nextInt();
-		int totalPuzzle = rd.nextInt();
-        int total = totalPuzzle;
-		//writing inline comparator there and there itsel
-        ArrayList<Integer> q = new ArrayList<>();
-		// Queue<Integer> q = new PriorityQueue<Integer>(new Comparator<Integer>() {
-		// 	@Override
-		// 	public int compare(Integer a, Integer b) {
-		// 		return a <= b ? -1 :  1 ;
-		// 	}
-		// });
-		while(totalPuzzle > 0) {
-			q.add(rd.nextInt());
-			// System.out.println(q);
-			totalPuzzle-=1;
+		int totalPeople = rd.nextInt();
+		int totalPlanes = rd.nextInt();
+		Queue<Integer> seatsInPlanesAesc = new PriorityQueue<>(new Comparator<Integer>(){
+			@Override
+			public int compare(Integer a, Integer b) {
+				return a <= b ? -1 : 1;
+			}
+		});
+		Queue<Integer> seatsInPlanesDesc = new PriorityQueue<>(new Comparator<Integer>(){
+			@Override
+			public int compare(Integer a, Integer b) {
+				return a >= b ? -1 : 1;
+			}
+		});
+		while(totalPlanes > 0) {
+			int currSeats = rd.nextInt();
+			seatsInPlanesAesc.offer(currSeats);
+			seatsInPlanesDesc.offer(currSeats);
+			totalPlanes-=1;
 		}
-        Collections.sort(q);
-		// System.out.println(q);
-        int min = Integer.MAX_VALUE;
-		for(int i = 0; i <= total - totalChildren; i++) {
-            int currMin = Math.abs(q.get(i) - q.get(Math.abs(i + totalChildren - 1)));
-            // System.out.println(currMin);
-            if(currMin < min) {
-                min = currMin;
-            }
-        }
-        System.out.println(min);
+		//Do your thing
+		// System.out.println(seatsInPlanesAesc);
+		// System.out.println(seatsInPlanesDesc);
+		//Min revenue
+		int ascPeople = totalPeople;
+		int  minRevenue = 0;
+		while(ascPeople > 0) {
+			int currTotalSeats = seatsInPlanesAesc.poll();
+			minRevenue += currTotalSeats;
+			int remainingSeats = currTotalSeats - 1;
+			if(remainingSeats > 0) {
+				seatsInPlanesAesc.offer(remainingSeats);
+			}
+			ascPeople-=1;
+		}	
+		// System.out.println(minRevenue);
+		//Max Revenue
+		int dscPeople = totalPeople;
+		int maxRevenue = 0;
+		while(dscPeople > 0) {
+			int currTotalSeats = seatsInPlanesDesc.poll();
+			maxRevenue += currTotalSeats;
+			int remainingSeats = currTotalSeats - 1;
+			if(remainingSeats > 0) {
+				seatsInPlanesDesc.offer(remainingSeats);
+			}
+			dscPeople-=1;
+		}
+		// System.out.println(maxRevenue);
+		System.out.println(maxRevenue+" "+minRevenue);
 	}
-
     static class Reader {
         final private int BUFFER_SIZE = 1 << 16;
         private DataInputStream din;
@@ -183,5 +200,4 @@ public class Puzzles {
             din.close();
         }
     }
-
 }

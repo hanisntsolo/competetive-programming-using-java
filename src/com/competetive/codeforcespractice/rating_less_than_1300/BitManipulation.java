@@ -25,7 +25,7 @@ public class BitManipulation {
 		int input = sc.nextInt();
 		// System.out.println(even(input));
 		System.out.println(clearBitsInRange(input, 6, 4));
-		// printBinary(input);
+		printBinary(input);
 	}
 	private static void printBinary(int num) {
 		System.out.println(Integer.toBinaryString(num));
@@ -124,7 +124,7 @@ public class BitManipulation {
 		//CODE HERE!!
 		int mask1 = (~0 << (i + 1));
 		int twosPower = (int)Math.pow(2, j - 1); // 2 ^ 4 = 16 | 15 11111
-		System.out.println("Power of two to"+"j "+ twosPower);
+		System.out.println("Power of two to "+"j "+ twosPower);
 		int mask2 = ((twosPower) | ( twosPower - 1)); // 1000
 		int mask3 = mask1 | mask2;                   //  0111
 		int result = num & mask3;
@@ -138,7 +138,7 @@ public class BitManipulation {
 		printBinary(mask3);
 		System.out.print("Res =:");
 		printBinary(result);
-		return 0;
+		return result;
 	}
 
 }

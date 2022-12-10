@@ -17,50 +17,29 @@ import java.util.Random;
 import java.util.HashMap;
 import java.util.AbstractMap;
 import java.util.Date;
-import java.util.Collections;
-import java.util.*;
+import java.util.HashSet;
+public class ChatRoom {
 
-
-public class Puzzles {
-
-//Valid Implementation in a seperate class
-	static class IntegerComparator implements Comparator<Integer> {
-		public int compare(Integer a, Integer b) {
-			return a < b ? -1 : a > b ? 1 : 0;
-		}
-	}// 
-	
 	public static void main(String[] args) throws IOException {
 		Reader rd = new Reader();
-		int totalChildren = rd.nextInt();
-		int totalPuzzle = rd.nextInt();
-        int total = totalPuzzle;
-		//writing inline comparator there and there itsel
-        ArrayList<Integer> q = new ArrayList<>();
-		// Queue<Integer> q = new PriorityQueue<Integer>(new Comparator<Integer>() {
-		// 	@Override
-		// 	public int compare(Integer a, Integer b) {
-		// 		return a <= b ? -1 :  1 ;
-		// 	}
-		// });
-		while(totalPuzzle > 0) {
-			q.add(rd.nextInt());
-			// System.out.println(q);
-			totalPuzzle-=1;
+		String message = rd.readLine();
+		char[] messageArray = message.toCharArray();
+		int index = 0;
+		char[] hello = {'h','e','l','l','o'};
+		for(char ch : messageArray) {
+			// System.out.println(ch + "::" + hello[index]);
+			if(hello[index] == ch) {
+				index+=1;
+			}
+			if(index == hello.length) {
+				System.out.println("YES");
+				System.exit(0);
+				break;
+			}
 		}
-        Collections.sort(q);
-		// System.out.println(q);
-        int min = Integer.MAX_VALUE;
-		for(int i = 0; i <= total - totalChildren; i++) {
-            int currMin = Math.abs(q.get(i) - q.get(Math.abs(i + totalChildren - 1)));
-            // System.out.println(currMin);
-            if(currMin < min) {
-                min = currMin;
-            }
-        }
-        System.out.println(min);
+		// if(index == hello.length - 1)
+		System.out.println("NO");
 	}
-
     static class Reader {
         final private int BUFFER_SIZE = 1 << 16;
         private DataInputStream din;
@@ -84,7 +63,7 @@ public class Puzzles {
 
         public String readLine() throws IOException
         {
-            byte[] buf = new byte[64]; // line length
+            byte[] buf = new byte[101]; // line length
             int cnt = 0, c;
             while ((c = read()) != -1) {
                 if (c == '\n') {
@@ -97,7 +76,7 @@ public class Puzzles {
                 }
                 buf[cnt++] = (byte)c;
             }
-            return new String(buf, 0, cnt);
+            return new String(buf, 0, cnt - 1);
         }
 
         public int nextInt() throws IOException
@@ -183,5 +162,4 @@ public class Puzzles {
             din.close();
         }
     }
-
 }
