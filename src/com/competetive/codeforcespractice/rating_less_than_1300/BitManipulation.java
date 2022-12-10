@@ -24,7 +24,7 @@ public class BitManipulation {
 		Scanner sc = new Scanner(System.in);
 		int input = sc.nextInt();
 		// System.out.println(even(input));
-		System.out.println(clearBitsInRange(input, 6, 5));
+		System.out.println(clearBitsInRange(input, 6, 4));
 		// printBinary(input);
 	}
 	private static void printBinary(int num) {
@@ -123,8 +123,8 @@ public class BitManipulation {
 	private	static int clearBitsInRange(int num, int i, int j) {
 		//CODE HERE!!
 		int mask1 = (~0 << (i + 1));
-		int twosPower = Math.pow(2, j); // 2 ^ 4 = 16 | 15 11111
-		System.out.println("Power of two to"+" j"+twosPower);
+		int twosPower = (int)Math.pow(2, j - 1); // 2 ^ 4 = 16 | 15 11111
+		System.out.println("Power of two to"+"j "+ twosPower);
 		int mask2 = ((twosPower) | ( twosPower - 1)); // 1000
 		int mask3 = mask1 | mask2;                   //  0111
 		int result = num & mask3;
