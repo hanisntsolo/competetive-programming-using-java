@@ -1,5 +1,3 @@
-package com.competetive;
-
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -21,9 +19,12 @@ import java.util.AbstractMap;
 import java.util.Date;
 import java.util.Comparator;
 import java.util.Collections;
+import java.util.Arrays;
+import java.util.Queue;
+import java.util.PriorityQueue;
 
 
-public class TemplateFull {
+public class HossanAndCombinatorics {
 // Notes: to keep in mind while coding - the program must run in max 1 sec.
     //  and 1 sec is equivalent to 10^8 instruction at most.
     // make sure to utilize fastI/O - Readers implementation and PrintWriters implemenatation
@@ -34,14 +35,55 @@ public class TemplateFull {
  *
  *
  */
+static class IncComp implements Comparator<Integer> {
+    @Override
+    public int compare(Integer a , Integer b) {
+        return a <= b ? -1 : 1;
+    }
+}
+static class DescComp implements Comparator<Integer> {
+    @Override
+    public int compare(Integer a , Integer b) {
+        return a >= b ? -1 : 1;
+    }
+}
 static PrintWriter out = new PrintWriter(System.out);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Reader rd = new Reader();
         long test = rd.nextLong();
         while(test > 0) {
             //Write code here;
-
+        	int nums = rd.nextInt();
+        	int currMin = Integer.MAX_VALUE;
+        	int currMax = Integer.MIN_VALUE;
+	        ArrayList<Integer> list = new ArrayList<>();	
+        	while(nums> 0) {
+	        	int currNum = rd.nextInt();
+	        	if(currNum > currMax) {
+	        		currMax = currNum;
+	        	}
+	        	if(currNum < currMin) {
+	        		currMin = currNum;
+	        	}
+	        	list.add(currNum);
+        		nums--;
+        	}
+        	int count = 0;
+        	int maxAbsDiff = currMax - currMin;
+        	// Collections.sort(list, new IncComp());
+        	int totalMins = 0;
+        	int totalMax = 0;
+        	for(int i = 0 ; i< list.size(); i++) {
+        		if(currMin == list.get(i)) {
+        			totalMax++;
+        		} else if(currMax == list.get(i)) {
+        			totalMins++;
+        		}
+        	}
+        	count = 2 * (totalMins + totalMax);
+        	out.print(count+"\n");
+            test--;
         }
 
         out.flush(); // to flush the output
@@ -161,4 +203,3 @@ static class Reader {
 
 }
 }
-

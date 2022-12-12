@@ -1,5 +1,3 @@
-package com.competetive;
-
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -21,9 +19,11 @@ import java.util.AbstractMap;
 import java.util.Date;
 import java.util.Comparator;
 import java.util.Collections;
+import java.math.BigInteger;
+import java.util.List;
 
 
-public class TemplateFull {
+public class GCD {
 // Notes: to keep in mind while coding - the program must run in max 1 sec.
     //  and 1 sec is equivalent to 10^8 instruction at most.
     // make sure to utilize fastI/O - Readers implementation and PrintWriters implemenatation
@@ -36,12 +36,39 @@ public class TemplateFull {
  */
 static PrintWriter out = new PrintWriter(System.out);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Reader rd = new Reader();
         long test = rd.nextLong();
         while(test > 0) {
-            //Write code here;
-
+            int totalNumbers = rd.nextInt();
+            List<Integer> pq = new ArrayList<>();
+            while(totalNumbers > 0) {
+                pq.add(rd.nextInt());
+                totalNumbers--;
+            }
+            int currMaxDiff = 0;
+            boolean flag = false;
+            for(int i = 0; i < pq.size() - 1; i++) {
+                BigInteger a = new BigInteger(String.valueOf(pq.get(i)));
+                for(int j = i + 1; j < pq.size(); j++) {
+                    BigInteger b = new BigInteger(String.valueOf(pq.get(j)));
+                    // System.out.println(a + "::" + b);
+                    BigInteger res = a.gcd(b);
+                    // System.out.println(res);
+                    // System.out.println(res.equals(1));
+                    if(res.compareTo(new BigInteger(String.valueOf("1"))) == 0) {
+                        continue;
+                    } else {
+                        out.print("YES" + "\n");
+                        flag = true;
+                        break;
+                    }
+                }
+            }
+            if(!flag) {
+                out.print("NO" + "\n");
+            }
+            test--;
         }
 
         out.flush(); // to flush the output
@@ -161,4 +188,3 @@ static class Reader {
 
 }
 }
-

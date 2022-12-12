@@ -1,5 +1,5 @@
-package com.competetive;
-
+<snippet>
+	<content><![CDATA[
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -41,7 +41,7 @@ static PrintWriter out = new PrintWriter(System.out);
         long test = rd.nextLong();
         while(test > 0) {
             //Write code here;
-
+            test--
         }
 
         out.flush(); // to flush the output
@@ -161,4 +161,9 @@ static class Reader {
 
 }
 }
-
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>cp</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.java</scope> -->
+</snippet>
