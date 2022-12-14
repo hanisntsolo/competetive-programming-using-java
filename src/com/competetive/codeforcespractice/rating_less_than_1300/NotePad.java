@@ -1,5 +1,3 @@
-<snippet>
-    <content><![CDATA[
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -29,16 +27,13 @@ import java.util.NavigableMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.HashSet;
 import java.math.BigInteger;
 
 
 
-public class TemplateFull {
+public class NotePad {
 
-    /*                                                      ॐ
-                                                     || तत् त्वम् असि ||
-    */
-    
     /* COMMIT TO MEMORY WHILE USING JAVA IN COMPETETIVE PROGRAMMING */
 
     //# Notes: to keep in mind while coding - the program must run in max 1 sec.
@@ -92,7 +87,31 @@ static PrintWriter out = new PrintWriter(System.out);
         long test = rd.nextLong();
         while(test > 0) {
             //Write code here;
-
+            boolean flag = false;
+            long n = rd.nextLong();
+        	StringBuilder s = new StringBuilder(rd.readLine());
+        	out.print( s + "\n");
+        	HashMap<String, Integer> charSet = new HashMap<>();
+        	for(int i = 0; i < n - 1; i++) {
+        		// out.print( i + "\n");
+        		if(charSet.get(s.substring(i, i + 1)) != null && charSet.get(s.substring(i, i + 1)) == 1) {
+        			flag = true;
+        		}
+        		if(i >= 1){
+        			// out.print( s.substring(i, i+1) + "\n");
+        			if(!charSet.containsKey(s.substring(i, i + 1))) {
+        				charSet.put(s.substring(i , i + 1), 1);
+        			} else {
+        				charSet.put(s.substring(i, i + 1), charSet.get(s.substring(i, i + 1)) + 1);
+        			}
+        		}
+        	}
+        	if(flag) {
+        		out.print( "YES" + "\n");
+        	}
+	        else {
+	        	out.print( "NO" + "\n");
+	        }
             test--;
         }
 
@@ -119,7 +138,7 @@ static class Reader {
     }
 
     public String readLine() throws IOException {
-        byte[] buf = new byte[101]; // line length
+        byte[] buf = new byte[100001]; // line length
         int cnt = 0, c;
         while ((c = read()) != -1) {
             if (c == '\n') {
@@ -213,9 +232,3 @@ static class Reader {
 
 }
 }
-]]></content>
-    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-    <tabTrigger>cp</tabTrigger>
-    <!-- Optional: Set a scope to limit where the snippet will trigger -->
-    <!-- <scope>source.java</scope> -->
-</snippet>

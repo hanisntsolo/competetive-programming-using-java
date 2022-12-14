@@ -47,6 +47,10 @@ static class DescComp implements Comparator<Integer> {
         return a >= b ? -1 : 1;
     }
 }
+
+//Make sure the arraylist is sorted
+private static binarySearch(ArrayList<>)
+
 static PrintWriter out = new PrintWriter(System.out);
 
     public static void main(String[] args) throws IOException {

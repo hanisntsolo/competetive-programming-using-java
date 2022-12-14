@@ -1,5 +1,3 @@
-<snippet>
-    <content><![CDATA[
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -32,16 +30,15 @@ import java.util.Set;
 import java.math.BigInteger;
 
 
+public class HossamAndCombinatorics {
 
-public class TemplateFull {
-
-    /*                                                      ॐ
-                                                     || तत् त्वम् असि ||
+	/*														ॐ
+													 ||	तत् त्वम् असि ||
     */
-    
-    /* COMMIT TO MEMORY WHILE USING JAVA IN COMPETETIVE PROGRAMMING */
+	
+	/* COMMIT TO MEMORY WHILE USING JAVA IN COMPETETIVE PROGRAMMING */
 
-    //# Notes: to keep in mind while coding - the program must run in max 1 sec.
+	//# Notes: to keep in mind while coding - the program must run in max 1 sec.
     // and 1 sec is equivalent to 10^8 instruction at most.
     //## make sure to utilize fastI/O - Readers implementation and PrintWriters implemenatation
     // is already present;
@@ -53,12 +50,14 @@ public class TemplateFull {
     
     //## When writing comparator and using in sorting the values make sure you do not
     // break the general contract of writing a comparator.
-    
+
+
 //Priority Queue
 /* 
  *
  *
  */
+	
 static class IncComp implements Comparator<Integer> {
     @Override
     public int compare(Integer a , Integer b) {
@@ -71,20 +70,6 @@ static class DescComp implements Comparator<Integer> {
         return a < b ? 1 : a > b ? -1 : 0;
     }
 }
-static Queue<Integer> ascQ = new PriorityQueue<>(new Comparator<Integer>(){
-        @Override
-        public int compare(Integer a, Integer b) {
-            return a <= b ? -1 : 1;
-        }
-});
-static Queue<Integer> descQ = new PriorityQueue<>(new Comparator<Integer>(){
-        @Override
-        public int compare(Integer a, Integer b) {
-            return a >= b ? -1 : 1;
-        }
-});
-
-
 static PrintWriter out = new PrintWriter(System.out);
 
     public static void main(String[] args) throws IOException {
@@ -92,10 +77,33 @@ static PrintWriter out = new PrintWriter(System.out);
         long test = rd.nextLong();
         while(test > 0) {
             //Write code here;
-
+        	int tn = rd.nextInt();
+        	int bf = tn;
+        	ArrayList<Integer> list = new ArrayList<>();	
+        	while(tn > 0) {
+        		list.add(rd.nextInt());
+        		tn--;
+        	}
+        		Collections.sort(list, new IncComp()); // nlogn
+        		Map<Integer, Integer> map = new TreeMap<>(); // nlogn
+        		for(int a : list) {
+        			if(map.get(a) == null) {
+        				map.put(a, 1);
+        			} else {
+        				map.put(a, map.get(a) + 1);
+        			}
+        		}										//order n
+        		BigInteger first = BigInteger.valueOf(map.get(list.get(0)));
+        		BigInteger second = BigInteger.valueOf(map.get(list.get(list.size() - 1)));
+        		// out.print( first + "\n");
+        		// out.print( second + "\n");
+        		if(list.get(0).equals(list.get(bf - 1))) {
+        			out.print( BigInteger.valueOf(bf).multiply(BigInteger.valueOf(bf - 1)) + "\n");
+        		} else {
+        			out.print( first.multiply(second).multiply(BigInteger.valueOf(2)) + "\n");
+        		}
             test--;
         }
-
         out.flush(); // to flush the output
     }
 
@@ -213,9 +221,3 @@ static class Reader {
 
 }
 }
-]]></content>
-    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-    <tabTrigger>cp</tabTrigger>
-    <!-- Optional: Set a scope to limit where the snippet will trigger -->
-    <!-- <scope>source.java</scope> -->
-</snippet>

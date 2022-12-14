@@ -1,5 +1,3 @@
-<snippet>
-    <content><![CDATA[
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -33,11 +31,9 @@ import java.math.BigInteger;
 
 
 
-public class TemplateFull {
+public class ExRound {
 
-    /*                                                      ॐ
-                                                     || तत् त्वम् असि ||
-    */
+
     
     /* COMMIT TO MEMORY WHILE USING JAVA IN COMPETETIVE PROGRAMMING */
 
@@ -92,7 +88,16 @@ static PrintWriter out = new PrintWriter(System.out);
         long test = rd.nextLong();
         while(test > 0) {
             //Write code here;
-
+            long ans = 0;
+            long num = rd.nextLong();
+            for(int i=1; i <= 9; i++) {
+                int x = i;
+                while(x <= num) {
+                    ans++;
+                    x*=10;
+                }
+            }
+            out.print( ans + "\n");
             test--;
         }
 
@@ -213,9 +218,3 @@ static class Reader {
 
 }
 }
-]]></content>
-    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-    <tabTrigger>cp</tabTrigger>
-    <!-- Optional: Set a scope to limit where the snippet will trigger -->
-    <!-- <scope>source.java</scope> -->
-</snippet>

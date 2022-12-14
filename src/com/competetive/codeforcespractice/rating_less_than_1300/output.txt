@@ -1,2 +1,12 @@
-4
-6
+codeforces
+YES
+labacaba
+YES
+uohhh
+YES
+isthissuffixtree
+YES
+x
+NO
+momo
+NO

@@ -1,5 +1,3 @@
-<snippet>
-    <content><![CDATA[
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -24,35 +22,13 @@ import java.util.Collections;
 import java.util.Arrays;
 import java.util.Queue;
 import java.util.PriorityQueue;
-import java.util.TreeMap;
-import java.util.NavigableMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
-import java.math.BigInteger;
 
 
-
-public class TemplateFull {
-
-    /*                                                      ॐ
-                                                     || तत् त्वम् असि ||
-    */
-    
-    /* COMMIT TO MEMORY WHILE USING JAVA IN COMPETETIVE PROGRAMMING */
-
-    //# Notes: to keep in mind while coding - the program must run in max 1 sec.
-    // and 1 sec is equivalent to 10^8 instruction at most.
-    //## make sure to utilize fastI/O - Readers implementation and PrintWriters implemenatation
+public class HamiltonianWall {
+// Notes: to keep in mind while coding - the program must run in max 1 sec.
+    //  and 1 sec is equivalent to 10^8 instruction at most.
+    // make sure to utilize fastI/O - Readers implementation and PrintWriters implemenatation
     // is already present;
-
-    //## Always try to use BigInteger class while writing contests.
-
-    //## While comparing wrapper class objects please use equals method 
-    // or write your own implementation of the equals method.
-    
-    //## When writing comparator and using in sorting the values make sure you do not
-    // break the general contract of writing a comparator.
     
 //Priority Queue
 /* 
@@ -62,37 +38,92 @@ public class TemplateFull {
 static class IncComp implements Comparator<Integer> {
     @Override
     public int compare(Integer a , Integer b) {
-        return a < b ? -1 : a > b ? 1 : 0;
+        return a <= b ? -1 : 1;
     }
 }
 static class DescComp implements Comparator<Integer> {
     @Override
     public int compare(Integer a , Integer b) {
-        return a < b ? 1 : a > b ? -1 : 0;
+        return a >= b ? -1 : 1;
     }
 }
-static Queue<Integer> ascQ = new PriorityQueue<>(new Comparator<Integer>(){
-        @Override
-        public int compare(Integer a, Integer b) {
-            return a <= b ? -1 : 1;
-        }
-});
-static Queue<Integer> descQ = new PriorityQueue<>(new Comparator<Integer>(){
-        @Override
-        public int compare(Integer a, Integer b) {
-            return a >= b ? -1 : 1;
-        }
-});
-
-
+static int[][] directions = {
+	{-1, 0}, // Up
+	{ 0, 1}, // Right
+	{ 1, 0} // Down
+	// { 1,-1}  // Left
+};
 static PrintWriter out = new PrintWriter(System.out);
 
     public static void main(String[] args) throws IOException {
         Reader rd = new Reader();
         long test = rd.nextLong();
+        int rows = 2;
         while(test > 0) {
             //Write code here;
+        	int col = rd.nextInt();
+        	String[] row1 = rd.readLine().toString().split("");
+        	String[] row2 = rd.readLine().toString().split("");
+        	// out.print(Arrays.toString(row1) + "\n");
+        	// out.print(Arrays.toString(row2) + "\n");
+        	int totalB = 0;
+        	for(String s : row1) {
+        		if(s.equals("B"))
+        			totalB++;
+        	}
+        	for(String s : row2) {
+        		if(s.equals("B"))
+        			totalB++;
+        	}
+        	int finalTotalB = totalB;
+        	int[][] tracker = new int[rows][row1.length];
+        	// out.print(totalB + "\n");
+        	int startR;
+        	int startC = 0;
+        	if(row1[0].equals("B")) {
+        		startR = 0;
+        	} else {
+        		startR = 1;
+        	}
+        	int currRow = startR;
+        	int currCol = startC;	
+        	String[][] painting = {
+        		row1,
+        		row2
+        	};
+        	// out.println("StartingPositions" + startR + "::" +startC);
+        	// out.print(Arrays.toString(painting[0]) + "\n");
+        	// out.print(Arrays.toString(painting[1]) + "\n");
+        	int totalSeenB = 1;
+        	tracker[currRow][currCol] = 1;	
+        	while(totalB > 0) {
 
+        		for(int i = 0; i < directions.length; i++) {
+        			// int[] direction = directions[i];
+        			int nextRow = directions[i][0] + currRow;
+        			int nextCol = directions[i][1] + currCol;
+        			// out.print("CURRROW:"+nextRow+"CURRCOl"+nextCol+"\n");
+        			if(nextRow >= 2 || nextRow < 0 || nextCol >= row1.length || nextCol < 0)
+        				continue;
+        			else if(painting[nextRow][nextCol].equals("W") || tracker[nextRow][nextCol] == 1)
+        				continue;
+        			else if(painting[nextRow][nextCol].equals("B") && tracker[nextRow][nextCol] == 0) {
+        				currRow = nextRow;
+        				currCol = nextCol;
+        				tracker[currRow][currCol] = 1;
+        				totalSeenB+=1;
+        			} else {
+        				break;
+        			}
+
+        		}
+        		totalB--;
+        	}
+        	if(finalTotalB == totalSeenB) {
+        		out.print("YES"+"\n");
+        	} else {
+        		out.print("NO"+"\n");
+        	}
             test--;
         }
 
@@ -119,7 +150,7 @@ static class Reader {
     }
 
     public String readLine() throws IOException {
-        byte[] buf = new byte[101]; // line length
+        byte[] buf = new byte[30000001]; // line length
         int cnt = 0, c;
         while ((c = read()) != -1) {
             if (c == '\n') {
@@ -213,9 +244,3 @@ static class Reader {
 
 }
 }
-]]></content>
-    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-    <tabTrigger>cp</tabTrigger>
-    <!-- Optional: Set a scope to limit where the snippet will trigger -->
-    <!-- <scope>source.java</scope> -->
-</snippet>

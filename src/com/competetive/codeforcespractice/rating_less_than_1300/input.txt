@@ -1,13 +1,16 @@
-2
-5
-6 2 3 8 1
 6
-7 2 8 3 2 10
-
-
-
-
-
+10
+codeforces
+8
+labacaba
+5
+uohhh
+16
+isthissuffixtree
+1
+x
+4
+momo
 
 
 
