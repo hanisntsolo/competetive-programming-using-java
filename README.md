@@ -256,3 +256,10 @@ Can you translate the algorithm to code well?
 
 #  | MORE Resources :
 ## [How to setup leetcode in vs code editor for free questions (GREAT HACK!! for free leetcoding!!)](https://betterprogramming.pub/work-on-leetcode-problems-in-vs-code-5fedf1a06ca1).
+
+#
+# Competetive Programming Essentials :-
+
+### If you are coding in java make sure that you are using FastReader and PrintWriter for fast I/O. As fast input/output can be a diffrentiator in getting as AC or TLE. Please make sure to amend this and dont get disheartned by the whole process of it.
+
+It will all finally make sense once you have started practising.
