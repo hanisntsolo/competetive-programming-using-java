@@ -1,12 +1,4 @@
-codeforces
-YES
-labacaba
-YES
-uohhh
-YES
-isthissuffixtree
-YES
-x
-NO
-momo
-NO
+3
+2
+500000001
+9

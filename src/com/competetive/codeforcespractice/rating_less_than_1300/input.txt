@@ -1,16 +1,9 @@
-6
-10
-codeforces
-8
-labacaba
-5
-uohhh
-16
-isthissuffixtree
-1
-x
 4
-momo
-
-
-
+3
+1 2 3
+3
+1 2 2
+2
+1 1000000000
+10
+3 8 6 7 4 1 2 4 10 1

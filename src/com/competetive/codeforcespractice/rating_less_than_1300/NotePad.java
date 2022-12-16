@@ -2,7 +2,9 @@ import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+    
 //Static imports for less code
 import static java.math.BigInteger.valueOf;
 import static java.lang.Math.max;
@@ -29,11 +31,15 @@ import java.util.Map;
 import java.util.Set;
 import java.util.HashSet;
 import java.math.BigInteger;
+import java.util.Random;
+import java.util.StringTokenizer;
 
 
 
 public class NotePad {
 
+
+    
     /* COMMIT TO MEMORY WHILE USING JAVA IN COMPETETIVE PROGRAMMING */
 
     //# Notes: to keep in mind while coding - the program must run in max 1 sec.
@@ -49,11 +55,177 @@ public class NotePad {
     //## When writing comparator and using in sorting the values make sure you do not
     // break the general contract of writing a comparator.
     
-//Priority Queue
-/* 
- *
- *
- */
+    public static void main(String[] args) throws IOException {
+        long test = fs.nextLong();
+        while(test > 0) {
+            //Write code here;
+            long num = fs.nextLong();
+            String line = fs.next();
+            HashMap<String, Integer> map = new HashMap<>();
+            boolean flag = false;
+            for(int i = 0 ; i < num -1; i++) {
+                if(map.containsKey(line.substring(i, i + 2))) {
+                    flag = true;
+                }
+                if(i >= 1) {
+                    map.put(line.substring(i - 1, i + 1), 1);
+                }
+            }  
+            if(flag)
+                out.print( "YES" + "\n");
+            else 
+                out.print( "NO" + "\n"); 
+            test--;
+        }
+
+        out.flush(); // to flush the output
+    }
+
+static PrintWriter out = new PrintWriter(System.out);
+static Reader rd = new Reader();
+static FastScanner fs = new FastScanner();
+static final Random random=new Random();
+static final int mod=1_000_000_007;
+static long[][] vals;
+
+static void ruffleSort(int[] a) {
+    int n=a.length;//shuffle, then sort 
+    for (int i=0; i<n; i++) {
+        int oi=random.nextInt(n), temp=a[oi];
+        a[oi]=a[i]; a[i]=temp;
+    }
+    Arrays.sort(a);
+}
+
+static long add(long a, long b) {
+    return (a+b)%mod;
+}
+
+static long sub(long a, long b) {
+    return ((a-b)%mod+mod)%mod;
+}
+
+static long mul(long a, long b) {
+    return (a*b)%mod;
+}
+
+static long exp(long base, long exp) {
+    if (exp==0) return 1;
+    long half=exp(base, exp/2);
+    if (exp%2==0) return mul(half, half);
+    return mul(half, mul(half, base));
+}
+
+static long[] factorials=new long[2_000_001];
+    static long[] invFactorials=new long[2_000_001];
+    static void precompFacts() {
+        factorials[0]=invFactorials[0]=1;
+        for (int i=1; i<factorials.length; i++) factorials[i]=mul(factorials[i-1], i);
+        invFactorials[factorials.length-1]=exp(factorials[factorials.length-1], mod-2);
+        for (int i=invFactorials.length-2; i>=0; i--)
+            invFactorials[i]=mul(invFactorials[i+1], i+1);
+    }
+    
+static long nCk(int n, int k) {
+    return mul(factorials[n], mul(invFactorials[k], invFactorials[n-k]));
+}
+
+static class Pair implements Comparable<Pair> {
+        int i, j;
+        long cost;
+        public Pair(int i, int j, long cost) {
+            this.i=i;
+            this.j=j;
+            this.cost=cost;
+        }
+        public int compareTo(Pair o) {
+            return -Long.compare(cost, o.cost);
+        }
+    }
+static void sort(int[] a) {
+        ArrayList<Integer> l=new ArrayList<>();
+        for (int i:a) l.add(i);
+        Collections.sort(l);
+        for (int i=0; i<a.length; i++) a[i]=l.get(i);
+}
+static class Node {
+        int index;
+        ArrayList<Node> adj=new ArrayList<>();
+        Node par;
+        long parEdgeVal;
+        int subtreeSize;
+ 
+        public Node(int i) {
+            this.index=i;
+        }
+        void dfs(Node par) {
+            this.par=par;
+            subtreeSize++;
+            for (Node nn:adj) {
+                if (nn==par) {
+                    continue;
+                }
+                nn.dfs(this);
+                subtreeSize+=nn.subtreeSize;
+            }
+            if (par!=null) {
+                long decreaseToMe=vals[0][par.index]-vals[0][index];
+                if (decreaseToMe%subtreeSize!=0) throw null;
+                parEdgeVal=decreaseToMe/subtreeSize;
+            }
+        }
+    }
+
+static class DisjointSet {
+        int[] s;
+        
+        public DisjointSet(int n) {
+            Arrays.fill(s = new int[n], -1);
+        }
+        
+        public int find(int i) {
+            return s[i] < 0 ? i : (s[i] = find(s[i]));
+        }
+        
+        public boolean union(int a, int b) {
+            if ((a = find(a)) == (b = find(b))) return false;
+            if(s[a] == s[b]) s[a]--;
+            if(s[a] <= s[b]) s[b] = a; 
+            else s[a] = b;
+            return true;
+        }
+    }
+static class FastScanner {
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st=new StringTokenizer("");
+        String next() {
+            while (!st.hasMoreTokens())
+                try {
+                    st=new StringTokenizer(br.readLine());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            return st.nextToken();
+        }
+        
+        int nextInt() {
+            return Integer.parseInt(next());
+        }
+        int[] readArray(int n) {
+            int[] a=new int[n];
+            for (int i=0; i<n; i++) a[i]=nextInt();
+            return a;
+        }
+        long[] readLongArray(int n) {
+            long[] a=new long[n];
+            for (int i=0; i<n; i++) a[i]=nextLong();
+            return a;
+        }
+        long nextLong() {
+            return Long.parseLong(next());
+        }
+}
+
 static class IncComp implements Comparator<Integer> {
     @Override
     public int compare(Integer a , Integer b) {
@@ -79,45 +251,6 @@ static Queue<Integer> descQ = new PriorityQueue<>(new Comparator<Integer>(){
         }
 });
 
-
-static PrintWriter out = new PrintWriter(System.out);
-
-    public static void main(String[] args) throws IOException {
-        Reader rd = new Reader();
-        long test = rd.nextLong();
-        while(test > 0) {
-            //Write code here;
-            boolean flag = false;
-            long n = rd.nextLong();
-        	StringBuilder s = new StringBuilder(rd.readLine());
-        	out.print( s + "\n");
-        	HashMap<String, Integer> charSet = new HashMap<>();
-        	for(int i = 0; i < n - 1; i++) {
-        		// out.print( i + "\n");
-        		if(charSet.get(s.substring(i, i + 1)) != null && charSet.get(s.substring(i, i + 1)) == 1) {
-        			flag = true;
-        		}
-        		if(i >= 1){
-        			// out.print( s.substring(i, i+1) + "\n");
-        			if(!charSet.containsKey(s.substring(i, i + 1))) {
-        				charSet.put(s.substring(i , i + 1), 1);
-        			} else {
-        				charSet.put(s.substring(i, i + 1), charSet.get(s.substring(i, i + 1)) + 1);
-        			}
-        		}
-        	}
-        	if(flag) {
-        		out.print( "YES" + "\n");
-        	}
-	        else {
-	        	out.print( "NO" + "\n");
-	        }
-            test--;
-        }
-
-        out.flush(); // to flush the output
-    }
-
 static class Reader {
     final private int BUFFER_SIZE = 1 << 16;
     private DataInputStream din;
@@ -138,7 +271,7 @@ static class Reader {
     }
 
     public String readLine() throws IOException {
-        byte[] buf = new byte[100001]; // line length
+        byte[] buf = new byte[101]; // line length
         int cnt = 0, c;
         while ((c = read()) != -1) {
             if (c == '\n') {
