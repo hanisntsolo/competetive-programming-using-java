@@ -36,7 +36,7 @@ import java.util.StringTokenizer;
 
 
 
-public class BlockTowers {
+public class Div3_839_D {
 
     /*                                                     "Om"
                                                     ""thou art that""
@@ -62,27 +62,55 @@ public class BlockTowers {
     public static void main(String[] args) throws IOException {
         long test = fs.nextLong();
         while(test > 0) {
-            //Write code here;
-        	long num = fs.nextLong();
-        	long tower1 = fs.nextLong();
-        	ArrayList<Long> list = new ArrayList<>();
-        	long len = num - 1;
-        	while(len > 0) {
-        		list.add(fs.nextLong());
-        		len--;
-        	}
-        	Collections.sort(list);
-        	// out.print( list + "\n");
-        	for(int i = 0; i < num - 1; i++) {
-        		if(tower1 < list.get(i)) {
-        			tower1+= (list.get(i) - tower1 + 1)/2;
-        		}
-        	}
-        	out.print( tower1 + "\n");
+
+// What I thought, first we check if the given array is sorted,
+// if yes answer will be 0, else we take the average value of first two element and ceil it.
+
+// Then we subtract that average value from each element 
+// of the array and take the absolute value. If array become sorted,
+ // answer will be that average value else answer will be -1.
+            int len = fs.nextInt();
+           	int index = 0;
+           	ArrayList<Integer> list = new ArrayList<>();
+           	// boolean isSortedFlag = true;
+           	while(index < len) {
+           		list.add(fs.nextInt());
+           		index+=1;
+           	}
+           	if(isSorted(list))
+           		out.print( "0" + "\n");
+           	else {
+
+           		int pNum = (list.get(0) + list.get(1) + 1) / 2;
+           		// out.print(pNum + "\n");
+           		ArrayList<Integer> list3 = new ArrayList<>();
+           		list3 = operate(list, pNum);
+           		if(isSorted(list3))
+           			out.print( pNum + "\n");
+           		else
+           			out.print( "-1" + "\n");
+           	}
             test--;
         }
         out.flush(); // to flush the output
     }
+static boolean isSorted(ArrayList<Integer> list) {
+	// out.print( list + "\n");
+	for(int i = 0; i < list.size() - 1; i++) {
+		if(list.get(i) <= list.get(i + 1)) 
+			continue;
+		return false;
+	}
+	return true;
+}
+static ArrayList operate(ArrayList<Integer> list, int num) {
+	ArrayList<Integer> list2 = new ArrayList<>();
+	for(int i = 0; i < list.size(); i++) {
+		int changedNum = Math.abs(list.get(i) - num);
+		list2.add(changedNum);
+	}
+	return list2;
+}
 
 static PrintWriter out = new PrintWriter(System.out);
 static Reader rd = new Reader();

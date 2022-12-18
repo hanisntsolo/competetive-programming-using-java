@@ -36,7 +36,7 @@ import java.util.StringTokenizer;
 
 
 
-public class BlockTowers {
+public class MaxPermutation {
 
     /*                                                     "Om"
                                                     ""thou art that""
@@ -63,27 +63,43 @@ public class BlockTowers {
         long test = fs.nextLong();
         while(test > 0) {
             //Write code here;
-        	long num = fs.nextLong();
-        	long tower1 = fs.nextLong();
-        	ArrayList<Long> list = new ArrayList<>();
-        	long len = num - 1;
-        	while(len > 0) {
-        		list.add(fs.nextLong());
-        		len--;
+        	int n = fs.nextInt();
+        	int k = fs.nextInt();
+        	StringBuilder sb = new StringBuilder();
+        	int i = 1;
+        	while(i <= n) {
+        		sb.append(i);
+        		i++;
         	}
-        	Collections.sort(list);
-        	// out.print( list + "\n");
-        	for(int i = 0; i < num - 1; i++) {
-        		if(tower1 < list.get(i)) {
-        			tower1+= (list.get(i) - tower1 + 1)/2;
-        		}
-        	}
-        	out.print( tower1 + "\n");
+        	printPermutn(sb, new StringBuilder(""));
             test--;
         }
+
         out.flush(); // to flush the output
     }
-
+static void printPermutn(StringBuilder str, StringBuilder ans)
+    {
+ 
+        // If string is empty
+        if (str.length() == 0) {
+            out.print(ans + " ");
+            return;
+        }
+ 
+        for (int i = 0; i < str.length(); i++) {
+ 
+            // ith character of str
+            char ch = str.charAt(i);
+ 
+            // Rest of the string after excluding
+            // the ith character
+            String ros1 = str.substring(0, i) +
+                        str.substring(i + 1);
+ 			StringBuilder ros = new StringBuilder(ros1);
+            // Recursive call
+            printPermutn(ros, ans.append(ch));
+        }
+    }
 static PrintWriter out = new PrintWriter(System.out);
 static Reader rd = new Reader();
 static FastScanner fs = new FastScanner();

@@ -36,7 +36,7 @@ import java.util.StringTokenizer;
 
 
 
-public class BlockTowers {
+public class AddPlus {
 
     /*                                                     "Om"
                                                     ""thou art that""
@@ -63,24 +63,25 @@ public class BlockTowers {
         long test = fs.nextLong();
         while(test > 0) {
             //Write code here;
-        	long num = fs.nextLong();
-        	long tower1 = fs.nextLong();
-        	ArrayList<Long> list = new ArrayList<>();
-        	long len = num - 1;
-        	while(len > 0) {
-        		list.add(fs.nextLong());
-        		len--;
-        	}
-        	Collections.sort(list);
-        	// out.print( list + "\n");
-        	for(int i = 0; i < num - 1; i++) {
-        		if(tower1 < list.get(i)) {
-        			tower1+= (list.get(i) - tower1 + 1)/2;
-        		}
-        	}
-        	out.print( tower1 + "\n");
+            int len = fs.nextInt();
+            	String line = fs.next();
+            	int sum = (line.charAt(0)  - '0');
+            	for(int i = 1; i < line.length(); i++) {
+            		// out.print( sum +"::" + line.charAt(i) +"::"+ (line.charAt(i) - '0') + "\n");
+            		int currValue = line.charAt(i) -'0';
+            		if(sum == currValue && sum != 0) {
+            			out.print( '-');
+            			sum-=currValue;
+            		} else {
+            			out.print( "+");
+            			sum+=currValue;
+            		}
+            		// out.print("\n");
+            	}
+            	out.print("\n");
             test--;
         }
+
         out.flush(); // to flush the output
     }
 

@@ -36,7 +36,7 @@ import java.util.StringTokenizer;
 
 
 
-public class BlockTowers {
+public class Div3_839_E {
 
     /*                                                     "Om"
                                                     ""thou art that""
@@ -62,27 +62,57 @@ public class BlockTowers {
     public static void main(String[] args) throws IOException {
         long test = fs.nextLong();
         while(test > 0) {
-            //Write code here;
-        	long num = fs.nextLong();
-        	long tower1 = fs.nextLong();
-        	ArrayList<Long> list = new ArrayList<>();
-        	long len = num - 1;
-        	while(len > 0) {
-        		list.add(fs.nextLong());
-        		len--;
-        	}
-        	Collections.sort(list);
-        	// out.print( list + "\n");
-        	for(int i = 0; i < num - 1; i++) {
-        		if(tower1 < list.get(i)) {
-        			tower1+= (list.get(i) - tower1 + 1)/2;
-        		}
-        	}
-        	out.print( tower1 + "\n");
+            //
+            int len = fs.nextInt();
+           	int index = 0;
+            Object[][] list = new Object[len][2];
+            Object[][] p1 = new Object[len][2];
+           	Object[][] p2 = new Object[len][2];
+           	while(index < len) {
+           		list[index][0] = fs.nextInt();
+                list[index][1] = 'R';
+           		index+=1;
+           	}
+            for(int i = 0 ; i < list.length; i++) {
+                int val = (int)list[i][0];
+                char ch = (char)list[i][1];
+                p1[i][0] = val;
+                p2[i][0] = val;
+                p1[i][1] = 'R';
+                p2[i][1] = 'R';
+            }
+            out.print( Arrays.deepToString(list) + "\n");
+            out.print( Arrays.deepToString(p1) + "\n");
+           	out.print( Arrays.deepToString(p2) + "\n");
+            long totalOps = 4 * 100_000_000;
+            while(totalOps > 0) {
+                //First player
+
+                //Secodn player
+                totalOps--;
+            }
+
             test--;
         }
         out.flush(); // to flush the output
     }
+static boolean isSorted(Map<Integer, Character> list) {
+	// out.print( list + "\n");
+	for(int i = 0; i < list.size() - 1; i++) {
+		if(list.get(i) <= list.get(i + 1)) 
+			continue;
+		return false;
+	}
+	return true;
+}
+static ArrayList operate(ArrayList<Integer> list, int num) {
+	ArrayList<Integer> list2 = new ArrayList<>();
+	for(int i = 0; i < list.size(); i++) {
+		int changedNum = Math.abs(list.get(i) - num);
+		list2.add(changedNum);
+	}
+	return list2;
+}
 
 static PrintWriter out = new PrintWriter(System.out);
 static Reader rd = new Reader();

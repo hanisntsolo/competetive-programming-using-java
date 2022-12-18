@@ -36,7 +36,7 @@ import java.util.StringTokenizer;
 
 
 
-public class BlockTowers {
+public class Div3839A {
 
     /*                                                     "Om"
                                                     ""thou art that""
@@ -63,26 +63,57 @@ public class BlockTowers {
         long test = fs.nextLong();
         while(test > 0) {
             //Write code here;
-        	long num = fs.nextLong();
-        	long tower1 = fs.nextLong();
-        	ArrayList<Long> list = new ArrayList<>();
-        	long len = num - 1;
-        	while(len > 0) {
-        		list.add(fs.nextLong());
-        		len--;
-        	}
-        	Collections.sort(list);
-        	// out.print( list + "\n");
-        	for(int i = 0; i < num - 1; i++) {
-        		if(tower1 < list.get(i)) {
-        			tower1+= (list.get(i) - tower1 + 1)/2;
-        		}
-        	}
-        	out.print( tower1 + "\n");
+            int[][] matrix = new int[2][2];
+            for(int i = 0; i < 2; i++) {
+                for(int j = 0; j < 2; j++) {
+                    matrix[i][j] = fs.nextInt();
+                }
+            }
+            //check and rotate.
+            int rotateCounter = 0;
+            boolean flag = false;
+            while(rotateCounter < 4) {
+                if(check(matrix)) {
+                    out.print( "YES" + "\n");
+                    flag = true;
+                    break;
+                } else {
+                    rotateMatrix(matrix);
+                }
+                rotateCounter+=1;
+            }
+            if(!flag) {
+                out.print( "NO" + "\n");
+            }
             test--;
         }
+
         out.flush(); // to flush the output
     }
+static boolean check(int[][] mat) {
+    if(mat[0][0] < mat[0][1] && mat[0][0] < mat[1][0] && mat[1][0] < mat[1][1] && mat[0][1] < mat[1][1])
+        return true;
+    return false;
+}
+static void rotateMatrix(int[][] mat) {
+    //Right
+    int right = mat[0][0];
+    //Down
+    int down = mat[0][1];
+    //Left
+    int left = mat[1][1];
+    //Up
+    int up = mat[1][0];
+
+    int temp = right;
+
+    mat[0][0] = up;
+    mat[1][0] = left;
+    mat[1][1] = down;
+    mat[0][1] = temp;
+
+    //Rotation complete.
+}
 
 static PrintWriter out = new PrintWriter(System.out);
 static Reader rd = new Reader();
