@@ -63,7 +63,30 @@ public class Hello2023B {
         long test = fs.nextLong();
         while(test > 0) {
             //Write code here;
+        	int n = fs.nextInt();
+        	if((n & 1) > 0 && n < 5) {
+        		out.print( "NO" + "\n");
+        	} else if ((n & 1) > 0) {
+        		//finding k :: n = 2k + 1;
+        		// => k = n - 1 / 2
+        		int k = (n - 1) / 2;
+        		int num = (n - 1) / 2;
+        		out.print( "YES" + "\n");
+        		while(num > 0) {
+        			out.print( k - 1 +" "+ -k + " ");
+        			num--;
+        		}
+        		out.print( k - 1 + "\n");
 
+        	} else if((n & 1) == 0) {
+        		out.print( "YES" + "\n");
+        		int num = n / 2;
+        		while(num > 0) {
+        			out.print( "1" + " " + "-1" + " ");
+        			num--;
+        		}
+        		out.print("\n");
+        	}
             test--;
         }
 
