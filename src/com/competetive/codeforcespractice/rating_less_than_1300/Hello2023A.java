@@ -36,7 +36,7 @@ import java.util.StringTokenizer;
 
 
 
-public class DetectCapitals {
+public class Hello2023A {
 
     /*                                                     "Om"
                                                     ""thou art that""
@@ -63,14 +63,18 @@ public class DetectCapitals {
         long test = fs.nextLong();
         while(test > 0) {
             //Write code here;
-        	String text = fs.next();
-        	// for(int i = 0; i < text.length(); i++) {
-        	// 	out.print( text.charAt(i) - 'A' + 1 + "\n");		
-        	// }
-        	// for(int i = 0; i < text.length(); i++) {
-        	// 	out.print(text.charAt(i) - 'a' + 1 + "\n");
-        	// }
-            test--;
+        	int len = fs.nextInt();
+        	String lamp = fs.next();
+        	if(lamp.indexOf("RL") != -1) {
+        		out.print( lamp.indexOf("RL") + "\n");
+        	} else if(lamp.indexOf("LR") != -1) {
+        		out.print( lamp.indexOf("LR") + 1 + "\n");
+        	} else if(lamp.indexOf("L") != -1 && lamp.indexOf("R") != -1) {
+        		out.print( "5" + "\n");
+        	} else {
+        		out.print( "-1" + "\n");
+        	}
+        	test--;
         }
 
         out.flush(); // to flush the output
