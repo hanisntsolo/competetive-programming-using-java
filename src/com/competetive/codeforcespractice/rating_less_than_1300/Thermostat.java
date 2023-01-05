@@ -35,8 +35,8 @@ import java.util.Random;
 import java.util.StringTokenizer;
 
 
-//Very important tricky question//
-public class LostPermutation834 {
+
+public class Thermostat {
 
     /*                                                     "Om"
                                                     ""thou art that""
@@ -63,36 +63,23 @@ public class LostPermutation834 {
         long test = fs.nextLong();
         while(test > 0) {
             //Write code here;
-        	int nums = fs.nextInt();
-        	int totalBalance = fs.nextInt();
-        	int index = 0;
-        	ArrayList<Integer> list = new ArrayList<Integer>();
-        	long totalSum = 0;
-        	while(index < nums) {
-        		int num = fs.nextInt();
-        		list.add(num);
-        		totalSum+=num;
-        		index+=1;
+        	int l = fs.nextInt(), r = fs.nextInt(), x = fs.nextInt();
+        	int a = fs.nextInt(), b = fs.nextInt();
+        	if(a == b) {
+        		out.print( "0" + "\n");
         	}
-        	Collections.sort(list);
-        	//Logic to create permutation.
-        	long sum = 0;
-        	totalBalance += totalSum;
-        	int n = 1;
-            int cnt = 0;
-        	for(int i = 1; i < totalBalance + 1; i++) {
-                if(sum >= totalBalance)
-                    break;
-                sum+=i;
-                cnt = i;
-            }
-        	// out.print( sum +"::"+totalSum + "\n");
-        	if(sum != totalBalance || list.get(list.size() - 1) > cnt || cnt <= nums) {
-        		out.print( "NO" + "\n");
+        	else if(Math.abs(a - b) >= x) {
+        		out.print( "1" + "\n");
+        	}
+        	else if( r - Math.max(a, b) >= x || Math.min(a, b) - l >= x) {
+        		out.print( "2" + "\n");
+        	}
+        	else if( r - b >= x && a - l >= x || r - a >= x && b - l >= x) {
+        		out.print( "3" + "\n");
         	} else {
-        		out.print( "YES" + "\n");
+        		out.print( "-1" + "\n");
         	}
-		   test--;
+            test--;
         }
 
         out.flush(); // to flush the output
