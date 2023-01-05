@@ -77,17 +77,20 @@ public class LostPermutation834 {
         	Collections.sort(list);
         	//Logic to create permutation.
         	long sum = 0;
-        	totalSum+=totalBalance;
+        	totalBalance += totalSum;
         	int n = 1;
-        	while(sum < totalSum) {
-        		sum+=n;
-        		n+=1;
-        	}
+            int cnt = 0;
+        	for(int i = 1; i < totalBalance + 1; i++) {
+                if(sum >= totalBalance)
+                    break;
+                sum+=i;
+                cnt = i;
+            }
         	// out.print( sum +"::"+totalSum + "\n");
-        	if(sum == totalSum && list.get(list.size() - 1) <= n && list.size() <= n) {
-        		out.print( "YES" + "\n");
-        	} else {
+        	if(sum != totalBalance || list.get(list.size() - 1) > cnt || cnt <= nums) {
         		out.print( "NO" + "\n");
+        	} else {
+        		out.print( "YES" + "\n");
         	}
 		   test--;
         }
