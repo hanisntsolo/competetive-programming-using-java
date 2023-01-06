@@ -64,20 +64,24 @@ public class Humanoid {
         while(test > 0) {
             //Write code here;
         	long n = fs.nextLong(); long h = fs.nextLong();
-        	int[] astronauts = new int[(int) n];
+        	// int[] astronauts = new int[(int) n];
+        	ArrayList<Integer> astronauts = new ArrayList<>();
         	for(int i = 0 ; i < n ; i++) {
-        		astronauts[i] = fs.nextInt();
+        		// astronauts[i] = fs.nextInt();
+        		astronauts.add(fs.nextInt());
         	}
-        	Arrays.sort(astronauts);
+        	Collections.sort(astronauts);
         	out.print(solve(astronauts, 0, h, 2, 1) + "\n");
             test--;
         }
         out.flush(); // to flush the output
     }
-    private static int solve(int[] astro, int i, long h, int s2, int s3) {
-    	if(i == astro.length) return 0;
-    	if(astro[i] < h)
-    		return solve(astro, i + 1, h + (astro[i] / 2), s2, s3) + 1;
+    private static int solve(ArrayList astro, int i, long h, int s2, int s3) {
+    	if(i == astro.size()) return 0;
+    	int num = (int)astro.get(i);		
+    	if(num < h) {
+    		return solve(astro, i + 1, h + (num / 2), s2, s3) + 1;
+    	}
     	int ans1 = (s2 > 0 ? solve(astro, i, h * 2, s2 - 1, s3) : 0);
     	int ans2 = (s3 > 0 ? solve(astro, i, h * 3, s2, s3 - 1) : 0);
     	return Math.max(ans1, ans2);

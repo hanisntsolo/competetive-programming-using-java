@@ -46,9 +46,12 @@ public class CP {
     
     /* COMMIT TO MEMORY WHILE USING JAVA IN COMPETETIVE PROGRAMMING */
 
+    //# Always use Collections.sort()// merge sort over any other sorting algorithm.
+    //# It will help avoid TLE.
+
     //# Notes: to keep in mind while coding - the program must run in max 1 sec.
     // and 1 sec is equivalent to 10^8 instruction at most.
-    //## make sure to utilize fastI/O - Readers implementation and PrintWriters implemenatation
+    //## make sure to utilize fastI/O - Readers implementation and PrintWriters implementation
     // is already present;
 
     //## Always try to use BigInteger class while writing contests.
