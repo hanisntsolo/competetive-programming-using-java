@@ -66,15 +66,15 @@ public class FindingSubsets {
         long test = fs.nextLong();
         while(test > 0) {
             //Write code here;
-            solve();
+            int n = fs.nextInt();
+            subsets(n);
             test--;
         }
 
         out.flush(); // to flush the output
     }
-    public static void solve() {
+    static void subsets(int n) {
         // code goes here//
-        int n = fs.nextInt();
         int[] set = new int[n];
         for(int i = 0; i < n; i++) {
         	set[i] = i + 1;
@@ -91,14 +91,20 @@ public class FindingSubsets {
         	}
         	listFinal.add(list);
         }
+        Collections.sort(listFinal, new Comparator<ArrayList>(){
+        	@Override
+        	public int compare(ArrayList list1, ArrayList list2) {
+        		return list1.size() - list2.size();
+        	}
+        });
         for(int i = 0 ; i < listFinal.size(); i++) {
         	print(listFinal.get(i));
         }
     }
-static void print(ArrayList list) {
-	list.toArray();
-	out.print( list + "\n");
-}
+	static void print(ArrayList list) {
+		list.toArray();
+		out.print(list + "\n");
+	}
 
 static PrintWriter out = new PrintWriter(System.out);
 static Reader rd = new Reader();
