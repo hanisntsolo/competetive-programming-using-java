@@ -1,4 +1,4 @@
-package com.competetive.codeforcespractice;
+package com.competetive.rating_less_than_1300.codeforcespractice;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.lang.Math.abs;
 import static java.lang.System.out;
-//Utilities
+//Utilitiesjava.util.
 import java.util.Scanner;
 import java.util.Collections;
 import java.util.ArrayList;

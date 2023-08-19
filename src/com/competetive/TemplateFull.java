@@ -3,6 +3,8 @@ package com.competetive;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
+
 //Static imports for less code
 import static java.math.BigInteger.valueOf;
 import static java.lang.Math.max;
@@ -17,8 +19,33 @@ import java.util.Random;
 import java.util.HashMap;
 import java.util.AbstractMap;
 import java.util.Date;
+import java.util.Comparator;
+import java.util.Collections;
+
 
 public class TemplateFull {
+// Notes: to keep in mind while coding - the program must run in max 1 sec.
+    //  and 1 sec is equivalent to 10^8 instruction at most.
+    // make sure to utilize fastI/O - Readers implementation and PrintWriters implemenatation
+    // is already present;
+    
+//Priority Queue
+/* 
+ *
+ *
+ */
+static PrintWriter out = new PrintWriter(System.out);
+
+    public static void main(String[] args) {
+        Reader rd = new Reader();
+        long test = rd.nextLong();
+        while(test > 0) {
+            //Write code here;
+
+        }
+
+        out.flush(); // to flush the output
+    }
 
 static class Reader {
     final private int BUFFER_SIZE = 1 << 16;
@@ -40,7 +67,7 @@ static class Reader {
     }
 
     public String readLine() throws IOException {
-        byte[] buf = new byte[64]; // line length
+        byte[] buf = new byte[101]; // line length
         int cnt = 0, c;
         while ((c = read()) != -1) {
             if (c == '\n') {
@@ -52,7 +79,7 @@ static class Reader {
             }
             buf[cnt++] = (byte) c;
         }
-        return new String(buf, 0, cnt);
+        return new String(buf, 0, cnt - 1);
     }
 
     public int nextInt() throws IOException {
@@ -133,10 +160,5 @@ static class Reader {
     }
 
 }
-
-    public static void main(String[] args) throws IOException {
-        Reader sc = new Reader();
-
-    }
 }
 
