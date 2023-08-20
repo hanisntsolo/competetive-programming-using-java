@@ -1,0 +1,8 @@
+{ 
+  "cmd": ["javac \"$file_name\" && java \"$file_base_name\" <   input.txt > output.txt"], 
+  "selector": "source.java",
+  "file_regex": "^\\s*File \"(...*?)\", line ([0-9]*)", 
+  //"path" : "C:\\Program Files\\Amazon Corretto\\jdk11.0.8_10\\bin\\",
+  "path" : "C:\\Program Files\\Java\\jdk-11.0.6\\bin\\",
+  "shell": true 
+} 

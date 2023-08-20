@@ -36,7 +36,7 @@ import java.util.StringTokenizer;
 
 
 
-public class FindingSubsets {
+public class Leena {
 
     /*                                                     "Om"
                                                     ""thou art that""
@@ -63,48 +63,84 @@ public class FindingSubsets {
     //## while comparing characters make sure to enclose in single quotes.
 
     public static void main(String[] args) throws IOException {
-        long test = fs.nextLong();
-        while(test > 0) {
+        // long test = fs.nextLong();
+        // while(test > 0) {
             //Write code here;
-            int n = fs.nextInt();
-            subsets(n);
-            test--;
-        }
+            solve();
+            // test--;
+        // }
 
         out.flush(); // to flush the output
     }
-    static void subsets(int n) {
+    public static void solve() {
         // code goes here//
-        int[] set = new int[n];
-        for(int i = 0; i < n; i++) {
-        	set[i] = i + 1;
-        }
-        ArrayList<ArrayList<Integer>> listFinal = new ArrayList<>();
-        for(int mask = 0; mask <= Math.pow(2 , n) - 1; mask++) {
-        	ArrayList<Integer> list = new ArrayList<>();
-        	for(int j = 0; j < set.length; j++) {
-        		//process element
-        		int ele = set[j];
-        		if((mask & (1 << n - 1 - j)) > 0) {
-        			list.add(ele);
-        		}
-        	}
-        	listFinal.add(list);
-        }
-        Collections.sort(listFinal, new Comparator<ArrayList>(){
-        	@Override
-        	public int compare(ArrayList list1, ArrayList list2) {
-        		return list1.size() - list2.size();
-        	}
-        });
-        for(int i = 0 ; i < listFinal.size(); i++) {
-        	print(listFinal.get(i));
-        }
+        /*
+         *
+          0
+        0 1 0
+      0 1 2 1 0
+    0 1 2 3 2 1 0
+  0 1 2 3 4 3 2 1 0
+0 1 2 3 4 5 4 3 2 1 0
+  0 1 2 3 4 3 2 1 0
+    0 1 2 3 2 1 0
+      0 1 2 1 0
+        0 1 0
+          0
+
+         */
+    	int n = fs.nextInt();
+    	String[][] grid = new String[2 * n + 1][2 * n + 1];
+    	for(int i = 0; i <= n * 2; i++) {
+    		for(int j = 0 ; j <= n * 2; j++) {
+    			grid[i][j] = " ";
+    			if(j == n && i <= n) {
+    				grid[i][j] = String.valueOf(i);
+    			} else if(j == n && i > n) {
+    				grid[i][j] = String.valueOf((2 * n) - i);
+    			}
+    		}
+    	}
+    	// out.print("Debug" + grid[4][n]  + "\n");
+    	int k = 0;
+    	for(int i = 0; i <= n * 2; i++) {
+    		for(int j = Integer.valueOf(grid[i][n]); j >= 0 ; j--) {
+    			// k = n + j + 1;
+    			grid[i][n - j] = String.valueOf(Integer.valueOf(grid[i][n]) - j);
+    			grid[i][n + j] = String.valueOf(Integer.valueOf(grid[i][n]) - j);
+    		}
+    		for(k = n + Integer.valueOf(grid[i][n]) + 1 ;k< 2 * n + 1; k++) {
+    			grid[i][k] = null;
+    		}
+    	}
+    	//Print
+    	StringBuilder fb = new StringBuilder();
+    	for(int i = 0; i <= n * 2; i++) {
+    		StringBuilder sb = new StringBuilder();
+    		for(int j = 0 ; j <= n * 2; j++) {
+    			if(grid[i][j] == null) {
+    				sb.append("\n");
+    				break;
+    			}
+    			else if(j < n) {
+    				sb.append(grid[i][j] + " ");
+    			}
+    			else if(j >= n && grid[i][j] != "0") {
+    				sb.append(grid[i][j] + " ");
+    			}
+    			else if(j >= n && grid[i][j] == "0") {
+    				sb.append(grid[i][j] + "\n");
+    			}
+    			if(j == 2 * n) {
+    				sb.append("\n");
+    			}
+    		}
+    		sb.deleteCharAt(sb.length() - 2);
+    		fb.append(sb);
+    	}
+    	out.print(fb);
     }
-	static void print(ArrayList list) {
-		list.toArray();
-		out.print(list + "\n");
-	}
+
 
 static PrintWriter out = new PrintWriter(System.out);
 static Reader rd = new Reader();
@@ -113,6 +149,40 @@ static final Random random=new Random();
 static final int mod=1_000_000_007;
 static long[][] vals;
 
+//My helper methods :
+
+    static void print(ArrayList list) {
+        list.toArray();
+        out.print(list + "\n");
+    }
+    static void subsets(int n) {
+        // code goes here//
+        int[] set = new int[n];
+        for(int i = 0; i < n; i++) {
+            set[i] = i + 1;
+        }
+        ArrayList<ArrayList<Integer>> listFinal = new ArrayList<>();
+        for(int mask = 0; mask <= Math.pow(2 , n) - 1; mask++) {
+            ArrayList<Integer> list = new ArrayList<>();
+            for(int j = 0; j < set.length; j++) {
+                //process element
+                int ele = set[j];
+                if((mask & (1 << n - 1 - j)) > 0) {
+                    list.add(ele);
+                }
+            }
+            listFinal.add(list);
+        }
+        Collections.sort(listFinal, new Comparator<ArrayList>(){
+            @Override
+            public int compare(ArrayList list1, ArrayList list2) {
+                return list1.size() - list2.size();
+            }
+        });
+        for(int i = 0 ; i < listFinal.size(); i++) {
+            print(listFinal.get(i));
+        }
+    }
 
 static void ruffleSort(int[] a) {
     int n=a.length;//shuffle, then sort 

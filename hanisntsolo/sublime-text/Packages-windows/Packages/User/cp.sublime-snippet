@@ -1,3 +1,5 @@
+<snippet>
+	<content><![CDATA[
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -36,14 +38,16 @@ import java.util.StringTokenizer;
 
 
 
-public class FindingSubsets {
+public class CP {
 
     /*                                                     "Om"
                                                     ""thou art that""
     */
     
     /* COMMIT TO MEMORY WHILE USING JAVA IN COMPETETIVE PROGRAMMING */
-
+    //#String Manipulations:
+        1: Use deleteChatAt() on stringBuilder with loc 2 to remove newLine extra char while printing. gave me a (PIA).
+        
     //# Always use Collections.sort()// merge sort over any other sorting algorithm.
     //# It will help avoid TLE.
 
@@ -66,45 +70,17 @@ public class FindingSubsets {
         long test = fs.nextLong();
         while(test > 0) {
             //Write code here;
-            int n = fs.nextInt();
-            subsets(n);
+            solve();
             test--;
         }
 
         out.flush(); // to flush the output
     }
-    static void subsets(int n) {
+    public static void solve() {
         // code goes here//
-        int[] set = new int[n];
-        for(int i = 0; i < n; i++) {
-        	set[i] = i + 1;
-        }
-        ArrayList<ArrayList<Integer>> listFinal = new ArrayList<>();
-        for(int mask = 0; mask <= Math.pow(2 , n) - 1; mask++) {
-        	ArrayList<Integer> list = new ArrayList<>();
-        	for(int j = 0; j < set.length; j++) {
-        		//process element
-        		int ele = set[j];
-        		if((mask & (1 << n - 1 - j)) > 0) {
-        			list.add(ele);
-        		}
-        	}
-        	listFinal.add(list);
-        }
-        Collections.sort(listFinal, new Comparator<ArrayList>(){
-        	@Override
-        	public int compare(ArrayList list1, ArrayList list2) {
-        		return list1.size() - list2.size();
-        	}
-        });
-        for(int i = 0 ; i < listFinal.size(); i++) {
-        	print(listFinal.get(i));
-        }
+        
     }
-	static void print(ArrayList list) {
-		list.toArray();
-		out.print(list + "\n");
-	}
+
 
 static PrintWriter out = new PrintWriter(System.out);
 static Reader rd = new Reader();
@@ -113,6 +89,40 @@ static final Random random=new Random();
 static final int mod=1_000_000_007;
 static long[][] vals;
 
+//My helper methods :
+
+    static void print(ArrayList list) {
+        list.toArray();
+        out.print(list + "\n");
+    }
+    static void subsets(int n) {
+        // code goes here//
+        int[] set = new int[n];
+        for(int i = 0; i < n; i++) {
+            set[i] = i + 1;
+        }
+        ArrayList<ArrayList<Integer>> listFinal = new ArrayList<>();
+        for(int mask = 0; mask <= Math.pow(2 , n) - 1; mask++) {
+            ArrayList<Integer> list = new ArrayList<>();
+            for(int j = 0; j < set.length; j++) {
+                //process element
+                int ele = set[j];
+                if((mask & (1 << n - 1 - j)) > 0) {
+                    list.add(ele);
+                }
+            }
+            listFinal.add(list);
+        }
+        Collections.sort(listFinal, new Comparator<ArrayList>(){
+            @Override
+            public int compare(ArrayList list1, ArrayList list2) {
+                return list1.size() - list2.size();
+            }
+        });
+        for(int i = 0 ; i < listFinal.size(); i++) {
+            print(listFinal.get(i));
+        }
+    }
 
 static void ruffleSort(int[] a) {
     int n=a.length;//shuffle, then sort 
@@ -310,8 +320,8 @@ static Queue<Integer> descQ = new PriorityQueue<>(new Comparator<Integer>(){
 
 static class Reader {
     final private int BUFFER_SIZE = 1 << 16;
-    private final DataInputStream din;
-    private final byte[] buffer;
+    private DataInputStream din;
+    private byte[] buffer;
     private int bufferPointer, bytesRead;
 
     public Reader() {
@@ -422,3 +432,9 @@ static class Reader {
 
 }
 }
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>cp</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.java</scope> -->
+</snippet>
