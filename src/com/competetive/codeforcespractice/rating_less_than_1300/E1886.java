@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 //Static imports for less code
-import static java.math.BigInteger.valueOf;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.lang.Math.abs;
@@ -30,13 +29,12 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.HashSet;
-import java.math.BigInteger;
 import java.util.Random;
 import java.util.StringTokenizer;
 
 
 
-public class DZY {
+public class E1886 {
 
     /*                                                     "Om"
                                                     ""thou art that""
@@ -54,7 +52,7 @@ public class DZY {
     //## make sure to utilize fastI/O - Readers implementation and PrintWriters implementation
     // is already present;
 
-    //## Always try to use BigInteger class while writing contests.
+    //## Always try to use long class while writing contests.
 
     //## While comparing wrapper class objects please use equals method 
     // or write your own implementation of the equals method.
@@ -65,60 +63,49 @@ public class DZY {
     //## while comparing characters make sure to enclose in single quotes.
 
     public static void main(String[] args) throws IOException {
-        int m = fs.nextInt();
-        int n = fs.nextInt();
-        // while(test > 0) {
+        long test = fs.nextLong();
+        while(test > 0) {
             //Write code here;
-            solve(m, n); // Pending
-            // test--;
-        // }
+            solve();
+            test--;
+        }
 
         out.flush(); // to flush the output
     }
-    public static void solve(int m, int n) {
+    public static void solve() {
         // code goes here//
-        String[] rows = new String[m];
-        Character[][] grid = new Character[m][n];
-        for (int i = 0;i < m ;i++ ) {
-        	rows[i] = fs.next();
+        long problems = fs.nextLong();
+        long k = fs.nextLong();
+        long a = (4 * problems);
+        long sum = 0;
+        long squareSum = 0;
+        long n = 4 * problems;
+        
+        for(int i = 0; i < problems; i++) {
+            long currBig = fs.nextLong();
+            sum+=currBig;
+            squareSum+=(currBig * currBig);
         }
-        for (int i = 0 ; i < m ; i++) {
-        	for (int j = 0 ; j < n ; j++) {
-        		grid[i][j] = rows[i].charAt(j);
-        	}
-        }
-        // grid = placePieces(grid, m, n);
-        Character[][] gridAns = placePieces(grid, m, n);
-        for (int i = 0 ; i < m ; i++) {
-        	for (int j = 0 ; j < n ; j++) {
-        		out.print(gridAns[i][j]);
-        	}
-        	out.print("\n");
-        }
+        long b = n * sum;
+        long c = squareSum - k;
+        long d = Math.round(Math.sqrt((b * b - 4 * a * c)));
+        long wNeg = -1 * b - d;
+        long wPos = -1 * b + d;
+        long resNeg = wNeg / (2 * a);
+        long resPos = wPos / (2 * a);
+        out.print( resNeg + " :: " + resPos + "\n");
     }
-    public static Character[][] placePieces(Character[][] grid, int m, int n) {
-    	for (int i = 0 ; i < m ; i++) {
-    		for (int j = 0 ; j < n ; j++) {
-                if(grid[i][j] == '.') {
-        			if((i + j) % 2 == 0) {
-                        grid[i][j] = 'B';    		      
-                	} else {
-                        grid[i][j] = 'W';
-                    }
-                }
-            }
+    public static StringBuilder replace(StringBuilder string) {
+        StringBuilder sb = new StringBuilder();
+        for(int i =0 ; i < string.length(); i++) {
+            if(string.charAt(i) == '.') 
+                continue;
+            sb.append(string.charAt(i)); 
         }
-    	return grid;
+        return sb;
     }
 
-public static int[][] directions = {
-	{-1 , 0},
-	{0 , +1},
-	{+1, 0},
-	{0 , -1}
-};
-
-static StringBuilder sb = new StringBuilder();
+// static StringBuilder sb = new StringBuilder();
 static StringBuilder gsb = new StringBuilder();
 static PrintWriter out = new PrintWriter(System.out);
 static Reader rd = new Reader();
@@ -334,7 +321,6 @@ static class FastScanner {
                 }
             return st.nextToken();
         }
-        
         int nextInt() {
             return Integer.parseInt(next());
         }

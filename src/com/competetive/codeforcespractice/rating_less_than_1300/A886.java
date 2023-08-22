@@ -36,7 +36,7 @@ import java.util.StringTokenizer;
 
 
 
-public class DZY {
+public class A886 {
 
     /*                                                     "Om"
                                                     ""thou art that""
@@ -65,58 +65,25 @@ public class DZY {
     //## while comparing characters make sure to enclose in single quotes.
 
     public static void main(String[] args) throws IOException {
-        int m = fs.nextInt();
-        int n = fs.nextInt();
-        // while(test > 0) {
+        long test = fs.nextLong();
+        while(test > 0) {
             //Write code here;
-            solve(m, n); // Pending
-            // test--;
-        // }
+            solve();
+            test--;
+        }
 
         out.flush(); // to flush the output
     }
-    public static void solve(int m, int n) {
+    public static void solve() {
         // code goes here//
-        String[] rows = new String[m];
-        Character[][] grid = new Character[m][n];
-        for (int i = 0;i < m ;i++ ) {
-        	rows[i] = fs.next();
-        }
-        for (int i = 0 ; i < m ; i++) {
-        	for (int j = 0 ; j < n ; j++) {
-        		grid[i][j] = rows[i].charAt(j);
-        	}
-        }
-        // grid = placePieces(grid, m, n);
-        Character[][] gridAns = placePieces(grid, m, n);
-        for (int i = 0 ; i < m ; i++) {
-        	for (int j = 0 ; j < n ; j++) {
-        		out.print(gridAns[i][j]);
-        	}
-        	out.print("\n");
-        }
+        int a = fs.nextInt();
+        int b = fs.nextInt();
+        int c = fs.nextInt();
+        if(a + b >= 10 || a + c >= 10 || b + c >= 10)
+        	out.print( "YES" + "\n");
+    	else
+    		out.print( "NO" + "\n");
     }
-    public static Character[][] placePieces(Character[][] grid, int m, int n) {
-    	for (int i = 0 ; i < m ; i++) {
-    		for (int j = 0 ; j < n ; j++) {
-                if(grid[i][j] == '.') {
-        			if((i + j) % 2 == 0) {
-                        grid[i][j] = 'B';    		      
-                	} else {
-                        grid[i][j] = 'W';
-                    }
-                }
-            }
-        }
-    	return grid;
-    }
-
-public static int[][] directions = {
-	{-1 , 0},
-	{0 , +1},
-	{+1, 0},
-	{0 , -1}
-};
 
 static StringBuilder sb = new StringBuilder();
 static StringBuilder gsb = new StringBuilder();

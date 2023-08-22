@@ -36,7 +36,7 @@ import java.util.StringTokenizer;
 
 
 
-public class DZY {
+public class C886 {
 
     /*                                                     "Om"
                                                     ""thou art that""
@@ -65,60 +65,39 @@ public class DZY {
     //## while comparing characters make sure to enclose in single quotes.
 
     public static void main(String[] args) throws IOException {
-        int m = fs.nextInt();
-        int n = fs.nextInt();
-        // while(test > 0) {
+        long test = fs.nextLong();
+        while(test > 0) {
             //Write code here;
-            solve(m, n); // Pending
-            // test--;
-        // }
+            solve();
+            test--;
+        }
 
         out.flush(); // to flush the output
     }
-    public static void solve(int m, int n) {
+    public static void solve() {
         // code goes here//
-        String[] rows = new String[m];
-        Character[][] grid = new Character[m][n];
-        for (int i = 0;i < m ;i++ ) {
-        	rows[i] = fs.next();
+        StringBuilder sb = new StringBuilder();
+        int n = 8;
+        int pos = 1;
+        int result = pos;
+        int winner = 0;
+        while(pos <= n) {
+            sb.append(fs.next());
+            pos++;
         }
-        for (int i = 0 ; i < m ; i++) {
-        	for (int j = 0 ; j < n ; j++) {
-        		grid[i][j] = rows[i].charAt(j);
-        	}
-        }
-        // grid = placePieces(grid, m, n);
-        Character[][] gridAns = placePieces(grid, m, n);
-        for (int i = 0 ; i < m ; i++) {
-        	for (int j = 0 ; j < n ; j++) {
-        		out.print(gridAns[i][j]);
-        	}
-        	out.print("\n");
-        }
+        out.print( replace(sb) + "\n");
     }
-    public static Character[][] placePieces(Character[][] grid, int m, int n) {
-    	for (int i = 0 ; i < m ; i++) {
-    		for (int j = 0 ; j < n ; j++) {
-                if(grid[i][j] == '.') {
-        			if((i + j) % 2 == 0) {
-                        grid[i][j] = 'B';    		      
-                	} else {
-                        grid[i][j] = 'W';
-                    }
-                }
-            }
+    public static StringBuilder replace(StringBuilder string) {
+        StringBuilder sb = new StringBuilder();
+        for(int i =0 ; i < string.length(); i++) {
+            if(string.charAt(i) == '.') 
+                continue;
+            sb.append(string.charAt(i)); 
         }
-    	return grid;
+        return sb;
     }
 
-public static int[][] directions = {
-	{-1 , 0},
-	{0 , +1},
-	{+1, 0},
-	{0 , -1}
-};
-
-static StringBuilder sb = new StringBuilder();
+// static StringBuilder sb = new StringBuilder();
 static StringBuilder gsb = new StringBuilder();
 static PrintWriter out = new PrintWriter(System.out);
 static Reader rd = new Reader();
