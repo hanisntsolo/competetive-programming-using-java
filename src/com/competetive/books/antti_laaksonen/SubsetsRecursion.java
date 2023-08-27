@@ -13,7 +13,7 @@ import static java.lang.Math.abs;
 import static java.lang.System.out;
 //Utilities
 import java.util.Scanner;
-import java.util.Collections;
+import java.util.Collection;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.HashMap;
@@ -33,17 +33,20 @@ import java.util.HashSet;
 import java.math.BigInteger;
 import java.util.Random;
 import java.util.StringTokenizer;
+import java.util.Stack;
 
 
 
-public class GeneratingSubsets {
+public class SubsetsRecursion {
 
     /*                                                     "Om"
                                                     ""thou art that""
     */
     
     /* COMMIT TO MEMORY WHILE USING JAVA IN COMPETETIVE PROGRAMMING */
-
+    //#String Manipulations:
+    //    1: Use deleteChatAt() on stringBuilder with loc 2 to remove newLine extra char while printing. gave me a (PIA).
+        
     //# Always use Collections.sort()// merge sort over any other sorting algorithm.
     //# It will help avoid TLE.
 
@@ -72,25 +75,36 @@ public class GeneratingSubsets {
 
         out.flush(); // to flush the output
     }
-    static ArrayList<ArrayList<Integer>> subSetFinal = new ArrayList<>();
     public static void solve() {
         // code goes here//
-		int n = fs.nextInt();
-		for(int mask = 0; !((mask >> n) > 0); mask++) {
-			ArrayList<Integer> subSet = new ArrayList<>();
-			for(int j = 0; j < n; j++) {
-				if(((mask >> j) & 1 ) > 0) {
-					subSet.add(j);
-				}
-			}
-			subSetFinal.add(subSet);
-		}   
-		for(ArrayList<Integer> arrList : subSetFinal) {
-            out.print( arrList + "\n");
-        }   
+        int n = fs.nextInt();
+        int[] array = new int[n];
+        ArrayList<Integer> list = new ArrayList<>();
+        for(int i = 1; i <= n; i++) {
+        	array[i - 1] = i; 
+        	list.add(i);
+        }
+        createSubArray(1);
+        // out.print(list + "\n");
+    }
+    static ArrayList<Integer> list = new ArrayList<>();
+    static void createSubArray(int val) {
+    	// out.print(list + "\n");
+    	if(val >= list.size() - 1) {
+    		//Process subset
+    		out.print(list + "\n");
+    		return;
+    	} else {
+    		list.add(val);
+    		createSubArray(val + 1);
+    		list.remove(list.size() - 1);
+    		createSubArray(val + 1);
+    	}
     }
 
 
+static StringBuilder sb = new StringBuilder();
+static StringBuilder gsb = new StringBuilder();
 static PrintWriter out = new PrintWriter(System.out);
 static Reader rd = new Reader();
 static FastScanner fs = new FastScanner();
@@ -98,6 +112,62 @@ static final Random random=new Random();
 static final int mod=1_000_000_007;
 static long[][] vals;
 
+//My helper methods :
+    public static Boolean isfrequencyDivisible(Collection<Integer> valueSet, int k) {
+        for(Integer i : valueSet) {
+            if(i % k == 0) continue;
+            else
+                return false;
+        }
+        return true;
+    }
+    public static String convertCharSetToString(Set<Character> charSet) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Character c : charSet) {
+            stringBuilder.append(c);
+        }
+        return stringBuilder.toString();
+    }
+    public static String multiplyString(String string, int times) {
+        StringBuilder stringBuilder = new StringBuilder();
+        while(times > 0) {
+            stringBuilder.append(string);
+            times--;
+        }
+        return stringBuilder.toString();
+    }
+    static void print(ArrayList list) {
+        list.toArray();
+        out.print(list + "\n");
+    }
+    static void subsets(int n) {
+        // code goes here//
+        int[] set = new int[n];
+        for(int i = 0; i < n; i++) {
+            set[i] = i + 1;
+        }
+        ArrayList<ArrayList<Integer>> listFinal = new ArrayList<>();
+        for(int mask = 0; mask <= Math.pow(2 , n) - 1; mask++) {
+            ArrayList<Integer> list = new ArrayList<>();
+            for(int j = 0; j < set.length; j++) {
+                //process element
+                int ele = set[j];
+                if((mask & (1 << n - 1 - j)) > 0) {
+                    list.add(ele);
+                }
+            }
+            listFinal.add(list);
+        }
+        Collections.sort(listFinal, new Comparator<ArrayList>(){
+            @Override
+            public int compare(ArrayList list1, ArrayList list2) {
+                return list1.size() - list2.size();
+            }
+        });
+        for(int i = 0 ; i < listFinal.size(); i++) {
+            print(listFinal.get(i));
+        }
+    }
 
 static void ruffleSort(int[] a) {
     int n=a.length;//shuffle, then sort 
