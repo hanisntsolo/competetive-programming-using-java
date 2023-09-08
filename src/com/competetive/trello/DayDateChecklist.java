@@ -11,10 +11,20 @@ public class DayDateChecklist {
             for (int day = 1; day <= daysInMonth; day++) {
                 String date = String.format("%d-%02d-%02d", year, month, day);
                 String dayOfWeek = getDayOfWeek(year, month, day);
-                String checklistItem = "Cooking Morning:: " + String.format("%s (%s)", date, dayOfWeek);
-                String checklistItemEve = "Evening:: " + String.format("%s (%s)", date, dayOfWeek);  
-                System.out.println(checklistItem);
-                System.out.println(checklistItemEve);
+                String 
+                subjects =   "Mathematics" + "\n";
+                subjects +=  "Physics" + "\n";
+                subjects +=  "Chemistry" + "\n";
+                subjects +=  "Informatics Practices" + "\n";
+                subjects +=  "English" + "\n";
+                subjects +=  "Lab Chemistry" + "\n";
+                subjects +=  "Lab Physics" + "\n";
+                subjects +=  "Lab Computer" + "\n";
+
+                String checklistItem = "3 SUBJECTS DONE for today ? " + String.format("%s (%s)", date, dayOfWeek);
+                // String checklistItemEve = "Evening:: " + String.format("%s (%s)", date, dayOfWeek);  
+                System.out.println(subjects + checklistItem);
+                // System.out.println(checklistItemEve);
                 // You can add code here to create the checklist item in Trello using API or other methods
             }
         }
