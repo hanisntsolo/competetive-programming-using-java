@@ -76,16 +76,18 @@ public class GeneratingSubsets {
     public static void solve() {
         // code goes here//
 		int n = fs.nextInt();
-		for(int mask = 0; !(mask >> n); mask++) {
-			ArrayList<Integer> subSet;
+		for(int mask = 0; !((mask >> n) > 0); mask++) {
+			ArrayList<Integer> subSet = new ArrayList<>();
 			for(int j = 0; j < n; j++) {
-				if((mask >> j) & 1) {
+				if(((mask >> j) & 1 ) > 0) {
 					subSet.add(j);
 				}
 			}
 			subSetFinal.add(subSet);
 		}   
-		out.print( subSetFinal.toArray() + "\n");     
+		for(ArrayList<Integer> arrList : subSetFinal) {
+            out.print( arrList + "\n");
+        }   
     }
 
 
