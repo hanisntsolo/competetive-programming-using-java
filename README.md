@@ -263,3 +263,11 @@ Can you translate the algorithm to code well?
 ### If you are coding in java make sure that you are using FastReader and PrintWriter for fast I/O. As fast input/output can be a diffrentiator in getting as AC or TLE. Please make sure to amend this and dont get disheartned by the whole process of it.
 
 It will all finally make sense once you have started practising.
+
+General guidelines you want to contribute to this repo 
+
+create your named folder at the root of the project.
+
+Do as much code as you can 
+
+Raise a pull request against master.
