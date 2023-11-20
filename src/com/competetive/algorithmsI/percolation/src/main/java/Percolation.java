@@ -51,11 +51,10 @@ public class Percolation {
   // opens the site (row, col) if it is not open already
   public void open(int row, int col) {
     // what do we do when we are opening the site.
-    if (isValidRowColCombination(row, col)) {
+    if (!isOpen(row, col)) {
       int currSite = getIndex(row, col);
       this.sites[currSite] = 1;
-      numberOfOpenSites += 1;
-
+      this.numberOfOpenSites += 1;
       // Top artificial cell
       if (row == 1 && !(system.find(currSite) == system.find(top))) {
         system.union(currSite, top);
@@ -110,7 +109,7 @@ public class Percolation {
 
   // returns the number of open sites
   public int numberOfOpenSites() {
-    return numberOfOpenSites == 0 ? 0 : numberOfOpenSites - 1;
+    return numberOfOpenSites;
   }
 
   // does the system percolate?
