@@ -1,107 +1,130 @@
-import edu.princeton.cs.algs4.StdOut;
-import edu.princeton.cs.algs4.StdRandom;
-import edu.princeton.cs.algs4.StdStats;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
+
+/**
+ * Percolation. Given a composite systems comprised of randomly distributed insulating and metallic
+ * materials: what fraction of the materials need to be metallic so that the composite system is an
+ * electrical conductor? Given a porous landscape with water on the surface (or oil below), under
+ * what conditions will the water be able to drain through to the bottom (or the oil to gush through
+ * to the surface)? Scientists have defined an abstract process known as percolation to model such
+ * situations.
+ *
+ * <p>The model. We model a percolation system using an n-by-n grid of sites. Each site is either
+ * open or blocked.
+ *
+ * <p>A full site is an open site that can be connected to an open site in the top row via a chain
+ * of neighboring (left, right, up, down) open sites.
+ *
+ * <p>We say the system percolates if there is a full site in the bottom row.
+ *
+ * <p>In other words, a system percolates if we fill all open sites connected to the top row and
+ * that process fills some open site on the bottom row.
+ *
+ * <p>(For the insulating/metallic materials example, the open sites correspond to metallic
+ * materials, so that a system that percolates has a metallic path from top to bottom, with full
+ * sites conducting. For the porous substance example, the open sites correspond to empty space
+ * through which water might flow, so that a system that percolates lets water fill open sites,
+ * flowing from top to bottom.)
+ */
 public class Percolation {
-    private WeightedQuickUnionUF system;
-    private int numberOfOpenSitesLeft;
-    private int[] id;
-    private int totalRows;
-    private int totalCols;
-    boolean flag = true;
-    int virtualTop;
-    int virtualBottom;
-    private final int[][] directions = new int[][]{
-        {-1, 0}, // UP
-        {0, +1}, // RIGHT
-        {+1, 0}, // DOWN
-        {0, -1} // LEFT
-    };
-    // creates n-by-n grid, with all sites initially blocked
-    public Percolation(int n) {
-        numberOfOpenSitesLeft = 0;
-        system = new WeightedQuickUnionUF(n * n);
-        id = new int[n * n];
-        totalRows = n;
-        totalCols = n;
-//        id[0] = 1;
-//        id[n * n - 1] = 1;
-        virtualTop = 0;
-        virtualBottom = (totalCols * totalRows) - 1;
-    }
+  private final WeightedQuickUnionUF system;
+  private final WeightedQuickUnionUF systemPercolates;
+  private final byte[] sites;
+  private final int top;
+  private final int bottom;
+  private final int totalColumns;
+  private final int totalRows;
+  private int numberOfOpenSites;
 
-    // opens the site (row, col) if it is not open already
-    // and add union of all 4 directions here.
-    public void open(int row, int col) throws IllegalArgumentException {
-            System.out.println("Opening" + row +"::"+ col);
-            numberOfOpenSitesLeft+=1;
-            id[getIndex(row, col)] = 1;
-            //Now try to put a union with all other adjacent blocks.
-            createUnionOnConnectedBlocks(row, col);
-    }
+  // creates n-by-n grid, with all sites initially blocked
+  public Percolation(int n) { // adding 2 extra for top and bottom
+    if (n < 1) throw new IllegalArgumentException("Arguments less than 1.");
+    top = n * n;
+    bottom = n * n + 1;
+    totalColumns = n;
+    totalRows = n;
+    system = new WeightedQuickUnionUF(n * n + 2);
+    systemPercolates = new WeightedQuickUnionUF(n * n + 2);
+    sites = new byte[n * n]; // 0:closed //1: open //2: Full
+    numberOfOpenSites = 0;
+  }
 
-    private void createUnionOnConnectedBlocks (int row, int col) throws IllegalArgumentException {
-        for(int i = 0 ; i < directions.length; i++) {
-            int nextRow = row + directions[i][0];
-            int nextCol = col + directions[i][1];
-            if(nextRow > row || nextCol > col || nextRow < 0 || nextCol < 0 || id[getIndex(nextRow, nextCol)] == 0) continue;
-            else {
-                if(isOpen(nextRow, nextCol) && !system.connected(getIndex(row, col), getIndex(nextRow, nextCol)))
-                    system.union(getIndex(row, col), getIndex(nextRow, nextCol));
-            }
+  // opens the site (row, col) if it is not open already
+  public void open(int row, int col) {
+    // what do we do when we are opening the site.
+    if (isValidRowColCombination(row, col)) {
+      int currSite = getIndex(row, col);
+      this.sites[currSite] = 1;
+      numberOfOpenSites += 1;
+
+      // Top artificial cell
+      if (row == 1 && !(system.find(currSite) == system.find(top))) {
+        system.union(currSite, top);
+        systemPercolates.union(currSite, top);
+      }
+      // Bottom artificial cell
+      if (row == totalRows) {
+        systemPercolates.union(currSite, bottom);
+      }
+      // Union with bottom cell
+      if (row < totalRows)
+        if (isOpen(row + 1, col)) {
+          system.union(currSite, getIndex(row + 1, col));
+          systemPercolates.union(currSite, getIndex(row + 1, col));
+        }
+      // Union with upper cell
+      if (row > 1)
+        if (isOpen(row - 1, col)) {
+          system.union(currSite, getIndex(row - 1, col));
+          systemPercolates.union(currSite, getIndex(row - 1, col));
+        }
+      // Union with right cell
+      if (col < totalColumns)
+        if (isOpen(row, col + 1)) {
+          system.union(currSite, getIndex(row, col + 1));
+          systemPercolates.union(currSite, getIndex(row, col + 1));
+        }
+      // Union with left cell
+      if (col > 1)
+        if (isOpen(row, col - 1)) {
+          system.union(currSite, getIndex(row, col - 1));
+          systemPercolates.union(currSite, getIndex(row, col - 1));
         }
     }
+  }
 
-    // is the site (row, col) open?
-    public boolean isOpen(int row, int col) throws IllegalArgumentException {
-        StdOut.println("INDEX :: " + "Row" + row + "Col"+ col + "::" + getIndex(row, col) + "Status :: of site " + id[getIndex(row, col)]);
-        return id[getIndex(row, col)] == 1;
-    }
+  // is the site (row, col) open?
+  public boolean isOpen(int row, int col) {
+    return isValidRowColCombination(row, col) && sites[getIndex(row, col)] == 1;
+  }
 
-    // is the site (row, col) full?
-    public boolean isFull(int row, int col) throws IllegalArgumentException {
-        return id[getIndex(row, col)] == 1;
+  // is the site (row, col) full?
+  public boolean isFull(int row, int col) {
+    if (isValidRowColCombination(row, col)) {
+      if (!isOpen(row, col)) {
+        return false;
+      }
     }
+    int currSite = getIndex(row, col);
+    return system.find(top) == system.find(currSite);
+  }
 
-    // returns the number of open sites
-    public int numberOfOpenSites() {
-        return numberOfOpenSitesLeft;
-    }
+  // returns the number of open sites
+  public int numberOfOpenSites() {
+    return numberOfOpenSites == 0 ? 0 : numberOfOpenSites - 1;
+  }
 
-    // does the system percolate?
-    public boolean percolates() throws IllegalArgumentException {
-        for(int i = 0; i < totalCols; i++) {
-            if(isOpen(0, i)) {
-//                System.out.println("Connected top to bottom" + system.connected(virtualTop, virtualBottom));
-                system.union(virtualTop, getIndex(0, i));
-            }
-            if(isOpen(totalRows - 1, i)) {
-//                System.out.println("Connected top to bottom" + system.connected(virtualTop, virtualBottom));
-                system.union(getIndex(totalRows - 1, i), virtualBottom);
-            }
-        }
-        return system.connected(virtualTop, virtualBottom);
-    }
-    //helper to get a one 2D array in form of 1D interpretation
-    private int getIndex(int row, int col) {
-        int index =  row * totalCols + col;
-//        if(index < 0 || index > totalRows * totalCols - 1)
-//            throw new IllegalArgumentException("Row and Column Overflowed");
-        return index;
-    }
+  // does the system percolate?
+  public boolean percolates() {
+    return systemPercolates.find(top) == systemPercolates.find(bottom);
+  }
 
-    // test client (optional)
-    public static void main(String[] args) {
-        int N = 5;
-        Percolation grid = new Percolation(N);
-        while(!grid.percolates()) {
-            int randomIndex = StdRandom.uniformInt(N*N);
-            int row = randomIndex / N;
-            int col = randomIndex % N;
-            if(!grid.isOpen(row, col))
-                grid.open(row, col);
-            System.out.println("Number of open sites left" + grid.numberOfOpenSites());
-        }
-        System.out.println(grid.numberOfOpenSites());;
-    }
+  private int getIndex(int i, int j) {
+    return (i - 1) * totalColumns + j - 1;
+  }
+
+  private boolean isValidRowColCombination(int i, int j) {
+    if (i < 1 || j < 1 || i > totalColumns || j > totalRows)
+      throw new IllegalArgumentException("Argument out of Bounds!");
+    return true;
+  }
 }
