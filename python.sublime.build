@@ -5,7 +5,8 @@
 
   "windows":
   {
-    "shell_cmd": "python \"${file}\" < input.txt > output.txt"
+    "shell_cmd": "python \"${file}\" < input.txt > output.txt" // for writing to output file.
+    // for writing to shell
     // "shell_cmd": "start cmd /k \"python \"${file}\" && @echo OFF && echo. && echo ======================= && pause && exit\""
   },
 
