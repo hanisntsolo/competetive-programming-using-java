@@ -1,5 +1,3 @@
-<snippet>
-    <content><![CDATA[
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -35,10 +33,12 @@ import java.util.HashSet;
 import java.math.BigInteger;
 import java.util.Random;
 import java.util.StringTokenizer;
+import java.util.List;
 
 
 
-public class CP {
+
+public class ReadInDouble {
     
     /**
      * Weighted Quick Union : Java Implementation + Path Compression
@@ -214,17 +214,22 @@ public class CP {
         long test = fs.nextLong();
         while(test > 0) {
             //Write code here;
-            solve();
+            doubleList.add(new Double(fs.next()));
             test--;
         }
-
+        solve();
         out.flush(); // to flush the output
     }
     public static void solve() {
+        https://www.baeldung.com/java-printstream-printf
         // code goes here//
-        
+        for(Double d : doubleList) {
+        	out.printf("%7.3f%n", d);
+        }
+        // Resource
     }
 
+static List<Double> doubleList = new ArrayList<>();
 static StringBuilder sb = new StringBuilder();
 static StringBuilder gsb = new StringBuilder();
 static PrintWriter out = new PrintWriter(System.out);
@@ -598,21 +603,4 @@ static class Reader {
     }
 
 }
-/**
-*
-INFORMATION:
-
-1. The cp sublime snippet in windows is located at : 
-C:\Users\hanisntsolo-boxx\AppData\Roaming\Sublime Text 3\Packages\User\cp.sublime.snippet
-
-And its content are located in src/cp.sublime.snippet
-
-Any modification in source must ensure the modification in this file as well.
-*/
 }
-]]></content>
-    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-    <tabTrigger>cp</tabTrigger>
-    <!-- Optional: Set a scope to limit where the snippet will trigger -->
-    <!-- <scope>source.java</scope> -->
-</snippet>

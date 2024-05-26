@@ -1,5 +1,3 @@
-<snippet>
-    <content><![CDATA[
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -35,10 +33,12 @@ import java.util.HashSet;
 import java.math.BigInteger;
 import java.util.Random;
 import java.util.StringTokenizer;
+import java.util.Calendar;
+import java.text.DateFormatSymbols;
 
 
 
-public class CP {
+public class DayFromDate {
     
     /**
      * Weighted Quick Union : Java Implementation + Path Compression
@@ -222,7 +222,27 @@ public class CP {
     }
     public static void solve() {
         // code goes here//
-        
+        // Tokens are seperated by space IMP!
+        HashMap<String, Integer> monthNumberMap = new HashMap<>();
+        monthNumberMap.put("january", 1);
+        monthNumberMap.put("february", 2);
+        monthNumberMap.put("march", 3);
+        monthNumberMap.put("april", 4);
+        monthNumberMap.put("may", 5);
+        monthNumberMap.put("june", 6);
+        monthNumberMap.put("july", 7);
+        monthNumberMap.put("august", 8);
+        monthNumberMap.put("september", 9);
+        monthNumberMap.put("october", 10);
+        monthNumberMap.put("november", 11);
+        monthNumberMap.put("december", 12);
+        int date = Integer.parseInt(fs.next());
+        String month = fs.next();
+        int monthNumber = monthNumberMap.get(month.toLowerCase());
+        int year = Integer.parseInt(fs.next());
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, monthNumber, date);
+    	out.print(new DateFormatSymbols().getWeekdays()[calendar.get(Calendar.DAY_OF_WEEK)]+ "\n");
     }
 
 static StringBuilder sb = new StringBuilder();
@@ -598,21 +618,4 @@ static class Reader {
     }
 
 }
-/**
-*
-INFORMATION:
-
-1. The cp sublime snippet in windows is located at : 
-C:\Users\hanisntsolo-boxx\AppData\Roaming\Sublime Text 3\Packages\User\cp.sublime.snippet
-
-And its content are located in src/cp.sublime.snippet
-
-Any modification in source must ensure the modification in this file as well.
-*/
 }
-]]></content>
-    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-    <tabTrigger>cp</tabTrigger>
-    <!-- Optional: Set a scope to limit where the snippet will trigger -->
-    <!-- <scope>source.java</scope> -->
-</snippet>

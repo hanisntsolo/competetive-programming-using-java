@@ -1,5 +1,3 @@
-<snippet>
-    <content><![CDATA[
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -38,7 +36,7 @@ import java.util.StringTokenizer;
 
 
 
-public class CP {
+public class A {
     
     /**
      * Weighted Quick Union : Java Implementation + Path Compression
@@ -610,9 +608,3 @@ And its content are located in src/cp.sublime.snippet
 Any modification in source must ensure the modification in this file as well.
 */
 }
-]]></content>
-    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-    <tabTrigger>cp</tabTrigger>
-    <!-- Optional: Set a scope to limit where the snippet will trigger -->
-    <!-- <scope>source.java</scope> -->
-</snippet>
