@@ -5,7 +5,7 @@ public class DayDateChecklist {
 
     public static void main(String[] args) {
         int year = Calendar.getInstance().get(Calendar.YEAR);
-
+        // year += 1;
         for (int month = 1; month <= 12; month++) {
             int daysInMonth = getDaysInMonth(year, month);
             for (int day = 1; day <= daysInMonth; day++) {
