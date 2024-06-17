@@ -1,5 +1,3 @@
-<snippet>
-    <content><![CDATA[
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -38,7 +36,7 @@ import java.util.StringTokenizer;
 
 
 
-public class CP {
+public class PashMakAndFlowers {
     
     /**
      * Weighted Quick Union : Java Implementation + Path Compression
@@ -211,20 +209,46 @@ public class CP {
     //## while comparing characters make sure to enclose in single quotes.
 
     public static void main(String[] args) throws IOException {
-        long test = fs.nextLong();
-        while(test > 0) {
-            //Write code here;
+        // long test = fs.nextLong();
+        // while(test > 0) {
+        //     //Write code here;
             solve();
-            test--;
-        }
+        //     test--;
+        // }
 
         out.flush(); // to flush the output
     }
     public static void solve() {
         // code goes here//
-        
+        int totalFlowers = fs.nextInt();
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+    	Map<Integer, Integer> numMap = new HashMap<>();
+    	for(int i = 0; i < totalFlowers; i++) {
+    		int currentNum = fs.nextInt();
+    		if(!numMap.containsKey(currentNum)) {
+    			numMap.put(currentNum, 1);
+    		} else {
+    			numMap.put(currentNum, numMap.get(currentNum) + 1);
+    		}
+    		if(currentNum < min) {
+    			min = currentNum;
+    		}
+    		if(currentNum > max) {
+    			max = currentNum;
+    		}
+    	}
+    	int lowCount = numMap.get(min);
+    	int highCount = numMap.get(max);
+    	long firstnCr = nCr(lowCount, 1);
+    	long secondnCr = nCr(highCount, 1);
+		long totalWays = firstnCr * secondnCr;
+		if(numMap.size() == 1) {
+			totalWays = nCr(totalFlowers, 2);
+		}
+    	out.print( max - min + " "+ totalWays + "\n");
     }
-
+static final boolean DEBUG = false;
 static StringBuilder sb = new StringBuilder();
 static StringBuilder gsb = new StringBuilder();
 static PrintWriter out = new PrintWriter(System.out);
@@ -233,9 +257,7 @@ static FastScanner fs = new FastScanner();
 static final Random random=new Random();
 static final int mod=1_000_000_007;
 static long[][] vals;
-
-//My helper methods :
-    // Function to calculate nCr using binomial co-efficients
+// Function to calculate nCr using binomial co-efficients
     public static long nCr(int n, int r) {
         if (r > n) {
             return 0;
@@ -258,6 +280,7 @@ static long[][] vals;
 
         return res;
     }
+//My helper methods :
     public static Boolean isfrequencyDivisible(Collection<Integer> valueSet, int k) {
         for(Integer i : valueSet) {
             if(i % k == 0) continue;
@@ -633,9 +656,3 @@ And its content are located in src/cp.sublime.snippet
 Any modification in source must ensure the modification in this file as well.
 */
 }
-]]></content>
-    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-    <tabTrigger>cp</tabTrigger>
-    <!-- Optional: Set a scope to limit where the snippet will trigger -->
-    <!-- <scope>source.java</scope> -->
-</snippet>
