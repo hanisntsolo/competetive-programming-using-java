@@ -207,7 +207,7 @@ public class B {
     // break the general contract of writing a comparator.
     
     //## while comparing characters make sure to enclose in single quotes.
-
+    static final boolean DEBUG = false;
     public static void main(String[] args) throws IOException {
         long test = fs.nextLong();
         while(test > 0) {
@@ -218,9 +218,67 @@ public class B {
 
         out.flush(); // to flush the output
     }
+    public static boolean isPowerOfTwo(long n)
+    {
+        if (n == 0)
+            return false;
+ 
+        return (long)(Math.ceil((Math.log(n) / Math.log(2))))
+            == (long)(Math.floor(
+                ((Math.log(n) / Math.log(2)))));
+    }
     public static void solve() {
         // code goes here//
-        
+        long num = fs.nextInt();
+        if(DEBUG)
+           out.print("Num :" + num + "\n");
+        String ans = Long.toBinaryString(num);
+        if(num == 1) {
+        	out.print( "1" + "\n");
+        	out.print( "1");
+        } else if(isPowerOfTwo(num)) {
+        	out.print(ans.length() + "\n");
+        	StringBuilder diffStr = new StringBuilder(Long.toBinaryString(num));
+	        diffStr.reverse();
+	        int i = 0;
+	        for(; i < diffStr.length(); i++) {
+	        	if(i == diffStr.length() - 1) {
+	        		out.print(diffStr.charAt(i));
+	        	} else {
+	        		out.print(diffStr.charAt(i) + " ");
+	        	}
+	        }
+        } else {
+	        out.print(ans.length() + 1 + "\n");
+	        //Calculate the array
+	        long nextBigNumber = (long)Math.pow(2, ans.length());
+	        StringBuilder nextBigNumberStr = new StringBuilder(Long.toBinaryString(nextBigNumber));
+	        nextBigNumberStr.reverse();
+	        long diff = nextBigNumber - num;
+	        if(DEBUG) {
+	        	out.print("nextBigNumber : " + nextBigNumber  + "\n");
+	        	out.print("diff : "+ diff + "\n");
+	        }
+	        StringBuilder diffStr = new StringBuilder(Long.toBinaryString(diff));
+	        diffStr.reverse();
+	        if(DEBUG)
+	        	out.print( diffStr + "\n");
+	        int i = 0;
+	        for(; i < diffStr.length(); i++) {
+	        	if(diffStr.charAt(i) == '1') {
+	        		out.print(-1 + " ");
+	        	} else {
+	        		out.print( diffStr.charAt(i) + " ");
+	        	}
+	        }
+	        for(;i < nextBigNumberStr.length(); i++) {
+	        	if(i == nextBigNumberStr.length() - 1)
+	        		out.print(nextBigNumberStr.charAt(i));
+	        	else
+		        	out.print( nextBigNumberStr.charAt(i) + " ");
+	        }
+        }
+        out.print("\n");
     }
 
 static StringBuilder sb = new StringBuilder();

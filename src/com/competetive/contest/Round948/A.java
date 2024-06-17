@@ -208,6 +208,7 @@ public class A {
     
     //## while comparing characters make sure to enclose in single quotes.
 
+    // Always remember the problems are already solved.
     public static void main(String[] args) throws IOException {
         long test = fs.nextLong();
         while(test > 0) {
@@ -220,7 +221,17 @@ public class A {
     }
     public static void solve() {
         // code goes here//
-        
+        int first = fs.nextInt();
+        int second = fs.nextInt();
+        if(first < second)
+        	out.print( "No" + "\n");
+        else {
+        	if(first % 2 == 0 && second % 2 != 0 || first % 2 != 0 && second % 2 == 0) {
+        		out.print( "No" + "\n");
+        	} else {
+        		out.print( "Yes" + "\n");
+        	}
+        }
     }
 
 static StringBuilder sb = new StringBuilder();
