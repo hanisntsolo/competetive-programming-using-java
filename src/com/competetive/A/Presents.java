@@ -233,7 +233,8 @@ public class Presents {
         	gifts[i][0] = fs.nextInt();
         	gifts[i][1] = i+1;
         }
-        Arrays.sort(gifts, (int[] o1, int[] o2) -> o1[0] - o2[0]);
+        // Arrays.sort(gifts, (int[] o1, int[] o2) -> o1[0] - o2[0]);
+        Arrays.sort(gifts, (o1,o2) -> o1[0] - o2[0]);
         for (int i = 0; i < len; i++) {
         	out.print( gifts[i][1] + " ");
         }
