@@ -36,7 +36,7 @@ import java.util.StringTokenizer;
 
 
 
-public class Sail {
+public class ShowerLine {
     
     /**
      * Weighted Quick Union : Java Implementation + Path Compression
@@ -209,7 +209,7 @@ public class Sail {
     //## while comparing characters make sure to enclose in single quotes.
 
     public static void main(String[] args) throws IOException {
-        long test = 1;
+        long test = fs.nextLong();
         while(test > 0) {
             //Write code here;
             solve();
@@ -219,48 +219,10 @@ public class Sail {
         out.flush(); // to flush the output
     }
     public static void solve() {
-        long time = fs.nextInt();
-        long x = fs.nextInt();
-        long y = fs.nextInt();
-        final long xDestination = fs.nextInt();
-        final long yDestination = fs.nextInt();
-        final long xMovement = xDestination - x;
-        final long yMovement = yDestination - y;
-        if(DEBUG)
-        out.print( xMovement + "::" + yMovement + "\n");
-        Character xDirection = xMovement < 0 ? 'W' : 'E';
-        Character yDirection = yMovement < 0 ? 'S' : 'N';
-        if(DEBUG)
-        out.print( xDirection + "::" + yDirection + "\n");
-        final String wind = fs.next();
-        long movesX = Math.abs(xMovement);
-        long movesY = Math.abs(yMovement);
-        if(DEBUG)
-        out.print( movesX + "::" + movesY + "\n");
-        long latestTime = -1;
-        int index = 0;
-        int sec = 0;
-        while(time-- > 0) {
-        	if(DEBUG)
-        	out.print("Current wind :: " + wind.charAt(index)  + "\n");
-        	if(Character.getNumericValue(wind.charAt(index)) == Character.getNumericValue(xDirection) && movesX > 0) {
-        		--movesX;
-        	} else if(Character.getNumericValue(wind.charAt(index)) == Character.getNumericValue(yDirection) && movesY > 0) {
-        		--movesY;
-        	}
-        	++sec;
-        	index++;
-        	if(DEBUG) {
-        		out.print(movesX + "::" + movesY + "\n");
-        	}
-        	if(movesX == 0 && movesY == 0) {
-        		latestTime = sec;
-        		break;
-        	}
-        }
-        out.print( latestTime + "\n");
+        // code goes here//
+        
     }
-static boolean DEBUG = false;
+
 static StringBuilder sb = new StringBuilder();
 static StringBuilder gsb = new StringBuilder();
 static PrintWriter out = new PrintWriter(System.out);

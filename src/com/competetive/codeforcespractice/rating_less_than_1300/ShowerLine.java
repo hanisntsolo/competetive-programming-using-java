@@ -33,10 +33,12 @@ import java.util.HashSet;
 import java.math.BigInteger;
 import java.util.Random;
 import java.util.StringTokenizer;
+import java.util.List;
+import java.util.stream.*;
 
 
 
-public class Sail {
+public class ShowerLine {
     
     /**
      * Weighted Quick Union : Java Implementation + Path Compression
@@ -219,47 +221,61 @@ public class Sail {
         out.flush(); // to flush the output
     }
     public static void solve() {
-        long time = fs.nextInt();
-        long x = fs.nextInt();
-        long y = fs.nextInt();
-        final long xDestination = fs.nextInt();
-        final long yDestination = fs.nextInt();
-        final long xMovement = xDestination - x;
-        final long yMovement = yDestination - y;
-        if(DEBUG)
-        out.print( xMovement + "::" + yMovement + "\n");
-        Character xDirection = xMovement < 0 ? 'W' : 'E';
-        Character yDirection = yMovement < 0 ? 'S' : 'N';
-        if(DEBUG)
-        out.print( xDirection + "::" + yDirection + "\n");
-        final String wind = fs.next();
-        long movesX = Math.abs(xMovement);
-        long movesY = Math.abs(yMovement);
-        if(DEBUG)
-        out.print( movesX + "::" + movesY + "\n");
-        long latestTime = -1;
-        int index = 0;
-        int sec = 0;
-        while(time-- > 0) {
-        	if(DEBUG)
-        	out.print("Current wind :: " + wind.charAt(index)  + "\n");
-        	if(Character.getNumericValue(wind.charAt(index)) == Character.getNumericValue(xDirection) && movesX > 0) {
-        		--movesX;
-        	} else if(Character.getNumericValue(wind.charAt(index)) == Character.getNumericValue(yDirection) && movesY > 0) {
-        		--movesY;
+    	//Very Important Way to take care while creating 2-D ArrayList.
+        List<List<Integer>> happinessMatrix = new ArrayList<>();
+        happinessMatrix.add(new ArrayList<>());
+        for(int i = 1; i <= 5; i++) {
+        	//Madatory new Initialization.
+        	List<Integer> row = new ArrayList<>(Collections.nCopies(6, 0));
+        	for(int j = 1; j <= 5; j++) {
+        		int currNum = fs.nextInt();
+        		row.set(j, currNum);
         	}
-        	++sec;
-        	index++;
-        	if(DEBUG) {
-        		out.print(movesX + "::" + movesY + "\n");
-        	}
-        	if(movesX == 0 && movesY == 0) {
-        		latestTime = sec;
-        		break;
+        	happinessMatrix.add(row);
+        }
+        if(DEBUG)
+        out.print( happinessMatrix + "\n");
+        // List<Integer> list = new ArrayList<>(List.of(1, 2, 3, 4, 5));
+        // List<List<Integer>> permutations = new ArrayList<>();
+        // calculatePermutation(list, 0, permutations);
+        long maximalHappines = 0;
+        for(List<Integer> currPerm: permutations) {
+        	long currShowerLineHappines = 0;
+        	//23154 first Four
+        	//0 -> 1 :: 1 -> 0; 2 -> 3 :: 3 -> 2
+        	currShowerLineHappines += (happinessMatrix.get(currPerm.get(0)).get(currPerm.get(1)) + happinessMatrix.get(currPerm.get(1)).get(currPerm.get(0))
+        	        							 +happinessMatrix.get(currPerm.get(2)).get(currPerm.get(3)) + happinessMatrix.get(currPerm.get(3)).get(currPerm.get(2)));
+        	//3154 Last four
+        	currShowerLineHappines += (happinessMatrix.get(currPerm.get(1)).get(currPerm.get(2)) + happinessMatrix.get(currPerm.get(2)).get(currPerm.get(1))
+        	        							 +happinessMatrix.get(currPerm.get(3)).get(currPerm.get(4)) + happinessMatrix.get(currPerm.get(4)).get(currPerm.get(3)));
+        	//15 last pair which can talk
+        	currShowerLineHappines += happinessMatrix.get(currPerm.get(2)).get(currPerm.get(3)) + happinessMatrix.get(currPerm.get(3)).get(currPerm.get(2));	
+        	currShowerLineHappines += happinessMatrix.get(currPerm.get(3)).get(currPerm.get(4)) + happinessMatrix.get(currPerm.get(4)).get(currPerm.get(3));	
+        	if(currShowerLineHappines > maximalHappines) {
+        		if(DEBUG)
+        			out.print( currPerm +"::"+currShowerLineHappines + "::"+ maximalHappines + "\n");
+        		maximalHappines = currShowerLineHappines;
         	}
         }
-        out.print( latestTime + "\n");
+        out.print(maximalHappines  + "\n");
     }
+    //Very efficient way to calucate permutations.
+    private static void calculatePermutation(List<Integer> nums,int index, List<List<Integer>> result) {
+    	if(index == nums.size()) {
+    		result.add(new ArrayList<>(nums));
+    		return;
+    	}
+    	for(int i = index; i < nums.size(); i++) {
+    		Collections.swap(nums, index, i);
+    		calculatePermutation(nums, index + 1, result);
+    		Collections.swap(nums, index, i);
+    	}
+    }
+static List<Integer> list = new ArrayList<>(List.of(1, 2, 3, 4, 5));
+static List<List<Integer>> permutations = new ArrayList<>();
+static {
+    calculatePermutation(list, 0, permutations);
+}
 static boolean DEBUG = false;
 static StringBuilder sb = new StringBuilder();
 static StringBuilder gsb = new StringBuilder();
