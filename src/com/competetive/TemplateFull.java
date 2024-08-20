@@ -36,7 +36,7 @@ public class TemplateFull {
  */
 static PrintWriter out = new PrintWriter(System.out);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Reader rd = new Reader();
         long test = rd.nextLong();
         while(test > 0) {

@@ -1,11 +1,11 @@
 package com.competetive.recursionandbacktracking.recursion;
 
-import recursiontypes.EuclidianAlgorithm;
-import recursiontypes.Factorial;
-import recursiontypes.Fibonacci;
-import recursiontypes.Sum;
-import recursiontypes.TowerOfHanoi;
-import recursiontypes.TypesOfRecursion;
+import com.competetive.recursionandbacktracking.recursiontypes.EuclidianAlgorithm;
+import com.competetive.recursionandbacktracking.recursiontypes.Factorial;
+import com.competetive.recursionandbacktracking.recursiontypes.Fibonacci;
+import com.competetive.recursionandbacktracking.recursiontypes.Sum;
+import com.competetive.recursionandbacktracking.recursiontypes.TowerOfHanoi;
+import com.competetive.recursionandbacktracking.recursiontypes.TypesOfRecursion;
 
 public class RecursionAndBackTracking {
 

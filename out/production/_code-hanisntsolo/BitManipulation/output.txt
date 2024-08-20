@@ -1,0 +1,3 @@
+BitManipulation.class
+4
+Bit present is =1
