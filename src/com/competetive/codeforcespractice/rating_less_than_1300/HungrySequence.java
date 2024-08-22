@@ -35,13 +35,11 @@ import java.util.Random;
 import java.util.StringTokenizer;
 import java.util.List;
 import java.util.stream.*;
-import java.util.Arrays;
 
 
 
-public class ComparingStrings {
-	
-    static boolean DEBUG = false;
+public class HungrySequence {
+    
     static StringBuilder sb = new StringBuilder();
     static StringBuilder gsb = new StringBuilder();
     static PrintWriter out = new PrintWriter(System.out);
@@ -87,43 +85,43 @@ public class ComparingStrings {
 
         out.flush(); // to flush the output
     }
+    //3 * N + 0, 3 * N + 1, 3 * N + 2, …, 3 * N + (N – 1). 
     public static void solve() {
-        String first = fs.next();
-        String second = fs.next();
-        if(first.length() != second.length())
-        {
-        	out.print( "NO" + "\n");
-        	return;
+        int N = fs.nextInt();
+        for(int i = 0 ; i < N; i++) {
+        	out.print( 3 * N + i + " ");
         }
-        // int[] firstGenome = new int[26];
-        // int[] secondGenome = new int[26];
-        int count = 0;
-        int pos1 = 0;
-        int pos2 = 0;
-    	for(int i = 0; i < first.length(); i++) {
-    		// firstGenome[Character.getNumericValue(first.charAt(i)) - 10] += 1;
-    		if((int)first.charAt(i) != (int)second.charAt(i)) {
-    			if(count == 1) {
-    				pos2 = i;
-    			} else {
-    				pos1 = i;
-    			}
-    			count++;
-    		}
-    		if(count > 2) {
-    			out.print( "NO" + "\n");
-    			return;
-    		}
-    	}
-    	List<String> firstList = new ArrayList<String>(Arrays.asList(first.split("")));
-    	List<String> secondList = new ArrayList<String>(Arrays.asList(second.split("")));
-		Collections.swap(firstList, pos1, pos2);
-		if(firstList.equals(secondList)) {
-			out.print( "YES" + "\n");
-			return;
-		}
-    	out.print("NO" + "\n");
+        // bound = N;
+        // List<Integer> list = approachTwo(1000000);
+        // out.print( gsb + "\n");
     }
+    static int bound = 0;
+    private static List<Integer> approachTwo(int n) {
+	    List<Integer> primes = new ArrayList<>();
+	    //Formula based approach given n => total primes will be : ((n - 3) / 2) + 1
+	    // Sieving from p^2, whose value is (4i^2 + 12i + 9). The index of this value in isPrime is 2i^2 + 6i + 3 because isPrime(i) represents 2i + 3
+	    if(n < 2) return Collections.emptyList();
+	    final int size = (int)Math.floor(0.5 * (n - 3)) + 1;
+	    List<Boolean> isPrime = new ArrayList<>(Collections.nCopies(size, true));
+	    primes.add(2);
+	    gsb.append(String.valueOf(2)).append(" ");
+	    for(long i = 0; i < size; ++i) {
+	      if(isPrime.get((int)i)) {
+	        int p = ((int) (i * 2)) + 3;
+	        if(bound-- > 1) {
+	        	if(bound == 1)
+		        	gsb.append(String.valueOf(p));
+		        else
+		        	gsb.append(String.valueOf(p)).append(" ");
+	        }
+	        primes.add(p);
+	        for(long j = ((i * i) * 2 ) + 6 * i + 3; j < size; j += p) {
+	          isPrime.set((int)j, false);
+	        }
+	      }
+	    }
+	    return primes;
+  	}
 
     /**
      * Calculate permutations of a give list
