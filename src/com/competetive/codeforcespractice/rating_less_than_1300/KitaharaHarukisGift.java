@@ -1,5 +1,3 @@
-<snippet>
-    <content><![CDATA[
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -36,14 +34,12 @@ import java.math.BigInteger;
 import java.util.Random;
 import java.util.StringTokenizer;
 import java.util.List;
-import java.util.Arrays;
 import java.util.stream.*;
 
 
 
-public class CP {
-
-    static boolean DEBUG = true;
+public class KitaharaHarukisGift {
+    
     static StringBuilder sb = new StringBuilder();
     static StringBuilder gsb = new StringBuilder();
     static PrintWriter out = new PrintWriter(System.out);
@@ -80,7 +76,7 @@ public class CP {
     //## while comparing characters make sure to enclose in single quotes.
 
     public static void main(String[] args) throws IOException {
-        long test = fs.nextLong();
+        long test = 1;
         while(test > 0) {
             //Write code here;
             solve();
@@ -90,7 +86,34 @@ public class CP {
         out.flush(); // to flush the output
     }
     public static void solve() {
-        // code goes here//
+        int len = fs.nextInt();
+        if(len == 1) {
+        	out.print( "NO" + "\n");
+        	return;
+        }
+        int count100 = 0;
+        int count200 = 0;
+        while(len-- > 0) {
+        	int currNum = fs.nextInt();
+        	if(currNum == 200)
+        		count200++;
+        	else
+        		count100++;
+        }
+        // if 100 not present or 200 not present
+        if(count100 == 0 && count200 % 2 == 0) {
+        	out.print( "YES" + "\n");
+        } else if(count200 == 0 && count100 % 2 == 0) {
+        	out.print( "YES" + "\n");
+        } else if(count100 > 0 && count100 % 2 == 1) {
+        	out.print( "NO" + "\n");
+        } else if(count100 > 0 && count100 % 2 == 0) {
+        	out.print( "YES" + "\n");
+        } else if(count200 > 0 && count200 % 2 == 1) {
+        	out.print( "NO" + "\n");
+        } else {
+        	out.print( "NO" + "\n");
+        }
     }
 
     /**
@@ -661,9 +684,3 @@ public class CP {
      * 
      */
 }
-]]></content>
-    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-    <tabTrigger>cp</tabTrigger>
-    <!-- Optional: Set a scope to limit where the snippet will trigger -->
-    <!-- <scope>source.java</scope> -->
-</snippet>

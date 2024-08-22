@@ -1,5 +1,3 @@
-<snippet>
-    <content><![CDATA[
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -41,9 +39,8 @@ import java.util.stream.*;
 
 
 
-public class CP {
-
-    static boolean DEBUG = true;
+public class Letter {
+    
     static StringBuilder sb = new StringBuilder();
     static StringBuilder gsb = new StringBuilder();
     static PrintWriter out = new PrintWriter(System.out);
@@ -52,6 +49,7 @@ public class CP {
     static final Random random=new Random();
     static final int mod=1_000_000_007;
     static long[][] vals;
+    static boolean DEBUG = false;
 
     /*                                                     "Om"
                                                     ""thou art that""
@@ -80,7 +78,7 @@ public class CP {
     //## while comparing characters make sure to enclose in single quotes.
 
     public static void main(String[] args) throws IOException {
-        long test = fs.nextLong();
+        long test = 1;
         while(test > 0) {
             //Write code here;
             solve();
@@ -89,8 +87,31 @@ public class CP {
 
         out.flush(); // to flush the output
     }
-    public static void solve() {
-        // code goes here//
+    public static void solve() throws IOException {
+        String heading = rd.readLine();
+        String text = rd.readLine();
+        if(DEBUG) {
+        	out.print( heading  + "\n");
+        	out.print( text + "\n");
+        }
+        int[] availableChars = new int[123];
+        for(int i = 0; i < heading.length(); i++) {
+        	availableChars[(int)heading.charAt(i)] += 1;
+        }
+        if(DEBUG)
+        	out.print( Arrays.toString(availableChars) + "\n");
+        for(int i = 0; i < text.length(); i++) {
+        	if(text.charAt(i) == ' ') continue;
+        	char currChar = text.charAt(i);
+        	if(availableChars[(int)currChar] > 0) {
+        		availableChars[(int)currChar] -= 1;
+        	} else {
+        		// out.print( currChar + "\n");
+        		out.print("NO" + "\n");
+        		return;
+        	}
+        }
+        out.print( "YES" + "\n");
     }
 
     /**
@@ -549,7 +570,7 @@ public class CP {
         }
 
         public String readLine() throws IOException {
-            byte[] buf = new byte[101]; // line length
+            byte[] buf = new byte[201]; // line length
             int cnt = 0, c;
             while ((c = read()) != -1) {
                 if (c == '\n') {
@@ -661,9 +682,3 @@ public class CP {
      * 
      */
 }
-]]></content>
-    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-    <tabTrigger>cp</tabTrigger>
-    <!-- Optional: Set a scope to limit where the snippet will trigger -->
-    <!-- <scope>source.java</scope> -->
-</snippet>

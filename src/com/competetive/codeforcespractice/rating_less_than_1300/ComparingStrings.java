@@ -1,5 +1,3 @@
-<snippet>
-    <content><![CDATA[
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -36,14 +34,13 @@ import java.math.BigInteger;
 import java.util.Random;
 import java.util.StringTokenizer;
 import java.util.List;
-import java.util.Arrays;
 import java.util.stream.*;
+import java.util.Arrays;
 
 
 
-public class CP {
-
-    static boolean DEBUG = true;
+public class ComparingStrings {
+    static boolean DEBUG = false;
     static StringBuilder sb = new StringBuilder();
     static StringBuilder gsb = new StringBuilder();
     static PrintWriter out = new PrintWriter(System.out);
@@ -80,7 +77,7 @@ public class CP {
     //## while comparing characters make sure to enclose in single quotes.
 
     public static void main(String[] args) throws IOException {
-        long test = fs.nextLong();
+        long test = 1;
         while(test > 0) {
             //Write code here;
             solve();
@@ -90,7 +87,41 @@ public class CP {
         out.flush(); // to flush the output
     }
     public static void solve() {
-        // code goes here//
+        String first = fs.next();
+        String second = fs.next();
+        if(first.length() != second.length())
+        {
+        	out.print( "NO" + "\n");
+        	return;
+        }
+        // int[] firstGenome = new int[26];
+        // int[] secondGenome = new int[26];
+        int count = 0;
+        int pos1 = 0;
+        int pos2 = 0;
+    	for(int i = 0; i < first.length(); i++) {
+    		// firstGenome[Character.getNumericValue(first.charAt(i)) - 10] += 1;
+    		if((int)first.charAt(i) != (int)second.charAt(i)) {
+    			if(count == 1) {
+    				pos2 = i;
+    			} else {
+    				pos1 = i;
+    			}
+    			count++;
+    		}
+    		if(count > 2) {
+    			out.print( "NO" + "\n");
+    			return;
+    		}
+    	}
+    	List<String> firstList = new ArrayList<String>(Arrays.asList(first.split("")));
+    	List<String> secondList = new ArrayList<String>(Arrays.asList(second.split("")));
+		Collections.swap(firstList, pos1, pos2);
+		if(firstList.equals(secondList)) {
+			out.print( "YES" + "\n");
+			return;
+		}
+    	out.print("NO" + "\n");
     }
 
     /**
@@ -661,9 +692,3 @@ public class CP {
      * 
      */
 }
-]]></content>
-    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-    <tabTrigger>cp</tabTrigger>
-    <!-- Optional: Set a scope to limit where the snippet will trigger -->
-    <!-- <scope>source.java</scope> -->
-</snippet>
