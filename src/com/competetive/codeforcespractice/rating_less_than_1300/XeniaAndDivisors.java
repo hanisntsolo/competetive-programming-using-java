@@ -38,8 +38,101 @@ import java.util.stream.*;
 
 
 
-public class ShooshunsAndSequence {
+public class XeniaAndDivisors {
     
+    static StringBuilder sb = new StringBuilder();
+    static StringBuilder gsb = new StringBuilder();
+    static PrintWriter out = new PrintWriter(System.out);
+    static Reader rd = new Reader();
+    static FastScanner fs = new FastScanner();
+    static final Random random=new Random();
+    static final int mod=1_000_000_007;
+    static long[][] vals;
+
+    /*                                                     "Om"
+                                                    ""thou art that""
+    */
+    
+    /* COMMIT TO MEMORY WHILE USING JAVA IN COMPETETIVE PROGRAMMING */
+    //#String Manipulations:
+    //    1: Use deleteChatAt() on stringBuilder with loc 2 to remove newLine extra char while printing. gave me a (PIA).
+        
+    //# Always use Collections.sort()// merge sort over any other sorting algorithm.
+    //# It will help avoid TLE.
+
+    //# Notes: to keep in mind while coding - the program must run in max 1 sec.
+    // and 1 sec is equivalent to 10^8 instruction at most.
+    //## make sure to utilize fastI/O - Readers implementation and PrintWriters implementation
+    // is already present;
+
+    //## Always try to use BigInteger class while writing contests.
+
+    //## While comparing wrapper class objects please use equals method 
+    // or write your own implementation of the equals method.
+    
+    //## When writing comparator and using in sorting the values make sure you do not
+    // break the general contract of writing a comparator.
+    
+    //## while comparing characters make sure to enclose in single quotes.
+
+    public static void main(String[] args) throws IOException {
+        long test = 1;
+        while(test > 0) {
+            //Write code here;
+            solve();
+            test--;
+        }
+
+        out.flush(); // to flush the output
+    }
+    public static void solve() {
+        int len = fs.nextInt();
+        List<Integer> oneToSix = new ArrayList<>(Collections.nCopies(8,0));
+        for(int i = 0; i < len; i++) {
+            int currNum = fs.nextInt();
+            oneToSix.set(currNum, oneToSix.get(currNum) + 1);
+        }
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0 ; i < len / 3; i++) {
+            if(oneToSix.get(1) > 0 && oneToSix.get(2) > 0 && oneToSix.get(4) > 0) {
+                oneToSix.set(1, oneToSix.get(1) - 1);
+                oneToSix.set(2, oneToSix.get(2) - 1);
+                oneToSix.set(4, oneToSix.get(4) - 1);
+                sb.append("1 2 4" + "\n");
+            } else if (oneToSix.get(1) > 0 && oneToSix.get(2) > 0 && oneToSix.get(6) > 0) {
+                oneToSix.set(1, oneToSix.get(1) - 1);
+                oneToSix.set(2, oneToSix.get(2) - 1);
+                oneToSix.set(6, oneToSix.get(6) - 1);
+                sb.append("1 2 6" + "\n");
+            } else if (oneToSix.get(1) > 0 && oneToSix.get(3) > 0 && oneToSix.get(6) > 0) {
+                oneToSix.set(1, oneToSix.get(1) - 1);
+                oneToSix.set(3, oneToSix.get(3) - 1);
+                oneToSix.set(6, oneToSix.get(6) - 1);
+                sb.append("1 3 6" + "\n");
+            } else {
+                out.print( -1 + "\n");
+                return;
+            }
+        }
+        out.print(sb.toString() + "\n");
+    }
+
+    /**
+     * Calculate permutations of a give list
+     * @params nums list to be premutation index as starting index, result to contain all permutations.
+     */ 
+    static void calculatePermutations(List<Integer> nums, int index, List<List<Integer>> result) {
+        if(index == nums.size()) {
+            result.add(new ArrayList<>(nums));
+            return;
+        }
+        for(int i = index; i < nums.size(); i++) {
+            Collections.swap(nums, index, i);
+            calculatePermutations(nums, index + 1, result);
+            Collections.swap(nums, index, i); // Backtrack
+        }
+    }
+
     /**
      * Weighted Quick Union : Java Implementation + Path Compression
      * Data Structure : Same as quick union, but maintain extra array sz[i]
@@ -150,8 +243,9 @@ public class ShooshunsAndSequence {
             id[i] = j;
         }
     }
+
     //Eager approach
-    /* Data Structure : Integer array[] id of size N.
+    /** Data Structure : Integer array[] id of size N.
      * Interpretation : p and q are connected iff they have the same id.
      * 
      * Find : Check if p and q have the same id.
@@ -184,68 +278,6 @@ public class ShooshunsAndSequence {
         }
     }
 
-    /*                                                     "Om"
-                                                    ""thou art that""
-    */
-    
-    /* COMMIT TO MEMORY WHILE USING JAVA IN COMPETETIVE PROGRAMMING */
-    //#String Manipulations:
-    //    1: Use deleteChatAt() on stringBuilder with loc 2 to remove newLine extra char while printing. gave me a (PIA).
-        
-    //# Always use Collections.sort()// merge sort over any other sorting algorithm.
-    //# It will help avoid TLE.
-
-    //# Notes: to keep in mind while coding - the program must run in max 1 sec.
-    // and 1 sec is equivalent to 10^8 instruction at most.
-    //## make sure to utilize fastI/O - Readers implementation and PrintWriters implementation
-    // is already present;
-
-    //## Always try to use BigInteger class while writing contests.
-
-    //## While comparing wrapper class objects please use equals method 
-    // or write your own implementation of the equals method.
-    
-    //## When writing comparator and using in sorting the values make sure you do not
-    // break the general contract of writing a comparator.
-    
-    //## while comparing characters make sure to enclose in single quotes.
-
-    public static void main(String[] args) throws IOException {
-        long test = fs.nextLong();
-        while(test > 0) {
-            //Write code here;
-            solve();
-            test--;
-        }
-
-        out.flush(); // to flush the output
-    }
-    public static void solve() {
-        // code goes here//
-        int n = fs.nextInt();
-        int k = fs.nextInt();
-        int last = 0;
-        int continuous = 1;
-        for(int i = 0; i < n ; i++) {
-        	int currNum = fs.nextInt();
-            if(currNum == last) { // very smart solution.
-                continuous += 1;
-            } else {
-                continuous = 1;
-            }
-            last = currNum;
-        }
-        out.print(continuous + k > n ? n - continuous : -1 + "\n");
-    }
-
-    static StringBuilder sb = new StringBuilder();
-    static StringBuilder gsb = new StringBuilder();
-    static PrintWriter out = new PrintWriter(System.out);
-    static Reader rd = new Reader();
-    static FastScanner fs = new FastScanner();
-    static final Random random=new Random();
-    static final int mod=1_000_000_007;
-    static long[][] vals;
 
     //My helper methods :
         // Function to calculate nCr using binomial co-efficients
@@ -633,15 +665,23 @@ public class ShooshunsAndSequence {
             din.close();
         }
     }
-/**
-*
-INFORMATION:
-
-1. The cp sublime snippet in windows is located at : 
-C:\Users\hanisntsolo-boxx\AppData\Roaming\Sublime Text 3\Packages\User\cp.sublime.snippet
-
-And its content are located in src/cp.sublime.snippet
-
-Any modification in source must ensure the modification in this file as well.
-*/
+    //Important Info
+    /**
+     * 
+     *  INFORMATION:
+     *
+     *  1. The cp sublime snippet in windows is located at : 
+     *  C:\Users\hanisntsolo-boxx\AppData\Roaming\Sublime Text 3\Packages\User\cp.sublime.snippet
+     *
+     *  And its content are located in src/cp.sublime.snippet
+     *
+     *  Any modification in source must ensure the modification in this file as well.
+     *  
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     */
 }
