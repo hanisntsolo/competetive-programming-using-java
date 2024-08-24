@@ -1,5 +1,3 @@
-<snippet>
-    <content><![CDATA[
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -36,14 +34,13 @@ import java.math.BigInteger;
 import java.util.Random;
 import java.util.StringTokenizer;
 import java.util.List;
-import java.util.Arrays;
 import java.util.stream.*;
 
 
 
-public class CP {
-
-    static boolean DEBUG = true;
+public class TL {
+    
+    static boolean DEBUG = false;
     static StringBuilder sb = new StringBuilder();
     static StringBuilder gsb = new StringBuilder();
     static PrintWriter out = new PrintWriter(System.out);
@@ -80,11 +77,38 @@ public class CP {
     //## while comparing characters make sure to enclose in single quotes.
 
     public static void main(String[] args) throws IOException {
-        solve();
+        long test = 1;
+        while(test > 0) {
+            //Write code here;
+            solve();
+            test--;
+        }
+
         out.flush(); // to flush the output
     }
-    public static void solve() throws IOException {
-        // code goes here//
+    public static void solve() {
+        int correctLen = fs.nextInt();
+        int incorrectLen = fs.nextInt();
+        int correctMin = Integer.MAX_VALUE;
+        int correctMax = Integer.MIN_VALUE;
+        int incorrectMin = Integer.MAX_VALUE;
+        for (int i = 0; i < correctLen; i++) {
+        	int currNum = fs.nextInt();
+        	correctMax = Math.max(correctMax, currNum);
+        	correctMin = Math.min(correctMin, currNum);
+        }
+        for (int i = 0; i < incorrectLen; i++) {
+        	incorrectMin = Math.min(fs.nextInt(), incorrectMin);
+        }
+        int timeLimit = incorrectMin;
+        if(DEBUG)
+        	out.print( correctMax + "::" + correctMin + "::"+ incorrectMin + "\n");
+        if(Math.max(2 * correctMin, correctMax) < timeLimit) {
+        	out.print( Math.max(2 * correctMin, correctMax) + "\n");
+        } else {
+        	out.print( -1 + "\n");
+        }
+
     }
 
     /**
@@ -543,31 +567,20 @@ public class CP {
         }
 
         public String readLine() throws IOException {
-            byte[] buf = new byte[256]; // Start with a reasonable size
+            byte[] buf = new byte[101]; // line length
             int cnt = 0, c;
             while ((c = read()) != -1) {
                 if (c == '\n') {
-                    break;
-                } else if (c == '\r') {
-                    // Handle \r\n (Windows line endings)
-                    int nextChar = read();
-                    if (nextChar != '\n' && nextChar != -1) {
-                        bufferPointer--; // Step back if it's not \n
+                    if (cnt != 0) {
+                        break;
+                    } else {
+                        continue;
                     }
-                    break;
-                }
-                if (cnt >= buf.length) {
-                    buf = Arrays.copyOf(buf, buf.length * 2); // Double buffer size if needed
                 }
                 buf[cnt++] = (byte) c;
             }
-            if (cnt == 0 && c == -1) {
-                return null; // End of stream with no data read
-            }
-            return new String(buf, 0, cnt);
+            return new String(buf, 0, cnt - 1);
         }
-
-
 
         public int nextInt() throws IOException {
             int ret = 0;
@@ -635,13 +648,10 @@ public class CP {
         }
 
         private byte read() throws IOException {
-            if (bufferPointer == bytesRead) {
+            if (bufferPointer == bytesRead)
                 fillBuffer();
-                if (bytesRead == -1) return -1; // End of stream
-            }
             return buffer[bufferPointer++];
         }
-
 
         public void close() throws IOException {
             if (din == null)
@@ -669,9 +679,3 @@ public class CP {
      * 
      */
 }
-]]></content>
-    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-    <tabTrigger>cp</tabTrigger>
-    <!-- Optional: Set a scope to limit where the snippet will trigger -->
-    <!-- <scope>source.java</scope> -->
-</snippet>

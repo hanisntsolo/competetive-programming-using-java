@@ -1,5 +1,3 @@
-<snippet>
-    <content><![CDATA[
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -36,14 +34,12 @@ import java.math.BigInteger;
 import java.util.Random;
 import java.util.StringTokenizer;
 import java.util.List;
-import java.util.Arrays;
 import java.util.stream.*;
 
 
 
-public class CP {
-
-    static boolean DEBUG = true;
+public class UnluckyTicket {
+    
     static StringBuilder sb = new StringBuilder();
     static StringBuilder gsb = new StringBuilder();
     static PrintWriter out = new PrintWriter(System.out);
@@ -80,13 +76,58 @@ public class CP {
     //## while comparing characters make sure to enclose in single quotes.
 
     public static void main(String[] args) throws IOException {
-        solve();
+        // long test = fs.nextLong();
+        // while(test > 0) {
+        //     //Write code here;
+        //     test--;
+        // }
+        solve();		
+
         out.flush(); // to flush the output
     }
     public static void solve() throws IOException {
-        // code goes here//
+        int count = Integer.parseInt(rd.readLine());
+        String text = rd.readLine();
+        ArrayList<Integer> first = new ArrayList<>();
+        ArrayList<Integer> last = new ArrayList<>();
+        populate(text, first, last);
+        // out.print( first + "\n");
+        // out.print( last + "\n");
+    	out.print(compute(last, first) || compute(first, last) ? "YES" : "NO" + "\n");
     }
-
+    private static void populate(String text, ArrayList<Integer> list1, ArrayList<Integer> list2 ) {
+    	for(int i = 0; i < text.length() /2; i++) {
+    		list1.add(Character.getNumericValue(text.charAt(i)));
+    		list2.add(Character.getNumericValue((text.charAt(i + text.length() / 2))));
+    	}
+    	Collections.sort(list1);
+    	Collections.sort(list2);
+    }
+    private static boolean compute(ArrayList<Integer> list1, ArrayList<Integer> list2) {
+    	for(int i = 0; i < list1.size(); i++) {
+    		if(list1.get(i) >= list2.get(i))
+    			return false;
+    	}
+    	return true;
+    } 
+    private static Boolean strictlyGreater(String nums) {
+    	for(int i = 0; i < nums.length() /2; i++) {
+    		for(int j = nums.length() / 2;j < nums.length(); j++) {
+    			if(nums.charAt(i) <= nums.charAt(j))
+    				return false;
+    		}
+    	}
+    	return true;
+    }
+    private static Boolean strictlySmaller(String nums) {
+    	for(int i = 0; i < nums.length() /2; i++) {
+    		for(int j = nums.length() / 2;j < nums.length(); j++) {
+    			if(nums.charAt(i) >= nums.charAt(j))
+    				return false;
+    		}
+    	}
+    	return true;
+    }
     /**
      * Calculate permutations of a give list
      * @params nums list to be premutation index as starting index, result to contain all permutations.
@@ -542,30 +583,30 @@ public class CP {
             bufferPointer = bytesRead = 0;
         }
 
-        public String readLine() throws IOException {
-            byte[] buf = new byte[256]; // Start with a reasonable size
-            int cnt = 0, c;
-            while ((c = read()) != -1) {
-                if (c == '\n') {
-                    break;
-                } else if (c == '\r') {
-                    // Handle \r\n (Windows line endings)
-                    int nextChar = read();
-                    if (nextChar != '\n' && nextChar != -1) {
-                        bufferPointer--; // Step back if it's not \n
-                    }
-                    break;
-                }
-                if (cnt >= buf.length) {
-                    buf = Arrays.copyOf(buf, buf.length * 2); // Double buffer size if needed
-                }
-                buf[cnt++] = (byte) c;
-            }
-            if (cnt == 0 && c == -1) {
-                return null; // End of stream with no data read
-            }
-            return new String(buf, 0, cnt);
-        }
+		public String readLine() throws IOException {
+		    byte[] buf = new byte[256]; // Start with a reasonable size
+		    int cnt = 0, c;
+		    while ((c = read()) != -1) {
+		        if (c == '\n') {
+		            break;
+		        } else if (c == '\r') {
+		            // Handle \r\n (Windows line endings)
+		            int nextChar = read();
+		            if (nextChar != '\n' && nextChar != -1) {
+		                bufferPointer--; // Step back if it's not \n
+		            }
+		            break;
+		        }
+		        if (cnt >= buf.length) {
+		            buf = Arrays.copyOf(buf, buf.length * 2); // Double buffer size if needed
+		        }
+		        buf[cnt++] = (byte) c;
+		    }
+		    if (cnt == 0 && c == -1) {
+		        return null; // End of stream with no data read
+		    }
+		    return new String(buf, 0, cnt);
+		}
 
 
 
@@ -635,12 +676,12 @@ public class CP {
         }
 
         private byte read() throws IOException {
-            if (bufferPointer == bytesRead) {
-                fillBuffer();
-                if (bytesRead == -1) return -1; // End of stream
-            }
-            return buffer[bufferPointer++];
-        }
+		    if (bufferPointer == bytesRead) {
+		        fillBuffer();
+		        if (bytesRead == -1) return -1; // End of stream
+		    }
+		    return buffer[bufferPointer++];
+		}
 
 
         public void close() throws IOException {
@@ -669,9 +710,3 @@ public class CP {
      * 
      */
 }
-]]></content>
-    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-    <tabTrigger>cp</tabTrigger>
-    <!-- Optional: Set a scope to limit where the snippet will trigger -->
-    <!-- <scope>source.java</scope> -->
-</snippet>
