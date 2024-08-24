@@ -1,5 +1,3 @@
-<snippet>
-    <content><![CDATA[
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -46,9 +44,9 @@ import java.util.stream.*;
 
 
 
-public class CP {
+public class BoysAndGirls {
 
-    static boolean DEBUG = true;
+    static boolean DEBUG = false;
     static StringBuilder sb = new StringBuilder();
     static StringBuilder gsb = new StringBuilder();
     static PrintWriter out = new PrintWriter(System.out);
@@ -85,25 +83,39 @@ public class CP {
     //## while comparing characters make sure to enclose in single quotes.
 
     public static void main(String[] args) throws IOException {
-        solveDirect();
-        //solveViaInputOutPutFile();
+        solveViaInputOutPutFile();
         out.flush(); // to flush the output
     }
-    public static void solveDirect() throws IOException {
-        // code goes here//
-    }
-    public static String solveInputOutputFile(String input) {
-        return "//YOUR CODE GOES HERE";
+    public static String solve2(String input) {
+	    String[] line = input.split(" ");
+        int boys = Integer.parseInt(line[0]);
+        int girls = Integer.parseInt(line[1]);
+        while(boys > 0 || girls > 0) {
+	        	// out.print( "BOYS :"+ boys + "GIRLS :" +girls + "\n");
+        	if(boys > 0 && boys > girls) 
+        		gsb.append("B");
+        	if(girls > 0 && boys > girls)
+        		gsb.append("G");
+        	if(girls > 0 && girls >= boys) {
+        		gsb.append("G");
+        	}
+        	if(boys > 0 && girls >= boys) {
+        		gsb.append("B");
+        	}
+        	boys--;
+        	girls--;
+        }
+        return gsb.toString();
     }
     public static void solveViaInputOutPutFile() throws IOException {
-        String inputFile = "input.txt";
+    	String inputFile = "input.txt";
         String outputFile = "output.txt";
         try (BufferedReader reader = new BufferedReader(new FileReader(inputFile));
              BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
             // Read input data
             String input = reader.readLine(); 
 
-            String output = solveInputOutputFile(input); // Call solveInputOutputFile
+            String output = solve2(input); // Call solve2
             
             writer.write(output);
             
@@ -113,7 +125,6 @@ public class CP {
             e.printStackTrace();
         }
     }
-
     /**
      * Calculate permutations of a give list
      * @params nums list to be premutation index as starting index, result to contain all permutations.
@@ -696,9 +707,3 @@ public class CP {
      * 
      */
 }
-]]></content>
-    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-    <tabTrigger>cp</tabTrigger>
-    <!-- Optional: Set a scope to limit where the snippet will trigger -->
-    <!-- <scope>source.java</scope> -->
-</snippet>
