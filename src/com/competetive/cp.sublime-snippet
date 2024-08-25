@@ -57,7 +57,13 @@ public class CP {
     static final Random random=new Random();
     static final int mod=1_000_000_007;
     static long[][] vals;
-
+    /**
+     *1.Can compute permutations of list.
+     *2.Can compute total factors of a number.
+     *
+     *
+     *
+     */
     /*                                                     "Om"
                                                     ""thou art that""
     */
@@ -83,10 +89,16 @@ public class CP {
     // break the general contract of writing a comparator.
     
     //## while comparing characters make sure to enclose in single quotes.
-
+    public static void runningTime() throws IOException{
+        long before = System.currentTimeMillis();
+        solveDirect();
+        // solveViaInputOutPutFile();
+        out.print("TIME TAKEN :: " + (System.currentTimeMillis() - before) +" ms" + "\n");
+    }
     public static void main(String[] args) throws IOException {
         solveDirect();
         //solveViaInputOutPutFile();
+        //runningTime();
         out.flush(); // to flush the output
     }
     public static void solveDirect() throws IOException {
@@ -113,7 +125,38 @@ public class CP {
             e.printStackTrace();
         }
     }
+    /**
+     * Calculate totalFactors of a given Integer
+     * @params n.
+     */ 
+    public static int calculateTotalFactors(int n) {
+        int totalFactors = 1;
 
+        // Count the number of 2s that divide n
+        int count = 0;
+        while (n % 2 == 0) {
+            n /= 2;
+            count++;
+        }
+        totalFactors *= (count + 1);
+
+        // n must be odd at this point so a skip of 2 is used
+        for (int i = 3; i <= Math.sqrt(n); i += 2) {
+            count = 0;
+            while (n % i == 0) {
+                n /= i;
+                count++;
+            }
+            totalFactors *= (count + 1);
+        }
+
+        // If n is still greater than 2, it must be prime
+        if (n > 2) {
+            totalFactors *= 2;  // for the prime number itself and 1
+        }
+
+        return totalFactors;
+    }
     /**
      * Calculate permutations of a give list
      * @params nums list to be premutation index as starting index, result to contain all permutations.
@@ -129,7 +172,43 @@ public class CP {
             Collections.swap(nums, index, i); // Backtrack
         }
     }
+    /**
+     * Calculate pythagorean triplets upto N.
+     * @params int
+     */
+    public static int calculatePythagoreanTripletsUptoN(int n) {
+        int count = 0;
+        /**
+            We iterate over m and n to generate all possible Pythagorean triplets using Euclid's formula.
+            The triplet is valid if c <= n.
+            We increment the count for every valid triplet.
+            We also account for multiples of the primitive triplet by multiplying the triplet by k.
+            gcd(int a, int b) Method:
+            A helper method to calculate the greatest common divisor (GCD) of two numbers, which is used to ensure that 
+            m and n are coprime.
+         */
+        // Iterate over m and k to generate Pythagorean triplets
+        for (int m = 2; m * m <= n; m++) {
+            for (int k = 1; k < m; k++) {
+                if ((m - k) % 2 == 1 && gcd(m, k) == 1) { // Ensure m and k are coprime and not both odd
+                    int a = m * m - k * k;
+                    int b = 2 * m * k;
+                    int c = m * m + k * k;
 
+                    if (c <= n) {
+                        count++;
+                        // Include multiples of the primitive triplet
+                        int multiple = 2;
+                        while (multiple * c <= n) {
+                            count++;
+                            multiple++;
+                        }
+                    }
+                }
+            }
+        }
+        return count;
+    }
     /**
      * Weighted Quick Union : Java Implementation + Path Compression
      * Data Structure : Same as quick union, but maintain extra array sz[i]

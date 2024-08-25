@@ -44,9 +44,9 @@ import java.util.stream.*;
 
 
 
-public class BoysAndGirls {
+public class PythagoreanTheoremII {
 
-    static boolean DEBUG = false;
+    static boolean DEBUG = true;
     static StringBuilder sb = new StringBuilder();
     static StringBuilder gsb = new StringBuilder();
     static PrintWriter out = new PrintWriter(System.out);
@@ -83,33 +83,53 @@ public class BoysAndGirls {
     //## while comparing characters make sure to enclose in single quotes.
 
     public static void main(String[] args) throws IOException {
-    	// solve();
-        solveViaInputOutPutFile();
+        solveDirect();
+        //solveViaInputOutPutFile();
         out.flush(); // to flush the output
     }
-    public static String solveInputOutputFile(String input) {
-	    String[] line = input.split(" ");
-        int boys = Integer.parseInt(line[0]);
-        int girls = Integer.parseInt(line[1]);
-        while(boys > 0 || girls > 0) {
-	        	// out.print( "BOYS :"+ boys + "GIRLS :" +girls + "\n");
-        	if(boys > 0 && boys > girls) 
-        		gsb.append("B");
-        	if(girls > 0 && boys > girls)
-        		gsb.append("G");
-        	if(girls > 0 && girls >= boys) {
-        		gsb.append("G");
-        	}
-        	if(boys > 0 && girls >= boys) {
-        		gsb.append("B");
-        	}
-        	boys--;
-        	girls--;
+    public static void solveDirect() throws IOException {
+        int n = fs.nextInt();
+        int count = calculatePythagoreanTripletsUptoN(n);
+        out.print(count + "\n");
+    }
+    public static int calculatePythagoreanTripletsUptoN(int n) {
+    	int count = 0;
+        /**
+			We iterate over m and n to generate all possible Pythagorean triplets using Euclid's formula.
+			The triplet is valid if c <= n.
+			We increment the count for every valid triplet.
+			We also account for multiples of the primitive triplet by multiplying the triplet by k.
+			gcd(int a, int b) Method:
+			A helper method to calculate the greatest common divisor (GCD) of two numbers, which is used to ensure that 
+			m and n are coprime.
+         */
+        // Iterate over m and k to generate Pythagorean triplets
+        for (int m = 2; m * m <= n; m++) {
+            for (int k = 1; k < m; k++) {
+                if ((m - k) % 2 == 1 && gcd(m, k) == 1) { // Ensure m and k are coprime and not both odd
+                    int a = m * m - k * k;
+                    int b = 2 * m * k;
+                    int c = m * m + k * k;
+
+                    if (c <= n) {
+                        count++;
+                        // Include multiples of the primitive triplet
+                        int multiple = 2;
+                        while (multiple * c <= n) {
+                            count++;
+                            multiple++;
+                        }
+                    }
+                }
+            }
         }
-        return gsb.toString();
+        return count;
+    }
+    public static String solveInputOutputFile(String input) {
+        return "//YOUR CODE GOES HERE";
     }
     public static void solveViaInputOutPutFile() throws IOException {
-    	String inputFile = "input.txt";
+        String inputFile = "input.txt";
         String outputFile = "output.txt";
         try (BufferedReader reader = new BufferedReader(new FileReader(inputFile));
              BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
@@ -126,6 +146,7 @@ public class BoysAndGirls {
             e.printStackTrace();
         }
     }
+
     /**
      * Calculate permutations of a give list
      * @params nums list to be premutation index as starting index, result to contain all permutations.

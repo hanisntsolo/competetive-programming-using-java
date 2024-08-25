@@ -44,13 +44,14 @@ import java.util.stream.*;
 
 
 
-public class BoysAndGirls {
+public class CardsWithNumbers {
 
-    static boolean DEBUG = false;
+    static boolean DEBUG = true;
     static StringBuilder sb = new StringBuilder();
     static StringBuilder gsb = new StringBuilder();
     static PrintWriter out = new PrintWriter(System.out);
     static Reader rd = new Reader();
+    // static Reader rdF = new Reader("input.txt");
     static FastScanner fs = new FastScanner();
     static final Random random=new Random();
     static final int mod=1_000_000_007;
@@ -83,40 +84,44 @@ public class BoysAndGirls {
     //## while comparing characters make sure to enclose in single quotes.
 
     public static void main(String[] args) throws IOException {
-    	// solve();
+        // solveDirect();
         solveViaInputOutPutFile();
         out.flush(); // to flush the output
     }
-    public static String solveInputOutputFile(String input) {
-	    String[] line = input.split(" ");
-        int boys = Integer.parseInt(line[0]);
-        int girls = Integer.parseInt(line[1]);
-        while(boys > 0 || girls > 0) {
-	        	// out.print( "BOYS :"+ boys + "GIRLS :" +girls + "\n");
-        	if(boys > 0 && boys > girls) 
-        		gsb.append("B");
-        	if(girls > 0 && boys > girls)
-        		gsb.append("G");
-        	if(girls > 0 && girls >= boys) {
-        		gsb.append("G");
+    public static void solveDirect() throws IOException {
+        // code goes here//
+    }
+    public static String solveInputOutputFile() throws IOException {
+    	Reader rdF = new Reader("input.txt");
+    	int nums = rdF.nextInt();
+		ArrayList<Integer> numsList = new ArrayList<>(Collections.nCopies(5001, -1));		        
+		ArrayList<Boolean> numsDone = new ArrayList<>(Collections.nCopies((nums * 2) + 1, false));		        
+        for(int i = 1 ; i <= nums * 2; i++) {
+        	int currNum = rdF.nextInt();
+        	if(numsList.get(currNum) == -1) {
+        		numsList.set(currNum, i);
+        		numsDone.set(i, true);
+        	} else if(numsList.get(currNum) != -1) {
+        		int prevIndex = numsList.get(currNum);
+        		gsb.append(i).append(" ").append(prevIndex).append("\n");
+        		numsList.set(currNum, -1);
+        		numsDone.set(prevIndex, false);
         	}
-        	if(boys > 0 && girls >= boys) {
-        		gsb.append("B");
-        	}
-        	boys--;
-        	girls--;
+        }
+        // out.print( gsb.toString() + "\n");
+        // out.print( numsDone + "\n");
+        if(numsDone.contains(true)) {
+        	return "-1";
         }
         return gsb.toString();
     }
     public static void solveViaInputOutPutFile() throws IOException {
-    	String inputFile = "input.txt";
+        String inputFile = "input.txt";
         String outputFile = "output.txt";
         try (BufferedReader reader = new BufferedReader(new FileReader(inputFile));
              BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
-            // Read input data
-            String input = reader.readLine(); 
-
-            String output = solveInputOutputFile(input); // Call solveInputOutputFile
+            // Read input data           
+            String output = solveInputOutputFile(); // Call solveInputOutputFile
             
             writer.write(output);
             
@@ -126,6 +131,7 @@ public class BoysAndGirls {
             e.printStackTrace();
         }
     }
+
     /**
      * Calculate permutations of a give list
      * @params nums list to be premutation index as starting index, result to contain all permutations.

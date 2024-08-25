@@ -44,9 +44,9 @@ import java.util.stream.*;
 
 
 
-public class BoysAndGirls {
+public class EasyNumberChallenge {
 
-    static boolean DEBUG = false;
+    static boolean DEBUG = true;
     static StringBuilder sb = new StringBuilder();
     static StringBuilder gsb = new StringBuilder();
     static PrintWriter out = new PrintWriter(System.out);
@@ -83,33 +83,71 @@ public class BoysAndGirls {
     //## while comparing characters make sure to enclose in single quotes.
 
     public static void main(String[] args) throws IOException {
-    	// solve();
-        solveViaInputOutPutFile();
+
+        solveDirect();
+        //solveViaInputOutPutFile();
+        // runningTime();
         out.flush(); // to flush the output
     }
-    public static String solveInputOutputFile(String input) {
-	    String[] line = input.split(" ");
-        int boys = Integer.parseInt(line[0]);
-        int girls = Integer.parseInt(line[1]);
-        while(boys > 0 || girls > 0) {
-	        	// out.print( "BOYS :"+ boys + "GIRLS :" +girls + "\n");
-        	if(boys > 0 && boys > girls) 
-        		gsb.append("B");
-        	if(girls > 0 && boys > girls)
-        		gsb.append("G");
-        	if(girls > 0 && girls >= boys) {
-        		gsb.append("G");
-        	}
-        	if(boys > 0 && girls >= boys) {
-        		gsb.append("B");
-        	}
-        	boys--;
-        	girls--;
+    public static void runningTime() throws IOException{
+    	long before = System.currentTimeMillis();
+    	solveDirect();
+    	// solveViaInputOutPutFile();
+    	out.print("TIME TAKEN :: " + (System.currentTimeMillis() - before) +" ms" + "\n");
+    }
+    public static void solveDirect() throws IOException {
+        long sum = 0;
+        long divisor = 1073741824L;
+        int[] prodMap = new int[1000001];
+        int l= fs.nextInt(), m = fs.nextInt(), n = fs.nextInt();
+		for(int i = 1; i <= l; i++) {
+			for(int j = 1; j <= m; j++) {
+				for(int k = 1; k <= n; k++) {
+					int currProd = i * k * j;
+					if(prodMap[currProd] != 0)
+						sum += prodMap[currProd];
+					else {
+						prodMap[currProd] = calculateTotalFactors(currProd);
+						sum += prodMap[currProd];
+					}
+				}
+			}
+		}        
+        out.print(sum % divisor + "\n");
+    }
+    public static int calculateTotalFactors(int n) {
+        int totalFactors = 1;
+
+        // Count the number of 2s that divide n
+        int count = 0;
+        while (n % 2 == 0) {
+            n /= 2;
+            count++;
         }
-        return gsb.toString();
+        totalFactors *= (count + 1);
+
+        // n must be odd at this point so a skip of 2 is used
+        for (int i = 3; i <= Math.sqrt(n); i += 2) {
+            count = 0;
+            while (n % i == 0) {
+                n /= i;
+                count++;
+            }
+            totalFactors *= (count + 1);
+        }
+
+        // If n is still greater than 2, it must be prime
+        if (n > 2) {
+            totalFactors *= 2;  // for the prime number itself and 1
+        }
+
+        return totalFactors;
+    }
+    public static String solveInputOutputFile(String input) {
+        return "//YOUR CODE GOES HERE";
     }
     public static void solveViaInputOutPutFile() throws IOException {
-    	String inputFile = "input.txt";
+        String inputFile = "input.txt";
         String outputFile = "output.txt";
         try (BufferedReader reader = new BufferedReader(new FileReader(inputFile));
              BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
@@ -126,6 +164,7 @@ public class BoysAndGirls {
             e.printStackTrace();
         }
     }
+
     /**
      * Calculate permutations of a give list
      * @params nums list to be premutation index as starting index, result to contain all permutations.
