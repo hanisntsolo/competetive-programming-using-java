@@ -5,91 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb90c0ea-a41c-4161-8a3d-610476ceab13" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/description.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/KotlinJavaRuntime.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/project-template.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/qaplug_profiles.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/TemplateFull.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/TemplateFull.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/books/competetive3-halim/ReadInDouble.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/books/competetive3-halim/ReadInDouble.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/codeforcespractice/rating_less_than_1300/SuperCentral.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/codeforcespractice/rating_less_than_1300/SuperCentral.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/competetive/codeforcespractice/rating_less_than_1300/input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/codeforcespractice/rating_less_than_1300/input.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/competetive/codeforcespractice/rating_less_than_1300/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/codeforcespractice/rating_less_than_1300/output.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/CodeforcesBetaRound2/A.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/CodeforcesBetaRound2/B.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round166/A.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round166/B.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round166/C.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round166/D.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round166/E.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round948/A.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round948/B.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round948/C.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round948/D.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round948/E.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round951/A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round951/A.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round951/B.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round951/B.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round951/C.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round951/C.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round951/D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round951/D.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round951/E.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round951/E.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round952/A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round952/A.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round952/B.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round952/B.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round952/C.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round952/C.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round952/D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round952/D.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round952/E.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round952/E.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round953/A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round953/A.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round953/B.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round953/B.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round953/C.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round953/C.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round953/D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round953/D.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round953/E.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round953/E.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/A$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/A$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/A$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/A$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/A$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/A$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/A$DescComp.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/A$DescComp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/A$DisjointSet.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/A$DisjointSet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/A$FastScanner.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/A$FastScanner.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/A$IncComp.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/A$IncComp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/A$Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/A$Node.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/A$Pair.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/A$Pair.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/A$Reader.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/A$Reader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/A.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/A.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/A.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/B$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/B$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/B$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/B$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/B$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/B$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/B$DescComp.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/B$DescComp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/B$DisjointSet.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/B$DisjointSet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/B$FastScanner.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/B$FastScanner.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/B$IncComp.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/B$IncComp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/B$Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/B$Node.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/B$Pair.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/B$Pair.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/B$Reader.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/B$Reader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/B.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/B.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/B.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/B.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/C.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/C.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/D.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/E.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/E.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/input.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/contest/Round964/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/contest/Round964/output.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/leetcodeDaily/MinAvgDiff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/leetcodeDaily/MinAvgDiff.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/recursionandbacktracking/recursion/RecursionAndBackTracking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/recursionandbacktracking/recursion/RecursionAndBackTracking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/sasa/bit-manipulation/BitManipulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/sasa/bit-manipulation/BitManipulation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/competetive/sasa/bit-manipulation/SubSets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/competetive/sasa/bit-manipulation/SubSets.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sublime-text/BitManipulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/sublime-text/BitManipulation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sublime-text/BitManipulation/BitManipulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/sublime-text/BitManipulation/BitManipulation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sublime-text/GetIthBit.java" beforeDir="false" afterPath="$PROJECT_DIR$/sublime-text/GetIthBit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sublime-text/Packages-windows/BitManipulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/sublime-text/Packages-windows/BitManipulation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sublime-text/UniqNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/sublime-text/UniqNumber.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sublime-text/javatest-main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/sublime-text/javatest-main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sublime-text/leet-code/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/sublime-text/leet-code/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,6 +112,7 @@
       <workItem from="1724144555533" duration="4257000" />
       <workItem from="1724148996248" duration="460000" />
       <workItem from="1724153192865" duration="43000" />
+      <workItem from="1725171976580" duration="40000" />
     </task>
     <servers />
   </component>
@@ -206,13 +124,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/competetive/codeforcespractice/rating_less_than_1300/JEFFANDPERIODS.java</url>
-          <line>128</line>
+          <line>13</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/competetive/codeforcespractice/rating_less_than_1300/JEFFANDPERIODS.java</url>
-          <line>132</line>
-          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
