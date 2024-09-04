@@ -103,30 +103,44 @@ public class E {
     	int[] even = new int[26];
     	int[] odd = new int[26];
     	for(int i = 0 ; i < str.length(); i += 2) {
-    		even[Character.getNumericValue(str.charAt(i)) - 9]++;
+    		even[Character.getNumericValue(str.charAt(i)) - 10]++;
     	}
     	for(int i = 1; i < str.length(); i += 2) {
-    		odd[Character.getNumericValue(str.charAt(i)) - 9]++;
+    		odd[Character.getNumericValue(str.charAt(i)) - 10]++;
     	}
     	if(DEBUG == false) {
     		out.print( Arrays.toString(even) + "\n");
     		out.print( Arrays.toString(odd) + "\n");
     	}
     	// List<Integer> data = new ArrayList<Integer>(); 
-    	List<Integer> evenList = Arrays.stream(even).boxed().toList();
-    	List<Integer> oddList = Arrays.stream(odd).boxed().toList();
-    	int evenMax = Collections.max(evenList);
-    	int oddMax = Collections.max(oddList);
-    	int evenCount1 = evenList.stream().filter(e -> e != 0).toList().size();
-    	int oddCount1 = oddList.stream().filter(e -> e != 0).toList().size();
-    	if(evenCount1 == 1 && oddCount1 == 1) {
-    		out.print( "0" + "\n");
-    		return;
-    	}
-    	if(oddCount1 - 1 == evenCount1 || evenCount1 - 1 == oddCount1) {
-    		out.print( 1 + "\n");
-    		return;
-    	}
+    	int evenMax = Integer.MIN_VALUE;
+    	int oddMax = Integer.MIN_VALUE;
+        int evenIndex = 0;
+        int oddIndex = 0;
+        evenMax = Math.max(evenMax, even[0]);
+        oddMax = Math.max(oddMax, odd[0]);
+        for(int i = 0; i < 26; i++) {
+            if(Math.max(evenMax, even[i]) > evenMax) {
+                evenIndex = i;
+                evenMax = Math.max(evenMax, even[i]);
+            }
+        }
+        for(int i = 0; i < 26; i++) {
+            if(Math.max(oddMax, odd[i]) > oddMax) {
+                oddIndex = i;
+                oddMax = Math.max(oddMax, odd[i]);
+            }
+        }
+    	// int evenCount1 = evenList.stream().filter(e -> e != 0).toList().size();
+    	// int oddCount1 = oddList.stream().filter(e -> e != 0).toList().size();
+    	// if(evenCount1 == 1 && oddCount1 == 1) {
+    	// 	out.print( "0" + "\n");
+    	// 	return;
+    	// }
+    	// if(oddCount1 - 1 == evenCount1 || evenCount1 - 1 == oddCount1) {
+    	// 	out.print( 1 + "\n");
+    	// 	return;
+    	// }
     	// if(evenMax == oddMax) {
     	// 	out.print( "0" + "\n");
     	// 	return;
@@ -138,17 +152,25 @@ public class E {
     		out.print("ODDMAX" + oddMax + "\n");
     	}
     	for(int i = 0 ; i < str.length(); i += 2) {
-    		if(Character.getNumericValue(str.charAt(i)) - 9 != evenMax) {
+    		if(Character.getNumericValue(str.charAt(i)) - 10 != evenIndex) {
 				evenCount++;
 			}
     	}
     	for(int i = 1; i < str.length(); i += 2) {
-    		if(Character.getNumericValue(str.charAt(i)) - 9 != oddMax) {
+    		if(Character.getNumericValue(str.charAt(i)) - 10 != oddIndex) {
 				oddCount++;
 			}	
     	}
+        if(evenCount == 0 && oddCount == 0) {
+            if((str.length() & 1) == 1) {
+                out.print( 1 + "\n");
+            } else {
+                out.print( 0 + "\n");
+            }
+            return;
+        }
     	if((str.length() & 1) == 1) {
-    		out.print( evenCount + oddCount + 1 + "\n");
+    		out.print( evenCount + oddCount - 1 + "\n");
     	} else {
     		out.print( evenCount + oddCount + "\n");
     	}
