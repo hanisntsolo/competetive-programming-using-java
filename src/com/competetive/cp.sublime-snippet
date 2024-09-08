@@ -126,6 +126,54 @@ public class CP {
         }
     }
     /**
+     * vertex would be 1 leftSegment = 0, rightSegment = len - 1 
+     */
+    static class BuildSegmentTreeForSumRangeQuery {
+        int n;
+        List<Integer> segmentTree;
+        public BuildSegmentTreeForSumRangeQuery(int n) {
+            this.n = n;
+            this.segmentTree = new ArrayList<>(Collections.nCopies(4 * n, 0));
+        }
+        public void build(List<Integer> arr, int vertex, int leftSegment, int rightSegment) {
+            if(leftSegment == rightSegment) {
+                segmentTree.set(vertex, arr.get(leftSegment));
+            } else {
+                int middle = (leftSegment + rightSegment) / 2;
+                build(arr, vertex * 2, leftSegment, middle);
+                build(arr, vertex * 2 + 1, middle + 1, rightSegment);
+                segmentTree.set(vertex, segmentTree.get(vertex * 2) + segmentTree.get(vertex * 2 + 1));
+            }
+        }
+        public int sum(int vertex, int leftSegment, int rightSegment, int leftQuery, int rightQuery) {
+            if(leftQuery > rightQuery) {
+                return 0;
+            }
+            if(leftQuery == leftSegment && rightQuery == rightSegment) {
+                return segmentTree.get(vertex);
+            }
+            int middle = (leftSegment + rightSegment) / 2;
+            return sum(vertex * 2, leftSegment, middle, leftQuery, Math.min(rightQuery, middle))
+            + sum(vertex * 2 + 1, middle + 1 , rightSegment, Math.max(leftQuery, middle + 1), rightQuery);
+        }
+        public void update(int vertex, int leftSegment, int rightSegment, int position, int newValue) {
+            if(leftSegment == rightSegment) {
+                segmentTree.set(vertex, newValue);
+            } else {
+                int middle = (leftSegment + rightSegment) / 2;
+                if(position <= middle) {
+                    update(vertex * 2, leftSegment, middle, position, newValue);
+                } else {
+                    update(vertex * 2 + 1, middle + 1, rightSegment, position, newValue);
+                }
+                segmentTree.set(vertex, segmentTree.get(vertex * 2) + segmentTree.get(vertex * 2 + 1));
+            }
+        }
+        public List<Integer> getSegmentTree() {
+            return this.segmentTree;
+        }
+    }
+    /**
      * Calculate totalFactors of a given Integer
      * @params n.
      */ 
