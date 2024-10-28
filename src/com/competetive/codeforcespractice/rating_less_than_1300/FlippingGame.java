@@ -1,3 +1,4 @@
+// Maximum Sum Subsequence
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -46,7 +47,7 @@ import java.util.stream.*;
 
 public class FlippingGame {
 
-    static boolean DEBUG = true;
+    static boolean DEBUG = false;
     static StringBuilder sb = new StringBuilder();
     static StringBuilder gsb = new StringBuilder();
     static PrintWriter out = new PrintWriter(System.out);
@@ -83,43 +84,41 @@ public class FlippingGame {
     //## while comparing characters make sure to enclose in single quotes.
 
     public static void main(String[] args) throws IOException {
+
         solveDirect();
         //solveViaInputOutPutFile();
         out.flush(); // to flush the output
     }
     public static void solveDirect() throws IOException {
         int len = fs.nextInt();
-        int[] arr = new int[len];
-        for(int i = 0 ; i < len; i++) {
-        	arr[i] = fs.nextInt();
+        ArrayList<Integer> flipStateOriginal = new ArrayList<>();
+        int ones = 0;
+        for(int i = 0; i < len; i++) {
+        	int currentNum = fs.nextInt();
+            if((currentNum & 1) == 1) {
+                ones+=1;
+            }
+            flipStateOriginal.add(currentNum);
         }
-        out.print( countTotalOnes(arr, 0, len - 1) + "\n");
+     	ArrayList<Integer> transformed = new ArrayList<>(flipStateOriginal.stream().map(element -> element == 0 ? 1 : -1).toList());
+        if(ones != len) {
+            out.print( ones + maxSubArraySum(transformed) + "\n");
+        } else {
+            out.print( ones - 1 + "\n");
+        }
+        
     }
-    private static int countTotalOnes(int[] arr, int left, int right) {
-    	if(left > right) {
-    		return totalOnes(left, right, arr);
-    	}
-    	int total = totalOnes(left, right, arr);
-    	return Math.max(total, Math.max(countTotalOnes(arr, left, right - 1), countTotalOnes(arr,left + 1, right)));
-    }
-    private static int totalOnes(int left, int right, int[] arr) {
-    	if(left > right) return 0;
-    	int total = 0;
-    	if(arr[left] == 1 && left != right) {
-    		total+=1;
-    	}
-    	if(arr[right] == 1 && left != right) {
-    		total+=1;
-    	}
-    	if(left == right && arr[left] == 0) {
-    		total+=1;
-    	}
-    	for(int i = left + 1; i < right; i++) {
-    		if(arr[i] == 0) {
-    			total += 1;
-    		}
-    	}
-    	return total;
+    static int maxSubArraySum(ArrayList<Integer> array) {
+        int res = array.get(0);
+        int maxEnding = res;
+        for(int i = 1; i < array.size(); i++) {
+            // Find the maximum sum ending at index i by either extending 
+            // the maximum sum subarray ending at index i - 1 or by
+            // starting a new subarray from index i
+            maxEnding = Math.max(maxEnding + array.get(i), array.get(i));
+            res = Math.max(res, maxEnding);
+        }
+        return res;
     }
     public static String solveInputOutputFile(String input) {
         return "//YOUR CODE GOES HERE";

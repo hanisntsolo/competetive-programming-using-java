@@ -57,13 +57,7 @@ public class CP {
     static final Random random=new Random();
     static final int mod=1_000_000_007;
     static long[][] vals;
-    /**
-     *1.Can compute permutations of list.
-     *2.Can compute total factors of a number.
-     *
-     *
-     *
-     */
+
     /*                                                     "Om"
                                                     ""thou art that""
     */
@@ -89,16 +83,10 @@ public class CP {
     // break the general contract of writing a comparator.
     
     //## while comparing characters make sure to enclose in single quotes.
-    public static void runningTime() throws IOException{
-        long before = System.currentTimeMillis();
-        solveDirect();
-        // solveViaInputOutPutFile();
-        out.print("TIME TAKEN :: " + (System.currentTimeMillis() - before) +" ms" + "\n");
-    }
+
     public static void main(String[] args) throws IOException {
         solveDirect();
         //solveViaInputOutPutFile();
-        //runningTime();
         out.flush(); // to flush the output
     }
     public static void solveDirect() throws IOException {
@@ -123,6 +111,36 @@ public class CP {
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    /**
+     * Calculate Max SubArray Sum : (Kadane's Algorithm);;
+     */
+    static int maxSubArraySum(ArrayList<Integer> array) {
+        int res = array.get(0);
+        int maxEnding = res;
+        for(int i = 1; i < array.size(); i++) {
+            // Find the maximum sum ending at index i by either extending 
+            // the maximum sum subarray ending at index i - 1 or by
+            // starting a new subarray from index i
+            maxEnding = Math.max(maxEnding + array.get(i), array.get(i));
+            res = Math.max(res, maxEnding);
+        }
+        return res;
+    }
+    /**
+     * Calculate permutations of a give list
+     * @params nums list to be premutation index as starting index, result to contain all permutations.
+     */ 
+    static void calculatePermutations(List<Integer> nums, int index, List<List<Integer>> result) {
+        if(index == nums.size()) {
+            result.add(new ArrayList<>(nums));
+            return;
+        }
+        for(int i = index; i < nums.size(); i++) {
+            Collections.swap(nums, index, i);
+            calculatePermutations(nums, index + 1, result);
+            Collections.swap(nums, index, i); // Backtrack
         }
     }
     /**
@@ -206,21 +224,6 @@ public class CP {
         return totalFactors;
     }
     /**
-     * Calculate permutations of a give list
-     * @params nums list to be premutation index as starting index, result to contain all permutations.
-     */ 
-    static void calculatePermutations(List<Integer> nums, int index, List<List<Integer>> result) {
-        if(index == nums.size()) {
-            result.add(new ArrayList<>(nums));
-            return;
-        }
-        for(int i = index; i < nums.size(); i++) {
-            Collections.swap(nums, index, i);
-            calculatePermutations(nums, index + 1, result);
-            Collections.swap(nums, index, i); // Backtrack
-        }
-    }
-    /**
      * Calculate pythagorean triplets upto N.
      * @params int
      */
@@ -257,6 +260,7 @@ public class CP {
         }
         return count;
     }
+
     /**
      * Weighted Quick Union : Java Implementation + Path Compression
      * Data Structure : Same as quick union, but maintain extra array sz[i]
